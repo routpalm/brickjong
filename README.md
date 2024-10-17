@@ -1,2 +1,5 @@
-# brickjong
-class project for UOCS 422
+# VisuaLoom
+by Brickjong
+Class project for UOCS 422
+
+
