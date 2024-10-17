@@ -24,12 +24,12 @@ if (tags.gps) {
   console.log(`lat, long: ${exifToNum.latitude}, ${exifToNum.longitude}`);
 }
 if (tags.Make) {
-  exifToNum.cameraMake = tags.Make.value.length; // Convert camera make to string length
+  exifToNum.cameraMake = tags.Make.value.length;
   console.log(`camera make: ${exifToNum.cameraMake}`);
 }
 if (tags.DateTime) {
   const dateParts = tags.DateTime.value.split(':').join('').split(' ');
-  exifToNum.dateTime = dateParts.map(Number); // e.g., [20231015, 123456]
+  exifToNum.dateTime = dateParts.map(Number); // ex [20231015, 123456]
   console.log(`datetime: ${exifToNum.dateTime}`);
 }
 console.log('EXIF Data:', exifToNum); // dump all data (just printin)
