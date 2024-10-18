@@ -1,10 +1,11 @@
 import React from 'react';
+import Front from '../components/front.js';
 
 const Home = () => {
 	return ( <>
 		<header>VisuaLoom</header>
   		<div id="root"></div>
-
+  		<Front/>
   		<footer>
     		<small>
       			VisuaLoom<br />
