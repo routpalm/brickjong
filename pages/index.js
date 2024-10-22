@@ -3,8 +3,8 @@ import Front from '../components/front.js';
 import Head from 'next/head';
 //import '../src/view.css'; // Ensure the path is correct
 
-const Home = () => {
-  return (
+const Home = () => 
+  (
     <>
       <Head>
       	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,6 +24,6 @@ const Home = () => {
       </footer>
     </>
   );
-}
+
 
 export default Home;
