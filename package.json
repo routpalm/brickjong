@@ -1,7 +1,7 @@
 {
   "name": "react.dev",
   "version": "0.0.0",
-  "main": "/src/index.js",
+  "main": "/pages/index.js",
   "scripts": {
     "start": "next dev",
     "build": "next build",
@@ -27,6 +27,6 @@
     ]
 },
   "engines": {
-    "node": ">=18.17.x"
+    "node": ">=18.17.0"
   }
 }
