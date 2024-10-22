@@ -1,5 +1,5 @@
 // pages/_app.js
-import '../src/view.css';
+import '../styles/view.css';
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
