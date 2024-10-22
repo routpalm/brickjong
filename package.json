@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "main": "/pages/index.js",
   "scripts": {
-    "start": "next dev",
-    "build": "next build",
-    "heroku-postbuild": "npm run build"
+    "dev" : "next",
+    "start": "next start -p $PORT",
+    "build": "next build"
   },
   "dependencies": {
     "next": "^14.2.15",
@@ -27,6 +27,6 @@
     ]
 },
   "engines": {
-    "node": ">=18.17.0"
+    "node": "20.x"
   }
 }

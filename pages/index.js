@@ -7,8 +7,9 @@ const Home = () =>
   (
     <>
       <Head>
-      	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      	<meta charSet="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>VisuaLoom Art Generator</title>
+
       </Head>
       <header>VisuaLoom</header>
       <div id="root">
