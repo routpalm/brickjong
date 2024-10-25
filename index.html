@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VisuaLoom MakerSpace</title>
+
+   <!-- p5.js library for the sketch -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+
+  <!-- Image processing libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"></script>
+
+  <script src="scripts/image_processor.js"></script>
+  <script src="scripts/lines.js"></script>
+  <script src="scripts/elaborateSketch.js"></script>
+  <script src="scripts/main.js"></script>
+
+   <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    #fileUpload {
+      margin-bottom: 20px;
+    }
+    #canvasContainer {
+      width: 800px; 
+      height: 800px; 
+      margin: 0 auto; 
+      border: 1px solid #ccc; 
+    }
+    #algorithmSelection {
+      margin-bottom: 20px;
+    }
+    select {
+      padding: 5px 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>VisuaLoom</h1>
+  </header>
+
+    <!-- user selects algorithm -->
+    <div id="algorithmSelection">
+      <label for="algorithmSelect">Choose an algorithm:</label>
+      <select id="algorithmSelect">
+        <option value="lines">Lines</option>
+        <option value="elaborate">Elaborate Sketch</option>
+      </select>
+    </div>
+
+    <!-- user uploads file -->
+    <div id="fileUpload">
+      <label for="imageUpload">Upload an image:</label>
+      <input type="file" id="imageUpload" accept="image/*">
+    </div>
+  
+    <!-- p5.js canvas will display -->
+    <div id="canvasContainer"></div>
+  </body>
+  </html>
