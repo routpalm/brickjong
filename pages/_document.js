@@ -1,4 +1,4 @@
-// pages/_document.js
+
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
@@ -6,8 +6,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          //<meta charSet="UTF-8" />
-          
         </Head>
         <body>
           <Main />

@@ -1,7 +1,6 @@
 import React from 'react';
 import Front from '../components/front.js';
 import Head from 'next/head';
-//import '../src/view.css'; // Ensure the path is correct
 
 const Home = () => 
   (
