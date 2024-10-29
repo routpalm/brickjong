@@ -11,7 +11,7 @@ export default function Square() {
 
   return (
     <div>
-      <button className="square" onClick={handleClick}>BUTTON</button>
+      <button className="square" onClick={handleClick}>Start</button>
       <p>{message}</p>
     </div>
   );
