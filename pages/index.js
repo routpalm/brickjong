@@ -1,7 +1,6 @@
 import React from 'react';
 import Front from '../components/front.js';
 import Head from 'next/head';
-//import '../src/view.css'; // Ensure the path is correct
 
 const Home = () => 
   (
@@ -11,9 +10,24 @@ const Home = () =>
 		<title>VisuaLoom Art Generator</title>
 
       </Head>
-      <header>VisuaLoom</header>
+      
       <div id="root">
+        <div id = "Title">
+          <h1>VisuaLoom</h1>
+        </div>
+        <div class="algorithmSelection">
+          <label for="algorithmSelect">Choose an algorithm:</label>
+          <select id="algorithmSelect">
+            <option value="lines">Lines</option>
+            <option value="elaborate">Elaborate Sketch</option>
+          </select>
+        </div>
+        
+        <div id="canvasContainer"></div>
+        <div id="buttons">
         <Front />
+        </div>
+        
       </div>
       <footer>
         <small>

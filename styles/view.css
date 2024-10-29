@@ -4,15 +4,40 @@ header {
 
 h1 {
   font-size: 70px;
+  text-align: center;
 
 }
 
 body{
-	background-color: #FFF9C4
+	background-color: #F5F5F5;
+  color: #9842f5;
 	}
 
 
+.algorithmSelection{
+  text-align: center;
+}
 
+.algorithmSelect-items{
+  background-color: #9842f5;
+}
+
+.square{
+  border: 2px solid #9842f5;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #9842f5;
+  color: #F2F2F2;
+}
+
+
+.square:hover{
+  border: 2px solid #9842f5;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #F2F2F2;
+  color: #9842f5;
+}
 
 
 
