@@ -15,19 +15,29 @@ const Home = () =>
         <div id = "Title">
           <h1>VisuaLoom</h1>
         </div>
-        <div class="algorithmSelection">
-          <label for="algorithmSelect">Choose an algorithm:</label>
-          <select id="algorithmSelect">
-            <option value="lines">Lines</option>
-            <option value="elaborate">Elaborate Sketch</option>
-          </select>
-        </div>
-        
-        <div id="canvasContainer"></div>
+        <div id="grid">
+          <div class="algorithmSelection">
+            <label for="algorithmSelect">Choose an algorithm:</label>
+            <select id="algorithmSelect">
+              <option value="lines">Lines</option>
+              <option value="elaborate">Elaborate Sketch</option>
+            </select>
+          </div>
+          
+
+          
+          
+          <div id="fileUpload">
+            <label for="imageUpload">Upload an image:</label>
+            <input type="file" id="imageUpload" accept="image/*"></input>
+          </div>
+          </div>
         <div id="buttons">
-        <Front />
+          <Front />
         </div>
+        <div id="canvasContainer"></div>
         
+
       </div>
       <footer>
         <small>
