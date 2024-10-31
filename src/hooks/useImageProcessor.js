@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ExifReader from 'exif-js';
-import Vibrant from 'node-vibrant';
+import ColorThief from 'color-thief-browser';
 
 const useImageProcessor = () => {
   const [processedImageData, setProcessedImageData] = useState(null);
@@ -13,11 +13,10 @@ const useImageProcessor = () => {
       image.src = event.target.result;
 
       image.onload = () => {
+        // Extract EXIF data
         ExifReader.getData(image, function () {
           const exifData = {};
-          const gpsData =
-            ExifReader.getTag(this, 'GPSLatitude') &&
-            ExifReader.getTag(this, 'GPSLongitude');
+          const gpsData = ExifReader.getTag(this, 'GPSLatitude') && ExifReader.getTag(this, 'GPSLongitude');
 
           if (gpsData) {
             exifData.latitude = ExifReader.getTag(this, 'GPSLatitude');
@@ -25,39 +24,27 @@ const useImageProcessor = () => {
           }
           exifData.cameraMake = ExifReader.getTag(this, 'Make');
           exifData.dateTime = ExifReader.getTag(this, 'DateTime');
-          console.log('EXIF data:', exifData);
 
-          Vibrant.from(image)
-            .getPalette()
-            .then((palette) => {
-              const colorPalette = {};
-              for (const swatch in palette) {
-                if (palette[swatch]) {
-                  colorPalette[swatch] = palette[swatch].getHex();
-                }
-              }
-              console.log('Color Palette:', colorPalette);
+          // Extract color palette using ColorThief
+          const colorThief = new ColorThief();
+          const colorPalette = colorThief.getPalette(image, 6).map(
+            (color) => `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+          );
 
-              const canvas = document.createElement('canvas');
-              const ctx = canvas.getContext('2d');
-              canvas.width = image.width;
-              canvas.height = image.height;
-              ctx.drawImage(image, 0, 0);
-              const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-              const pixelCluster = getRandomPixelCluster(imageData, 3);
-              console.log('Random Pixel Cluster (RGBA):', pixelCluster);
+          // Pixel extraction
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          canvas.width = image.width;
+          canvas.height = image.height;
+          ctx.drawImage(image, 0, 0);
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const pixelCluster = getRandomPixelCluster(imageData, 3);
 
-              const processedData = {
-                exifData,
-                colorPalette,
-                pixelCluster,
-              };
-
-              setProcessedImageData(processedData);
-            })
-            .catch((err) => {
-              console.error('Error extracting color palette:', err);
-            });
+          setProcessedImageData({
+            exifData,
+            colorPalette,
+            pixelCluster,
+          });
         });
       };
     };
@@ -65,6 +52,7 @@ const useImageProcessor = () => {
     reader.readAsDataURL(file);
   };
 
+  // Helper function to extract a cluster of random pixels
   const getRandomPixelCluster = (imageData, clusterSize = 3) => {
     const { data, width, height } = imageData;
     const randomX = Math.floor(Math.random() * (width - clusterSize));

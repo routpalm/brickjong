@@ -6,9 +6,8 @@ import * as p5 from 'p5';
 import AlgorithmSelector from './components/algorithmSelector';
 import FileUploader from './components/fileUploader';
 import CanvasContainer from './components/canvasContainer';
-import ImageProcessor from './components/imageProcessor';
-import LinesSketch from './sketches/LinesSketch';
-import WaveOscillator from './sketches/WaveOscillator';
+import { LinesSketch } from './sketches/LinesSketch';
+import { WaveOscillator } from './sketches/WaveOscillator';
 import useImageProcessor from './hooks/useImageProcessor';
 
 const App = () => {
@@ -16,6 +15,7 @@ const App = () => {
   const [algorithm, setAlgorithm] = useState('lines');
   const [description, setDescription] = useState('');
   const canvasRef = useRef();
+  const [fileUploaded, setFileUploaded] = useState(false); 
   let currentSketch = useRef(null);
 
   const algorithmDescriptions = {
@@ -23,11 +23,19 @@ const App = () => {
     wave: "Generates dynamic oscillating shapes with colors influenced by the uploaded image.",
   };
 
+    // Update description based on selected algorithm
+    useEffect(() => {
+      setDescription(algorithmDescriptions[algorithm] || 'Select an algorithm to see its description.');
+    }, [algorithm]);
+
   useEffect(() => {
-    if (algorithmDescriptions[algorithm]) {
-      setDescription(algorithmDescriptions[algorithm]);
-    } else {
-      setDescription('Select an algorithm to see its description.');
+
+    console.log("Algorithm selected:", algorithm);
+    console.log("Processed image data:", processedImageData);
+
+    if (!fileUploaded || !processedImageData || !processedImageData.colorPalette) {
+      console.warn("Waiting for file upload and processed image data...");
+      return;
     }
 
     if (currentSketch.current) {
@@ -50,7 +58,13 @@ const App = () => {
         currentSketch.current.remove();
       }
     };
-  }, [algorithm, processedImageData]);
+  }, [algorithm, fileUploaded, processedImageData]);
+
+   // hadnle fupload
+   const handleFileSelect = (file) => {
+    setFileUploaded(true); // flag to true once a file is uploaded
+    processImage(file);
+  };
 
   return (
     <div className="App">
@@ -59,8 +73,7 @@ const App = () => {
       </header>
       <AlgorithmSelector selected={algorithm} onChange={setAlgorithm} />
       <p>{description}</p>
-      <FileUploader onFileSelect={processImage} />
-      <ImageProcessor />
+      <FileUploader onFileSelect={handleFileSelect} />
       <CanvasContainer canvasRef={canvasRef} />
     </div>
   );

@@ -1,9 +1,11 @@
 import React from 'react';
 
-function fileUploader({ onFileSelect }) {
+function FileUploader({ onFileSelect }) {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    onFileSelect(file);
+    if (file) {
+      onFileSelect(file); // call processImage only when a file is selected
+    }
   };
 
   return (
@@ -14,4 +16,4 @@ function fileUploader({ onFileSelect }) {
   );
 }
 
-export default fileUploader;
+export default FileUploader;
