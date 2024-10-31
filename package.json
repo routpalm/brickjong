@@ -1,19 +1,24 @@
 {
-  "name": "react.dev",
-  "version": "0.0.0",
-  "main": "/pages/index.js",
-  "scripts": {
-    "dev" : "next",
-    "start": "next start",
-    "build": "next build"
-  },
+  "name": "visualoom-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
   "dependencies": {
-    "next": "^14.2.15",
+    "exif-js": "^2.3.0",
+    "node-vibrant": "^3.2.1-alpha.1",
+    "p5": "^1.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-scripts": "^5.0.0",
-    "serve": "^13.0.2"
+    "react-scripts": "^5.0.0"
   },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "author": "",
+  "license": "ISC",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -25,8 +30,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-},
-  "engines": {
-    "node": "20.x"
   }
 }
