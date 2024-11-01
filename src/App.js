@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //import 'p5/lib/addons/p5.dom';
 import * as p5 from 'p5';
 //import './app.css';
@@ -9,6 +11,8 @@ import CanvasContainer from './components/canvasContainer';
 import { LinesSketch } from './sketches/LinesSketch';
 import { WaveOscillator } from './sketches/WaveOscillator';
 import useImageProcessor from './hooks/useImageProcessor';
+import GoogleAuthTest from './pages/googleAuthTest';
+import Dashboard from './components/dashboard';
 
 const App = () => {
   const { processImage, processedImageData } = useImageProcessor();
@@ -67,15 +71,34 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <header>
-        <h1>VisuaLoom</h1>
-      </header>
-      <AlgorithmSelector selected={algorithm} onChange={setAlgorithm} />
-      <p>{description}</p>
-      <FileUploader onFileSelect={handleFileSelect} />
-      <CanvasContainer canvasRef={canvasRef} />
-    </div>
+    <Router>
+      
+      <Routes>
+        {/* home route */}
+        <Route
+          path="/"
+          element={
+            <div className="App">
+              <header>
+                <h1>VisuaLoom</h1>
+              </header>
+              <nav>
+                  <Link to="/">Home</Link> | <Link to="/dashboard">Dashboard</Link> | <Link to="/auth-test">Sign In</Link> 
+              </nav>
+              <AlgorithmSelector selected={algorithm} onChange={setAlgorithm} />
+              <p>{description}</p>
+              <FileUploader onFileSelect={handleFileSelect} />
+              <CanvasContainer canvasRef={canvasRef} />
+            </div>
+          }
+        />
+        
+        {/* google auth route */}
+        <Route path="/auth-test" element={<GoogleAuthTest />} />
+        {/* link to dashboard, which should be a protected page */}
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 };
 
