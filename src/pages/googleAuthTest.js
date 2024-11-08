@@ -8,7 +8,7 @@ function GoogleAuthTest({ onLoginSuccess }) {
 
   const handleLoginSuccess = async () => {
     await googleSignIn();
-    if (onLoginSuccess) onLoginSuccess(); // 执行传递的回调
+    if (onLoginSuccess) onLoginSuccess(); 
   };
 
   const handleLoginError = () => {

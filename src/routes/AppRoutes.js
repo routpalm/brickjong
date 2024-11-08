@@ -7,6 +7,7 @@ import ExploreSeeds from '../pages/ExploreSeeds';
 import MyGallery from '../pages/MyGallery';
 import SignIn from '../pages/SignIn';
 import { useAuth } from '../AuthContext';
+import GeneratedArtwork from '../pages/GeneratedArtwork';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -27,6 +28,7 @@ const AppRoutes = () => {
         element={isAuthenticated ? <MyGallery /> : <Navigate to="/sign-in" />}
       />
       <Route path="/sign-in" element={<SignIn />} />
+      <Route path="/generated-artwork" element={<GeneratedArtwork />} />
     </Routes>
   );
 };
