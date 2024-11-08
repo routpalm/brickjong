@@ -1,23 +1,18 @@
+// src/pages/GoogleAuthTest.js
 import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
+import { useAuth } from '../AuthContext';
 
-function GoogleAuthTest() {
+function GoogleAuthTest({ onLoginSuccess }) {
+  const { googleSignIn } = useAuth();
+
   const handleLoginSuccess = async () => {
-    // call backend to initiate google oauth
-    const response = await fetch('/auth/google/callback');
-    const data = await response.json();
-  
-  if (data.token) {
-    // store jwt in localstorage
-    localStorage.setItem('jwt', data.token);
-    setIsAuthenticated(true);  // update state
-  } else {
-    console.error('failed to obtain JWT');
-  }
-};
+    await googleSignIn();
+    if (onLoginSuccess) onLoginSuccess(); // 执行传递的回调
+  };
 
   const handleLoginError = () => {
-    console.log('login failed');
+    console.log('Google login failed');
   };
 
   return (
@@ -29,3 +24,4 @@ function GoogleAuthTest() {
 }
 
 export default GoogleAuthTest;
+
