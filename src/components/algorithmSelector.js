@@ -12,6 +12,7 @@ function AlgorithmSelector({ selected, onChange }) {
         <option value="lines">Lines</option>
         <option value="wave">Waves</option>
         <option value="rTruchet">Round Truchet Tile</option>
+        <option value="concirc">Concentric Circles</option>
       </select>
     </div>
   );

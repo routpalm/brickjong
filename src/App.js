@@ -11,6 +11,7 @@ import CanvasContainer from './components/canvasContainer';
 import { LinesSketch } from './sketches/LinesSketch';
 import { WaveOscillator } from './sketches/WaveOscillator';
 import { TruchetRound } from './sketches/truchetTriangles';
+import { ConCirc } from './sketches/concirc'
 import useImageProcessor from './hooks/useImageProcessor';
 import GoogleAuthTest from './pages/googleAuthTest';
 import Dashboard from './components/dashboard';
@@ -26,7 +27,8 @@ const App = () => {
   const algorithmDescriptions = {
     lines: "Generates random colored lines based on the image's color palette.",
     wave: "Generates dynamic oscillating shapes with colors influenced by the uploaded image.",
-    rTruchet: "Truchet tile pattern with curves."
+    rTruchet: "Truchet tile pattern with curves.",
+    concirc: "Concentric circle pattern."
   };
 
     // Update description based on selected algorithm
@@ -57,6 +59,9 @@ const App = () => {
         break;
       case 'rTruchet':
         currentSketch.current = new p5((p) => TruchetRound(p,processedImageData), canvasRef.current);
+        break;
+      case 'concirc':
+        currentSketch.current = new p5((p) => ConCirc(p,processedImageData), canvasRef.current);
         break;
       default:
         console.warn(`Unknown algorithm selected: ${algorithm}`);
