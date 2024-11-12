@@ -1,10 +1,12 @@
 {
   "name": "visualoom-app",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "src/index.js",
   "dependencies": {
     "@react-oauth/google": "^0.12.1",
+    "axios": "^1.7.7",
     "color-thief-browser": "^2.0.2",
     "exif-js": "^2.3.0",
     "node-vibrant": "^3.2.1-alpha.1",
