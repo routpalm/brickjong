@@ -1,36 +1,41 @@
 // src/routes/AppRoutes.js
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Homepage from '../pages/HomePage';
 import WeaveArtwork from '../pages/WeaveArtwork';
 import ExploreSeeds from '../pages/ExploreSeeds';
 import MyGallery from '../pages/MyGallery';
-import SignIn from '../pages/SignIn';
-import { useAuth } from '../AuthContext';
 import GeneratedArtwork from '../pages/GeneratedArtwork';
+import Info from '../pages/Info';
+import Privacy from '../pages/Privacy';
+import Contact from '../pages/Contact';
+import { useAuth } from '../AuthContext';
 
 const AppRoutes = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth(); 
 
   return (
     <Routes>
-      <Route path="/" element={<Homepage />} /> 
+      <Route path="/" element={<Homepage />} />
       <Route
         path="/weave-artwork"
-        element={isAuthenticated ? <WeaveArtwork /> : <Navigate to="/sign-in" />}
+        element={isAuthenticated ? <WeaveArtwork /> : <Homepage />}
       />
       <Route
         path="/explore-seeds"
-        element={isAuthenticated ? <ExploreSeeds /> : <Navigate to="/sign-in" />}
+        element={isAuthenticated ? <ExploreSeeds /> : <Homepage />}
       />
       <Route
         path="/my-gallery"
-        element={isAuthenticated ? <MyGallery /> : <Navigate to="/sign-in" />}
+        element={isAuthenticated ? <MyGallery /> : <Homepage />}
       />
-      <Route path="/sign-in" element={<SignIn />} />
       <Route path="/generated-artwork" element={<GeneratedArtwork />} />
+      <Route path="/info" element={<Info />} />
+      <Route path="/privacy" element={<Privacy />} />
+      <Route path="/contact" element={<Contact />} />
     </Routes>
   );
 };
 
 export default AppRoutes;
+

@@ -1,51 +1,35 @@
 // src/AuthContext.js
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
+import {jwtDecode} from 'jwt-decode'; 
+
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null); // Store User Information
+  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem('jwt');
-    const savedUser = localStorage.getItem('user');
-    if (token && savedUser) {
-      setIsAuthenticated(true);
-      setUser(JSON.parse(savedUser)); 
+  const googleSignIn = async (credential) => {
+    try {
+      const decoded = jwtDecode(credential); 
+      setUser(decoded);
+    } catch (error) {
+      console.error('Failed to decode Google token:', error);
     }
-  }, []);
-
-  // Mock: Google Login
-  const googleSignIn = async () => {
-    const fakeUser = {
-      name: "User1",
-      email: "user1@example.com"
-    };
-    const fakeToken = "fake_jwt_token";
-
-    // Store user information at localStorage
-    localStorage.setItem('jwt', fakeToken);
-    localStorage.setItem('user', JSON.stringify(fakeUser));
-
-    // Updated Frontend 
-    setIsAuthenticated(true);
-    setUser(fakeUser);
   };
 
   const signOut = () => {
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('user');
-    setIsAuthenticated(false);
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, googleSignIn, signOut }}>
+    <AuthContext.Provider value={{ user, isAuthenticated: !!user, googleSignIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
 
