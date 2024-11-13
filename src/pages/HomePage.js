@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
+import './HomePage.css'
 import FeaturedImages from '../components/FeaturedImages';
 import Footer from '../components/Footer';
 
@@ -21,8 +22,8 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-      <Header />
       <Navbar />
+      <Header />
       <FeaturedImages />
       <Footer />
     </div>
@@ -30,4 +31,5 @@ const Homepage = () => {
 };
 
 export default Homepage;
+
 

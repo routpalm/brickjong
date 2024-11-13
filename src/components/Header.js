@@ -1,27 +1,38 @@
 // src/components/Header.js
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import './Header.css';
+import Image1 from '../images/HomePage1.png';
+import Image2 from '../images/HomePage2.png';
 
 const Header = () => {
-  const { isAuthenticated } = useAuth(); 
-  const navigate = useNavigate(); 
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     if (isAuthenticated) {
-      navigate('/weave-artwork'); 
+      navigate('/weave-artwork');
     } else {
-      navigate('/sign-in'); 
+      navigate('/sign-in');
     }
   };
 
   return (
     <header className="header">
-      <h1 className="logo">VisuaLoom</h1>
-      <p className="slogan">Weave. Share. Explore.</p>
-      <button onClick={handleButtonClick} className="cta-button">
-        LET'S GO
-      </button>
+      <div className="header-left">
+        <h1 className="header-logo">VisuaLoom</h1>
+        <p className="header-slogan">
+          Weave. <span className="highlight">Share.</span> Explore.
+        </p>
+        <button onClick={handleButtonClick} className="cta-button">
+          LET'S GO
+        </button>
+      </div>
+      <div className="header-right">
+        <img src={Image1} alt="Decorative pattern 1" className="header-image" />
+        <img src={Image2} alt="Decorative pattern 2" className="header-image" />
+      </div>
     </header>
   );
 };

@@ -14,12 +14,11 @@ const GeneratedArtwork = () => {
 
   useEffect(() => {
     if (!processedImageData) {
-      // 没有图像数据则返回到 Weave Artwork 页面
       navigate('/weave-artwork');
       return;
     }
 
-    // 根据选择的算法来渲染图像
+    // Render the images based on selected algorithm
     let sketchInstance;
     if (selectedAlgorithm === 'Lines') {
       sketchInstance = new p5((p) => LinesSketch(p, processedImageData), canvasRef.current);
@@ -28,7 +27,7 @@ const GeneratedArtwork = () => {
     }
 
     return () => {
-      // 清除 p5 实例，避免内存泄漏
+      //Clean p5 instance for avoiding leak
       if (sketchInstance) sketchInstance.remove();
     };
   }, [processedImageData, selectedAlgorithm, navigate]);

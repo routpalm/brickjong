@@ -35,19 +35,4 @@
     max-height: 300px;
   }
   
-  .toolbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 20px;
-  }
-  
-  .toolbar button {
-    background-color: #9a4dbf;
-    color: white;
-    border: none;
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
-  }
   

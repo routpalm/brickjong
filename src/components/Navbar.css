@@ -1,0 +1,96 @@
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: none;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+}
+
+.navbar-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    gap: 60px; 
+}
+
+.navbar-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.team-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #6e8efb 0%, #a777e3 50%, #b19cd9 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.user-name-button {
+    padding: 15px 10px;
+    background-color: transparent;
+    border: 2px solid #9a4dbf;
+    color: #9a4dbf;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: default; 
+}
+
+.nav-button,
+.home-button,
+.sign-out-button {
+    padding: 15px 20px;
+    background-color: transparent;
+    border: 2px solid #9a4dbf;
+    color: #9a4dbf;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover,
+.home-button:hover,
+.sign-out-button:hover {
+    background-color: #9a4dbf;
+    color: #fff;
+}
+
+.active-link {
+    background-color: #6e8efb; 
+    color: #fff;
+    border: 2px solid #b19cd9; 
+}
+
+.sign-in-link {
+    border: 2px solid #9a4dbf;
+    padding: 15px 15px;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #9a4dbf;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sign-in-link:hover {
+    background-color: #9a4dbf;
+    color: #fff;
+}
+

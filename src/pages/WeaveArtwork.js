@@ -4,8 +4,10 @@ import AlgorithmSelector from '../components/AlgorithmSelector';
 import FileUploader from '../components/FileUploader';
 import useImageProcessor from '../hooks/useImageProcessor';
 import { useNavigate } from 'react-router-dom';
-import { LinesSketch } from '../sketches/LinesSketch';
-import { WaveOscillator } from '../sketches/WaveOscillator';
+import './WeaveArtwork.css';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
 
 const WeaveArtwork = () => {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState("Lines"); // Default with "Line" Algorithm
@@ -36,6 +38,7 @@ const WeaveArtwork = () => {
 
   return (
     <div className="weave-artwork">
+      <Navbar />
       <h1>VisuaLoom</h1>
       <p>Choose Your Algorithm:</p>
 
@@ -44,6 +47,7 @@ const WeaveArtwork = () => {
       <p>Please Upload Your Photo to Start Generating Your Unique Digital Art Work!</p>
 
       <FileUploader onFileSelect={handleFileUpload} isUploading={isUploading} />
+      <Footer />
     </div>
   );
 };
