@@ -7,10 +7,16 @@ import { useNavigate } from 'react-router-dom';
 import './WeaveArtwork.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import SampleAlgo1 from '../images/bauhaus.png';
+import SampleAlgo2 from '../images/spiro.jpg';
 
+const algorithmImages = {
+  "Lines": SampleAlgo1,
+  "Wave": SampleAlgo2,
+};
 
 const WeaveArtwork = () => {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState("Lines"); // Default with "Line" Algorithm
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState("Lines"); // Default algorithm is "Lines"
   const [isUploading, setIsUploading] = useState(false);
   const { processImage, processedImageData } = useImageProcessor();
   const navigate = useNavigate();
@@ -21,7 +27,7 @@ const WeaveArtwork = () => {
 
   const handleFileUpload = (file) => {
     setIsUploading(true);
-    processImage(file); 
+    processImage(file);
     setIsUploading(false);
   };
 
@@ -37,20 +43,30 @@ const WeaveArtwork = () => {
   }, [processedImageData, selectedAlgorithm, navigate]);
 
   return (
-    <div className="weave-artwork">
+    <div className="weave-artwork-page">
       <Navbar />
-      <h1>VisuaLoom</h1>
-      <p>Choose Your Algorithm:</p>
-
-      <AlgorithmSelector selected={selectedAlgorithm} onChange={handleAlgorithmChange} />
-
-      <p>Please Upload Your Photo to Start Generating Your Unique Digital Art Work!</p>
-
-      <FileUploader onFileSelect={handleFileUpload} isUploading={isUploading} />
+      <div className="weave-artwork-container">
+        <div className="left-section">
+          <img
+            src={algorithmImages[selectedAlgorithm]}
+            alt={`${selectedAlgorithm} Example`}
+            className="algorithm-image"
+          />
+        </div>
+        <div className="right-section">
+          <h1 className="page-title">VisuaLoom</h1>
+          <AlgorithmSelector selected={selectedAlgorithm} onChange={handleAlgorithmChange} />
+          <p className="upload-instructions">
+            Upload Your Photo to Create ✨!
+          </p>
+          <FileUploader onFileSelect={handleFileUpload} isUploading={isUploading} />
+        </div>
+      </div>
       <Footer />
     </div>
   );
 };
 
 export default WeaveArtwork;
+
 

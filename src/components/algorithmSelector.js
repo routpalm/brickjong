@@ -4,11 +4,12 @@ import React from 'react';
 const AlgorithmSelector = ({ selected, onChange }) => {
   return (
     <div className="algorithm-selector">
-      <label htmlFor="algorithm">Choose Your Algorithm:</label>
+      <label className="algorithm-label" htmlFor="algorithm">Choose Your Algorithm:</label>
       <select
         id="algorithm"
         value={selected}
         onChange={(e) => onChange(e.target.value)}
+        className="algorithm-dropdown"
       >
         <option value="Lines">Lines</option>
         <option value="Wave">Wave</option>
@@ -18,3 +19,4 @@ const AlgorithmSelector = ({ selected, onChange }) => {
 };
 
 export default AlgorithmSelector;
+

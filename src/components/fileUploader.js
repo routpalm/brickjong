@@ -11,8 +11,6 @@ const FileUploader = ({ onFileSelect, isUploading }) => {
 
   return (
     <div id="fileUpload">
-      <label htmlFor="imageUpload">Upload an image:</label>
-      
       {isUploading ? (
         <button className="upload-button" disabled>Uploading...</button>
       ) : (

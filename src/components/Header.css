@@ -11,6 +11,7 @@
     padding: 30px 50px; 
     background: linear-gradient(180deg, #EADDFF 0%, #F8F8FC 100%);
     font-family: 'Arial', sans-serif;
+    margin-top:10px;
 }
 
 .header-left {
@@ -24,7 +25,7 @@
     font-family: 'Oleo Script Swash Caps', cursive; 
     font-size: 6.8rem; 
     font-weight: 600;
-    background: linear-gradient(180deg, #EADDFF 0%, #AF52DE 25.5%, #71358F 100%);
+    background: linear-gradient(180deg, #EADDFF 10%, #AF52DE 50%, #71358F 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
