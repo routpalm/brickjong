@@ -13,8 +13,6 @@ const AlgorithmSelector = ({ selected, onChange }) => {
       >
         <option value="Lines">Lines</option>
         <option value="Wave">Wave</option>
-        <option value="rTruchet">Round Truchet Tile</option>
-        <option value="concirc">Concentric Circles</option>
       </select>
     </div>
   );

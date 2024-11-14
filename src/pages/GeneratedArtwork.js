@@ -1,10 +1,10 @@
 // src/pages/GeneratedArtwork.js
 import React, { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Toolbar from '../components/Toolbar';
+import Toolbar from '../components/Toolbar.js';
 import p5 from 'p5';
-import { LinesSketch } from '../sketches/LinesSketch';
-import { WaveOscillator } from '../sketches/WaveOscillator';
+import { LinesSketch } from '../sketches/LinesSketch.js';
+import { WaveOscillator } from '../sketches/WaveOscillator.js';
 
 const GeneratedArtwork = () => {
   const navigate = useNavigate();

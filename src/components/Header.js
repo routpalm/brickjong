@@ -1,7 +1,7 @@
 // src/components/Header.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../AuthContext.js';
 import './Header.css';
 import Image1 from '../images/HomePage1.png';
 import Image2 from '../images/HomePage2.png';
