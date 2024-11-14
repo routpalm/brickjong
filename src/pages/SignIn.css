@@ -1,4 +1,4 @@
-/* SignIn.css - 登录弹窗样式 */
+/* SignIn.css */
 
 .modal-background {
     position: fixed;
@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* 确保在最前面 */
+    z-index: 1000; 
   }
   
   .modal-content {
