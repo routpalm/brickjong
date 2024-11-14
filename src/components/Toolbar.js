@@ -22,3 +22,4 @@ const Toolbar = ({ imageUrl, onRegenerate }) => {
 };
 
 export default Toolbar;
+
