@@ -5,7 +5,7 @@ export const WaveOscillator = (p, processedImageData) => {
   let colorOffset = 0;
 
   p.setup = () => {
-    const canvas = p.createCanvas(800, 800);
+    const canvas = p.createCanvas(512, 512);
     canvas.parent('canvasContainer');
     p.angleMode(p.DEGREES);
     p.noFill();

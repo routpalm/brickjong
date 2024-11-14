@@ -1,19 +1,22 @@
+// src/components/AlgorithmSelector.js
 import React from 'react';
 
-function AlgorithmSelector({ selected, onChange }) {
+const AlgorithmSelector = ({ selected, onChange }) => {
   return (
-    <div id="algorithmSelection">
-      <label htmlFor="algorithmSelect">Choose an algorithm:</label>
+    <div className="algorithm-selector">
+      <label className="algorithm-label" htmlFor="algorithm">Choose Your Algorithm:</label>
       <select
-        id="algorithmSelect"
+        id="algorithm"
         value={selected}
         onChange={(e) => onChange(e.target.value)}
+        className="algorithm-dropdown"
       >
-        <option value="lines">Lines</option>
-        <option value="wave">Waves</option>
+        <option value="Lines">Lines</option>
+        <option value="Wave">Wave</option>
       </select>
     </div>
   );
-}
+};
 
 export default AlgorithmSelector;
+

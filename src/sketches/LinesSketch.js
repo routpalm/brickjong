@@ -1,5 +1,5 @@
 export const LinesSketch = (p, processedImageData) => {
-  const size = 800;
+  const size = 512;
   const numlines = 8;
 
   p.setup = () => {
