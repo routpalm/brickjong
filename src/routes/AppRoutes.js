@@ -1,15 +1,15 @@
 // src/routes/AppRoutes.js
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Homepage from '../pages/HomePage';
-import WeaveArtwork from '../pages/WeaveArtwork';
-import ExploreSeeds from '../pages/ExploreSeeds';
-import MyGallery from '../pages/MyGallery';
-import GeneratedArtwork from '../pages/GeneratedArtwork';
-import Info from '../pages/Info';
-import Privacy from '../pages/Privacy';
-import Contact from '../pages/Contact';
-import { useAuth } from '../AuthContext';
+import Homepage from '../pages/HomePage.js';
+import WeaveArtwork from '../pages/WeaveArtwork.js';
+import ExploreSeeds from '../pages/ExploreSeeds.js';
+import MyGallery from '../pages/MyGallery.js';
+import GeneratedArtwork from '../pages/GeneratedArtwork.js';
+import Info from '../pages/Info.js';
+import Privacy from '../pages/Privacy.js';
+import Contact from '../pages/Contact.js';
+import { useAuth } from '../AuthContext.js';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth(); 

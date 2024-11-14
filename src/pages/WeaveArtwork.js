@@ -1,12 +1,12 @@
 // src/pages/WeaveArtwork.js
 import React, { useState, useEffect } from 'react';
-import AlgorithmSelector from '../components/AlgorithmSelector';
-import FileUploader from '../components/FileUploader';
-import useImageProcessor from '../hooks/useImageProcessor';
+import AlgorithmSelector from '../components/AlgorithmSelector.js';
+import FileUploader from '../components/FileUploader.js';
+import useImageProcessor from '../hooks/useImageProcessor.js';
 import { useNavigate } from 'react-router-dom';
 import './WeaveArtwork.css';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Navbar from '../components/Navbar.js';
+import Footer from '../components/Footer.js';
 import SampleAlgo1 from '../images/bauhaus.png';
 import SampleAlgo2 from '../images/spiro.jpg';
 

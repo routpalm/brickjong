@@ -1,9 +1,9 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import AppRoutes from './routes/AppRoutes';
+import AppRoutes from './routes/AppRoutes.js';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { AuthProvider } from './AuthContext';
+import { AuthProvider } from './AuthContext.js';
 
 const App = () => {
   return (
