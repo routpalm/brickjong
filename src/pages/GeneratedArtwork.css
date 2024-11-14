@@ -61,7 +61,7 @@
 }
 .toolbar {
     display: flex;
-    flex-direction: column; /* 确保按钮垂直排列 */
+    flex-direction: column;
     gap: 10px;
     margin-left: -180px;
 }
