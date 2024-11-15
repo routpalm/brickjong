@@ -1,34 +1,30 @@
-// src/pages/SignIn.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../AuthContext.js';
 import { useNavigate } from 'react-router-dom';
 import './SignIn.css';
 
 const SignIn = ({ onClose }) => {
-  const { googleSignIn } = useAuth();
+  const { googleSignIn, isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLoginSuccess = async (credentialResponse) => {
     try {
-      // extract the Google ID token
       const idToken = credentialResponse.credential;
 
-      // send the ID token to your backend
+      // Send ID token to the backend for verification
       const response = await fetch('https://visualoom-8a10785743bd.herokuapp.com/auth/oauth2', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ idToken }), // send ID token for verification
+        body: JSON.stringify({ idToken }),
       });
 
       const data = await response.json();
       if (data.token) {
-        // store JWT in localStorage
-        localStorage.setItem('jwt', data.token);
-        setIsAuthenticated(true); // update authenticated state
+        // Pass the JWT to AuthContext
+        googleSignIn(data.token);
       } else {
         console.error('Failed to obtain JWT from server');
       }
@@ -40,6 +36,12 @@ const SignIn = ({ onClose }) => {
   const handleLoginError = () => {
     console.error('Google login failed');
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="modal-background" onClick={onClose}>
@@ -59,5 +61,3 @@ const SignIn = ({ onClose }) => {
 };
 
 export default SignIn;
-
-

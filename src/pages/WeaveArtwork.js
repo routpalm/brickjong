@@ -57,7 +57,7 @@ const WeaveArtwork = () => {
           <h1 className="page-title">VisuaLoom</h1>
           <AlgorithmSelector selected={selectedAlgorithm} onChange={handleAlgorithmChange} />
           <p className="upload-instructions">
-            Upload Your Photo to Create ✨!
+          Let's weave something new.
           </p>
           <FileUploader onFileSelect={handleFileUpload} isUploading={isUploading} />
         </div>
