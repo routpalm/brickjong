@@ -6,14 +6,22 @@ import { useAuth } from '../AuthContext.js';
 import './Navbar.css';
 import { FaHome, FaSignOutAlt } from 'react-icons/fa';
 
+
+
+
 const Navbar = () => {
   const { isAuthenticated, user, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation(); 
   const [showSignIn, setShowSignIn] = useState(false); 
+  const [showEmail, setShowEmail] = useState(false);
 
   const handleSignInClick = () => {
     setShowSignIn(true);
+  };
+
+  const handleToggleEmail = () => {
+    setShowEmail((prev) => !prev); // Toggle email display
   };
 
   const handleCloseModal = () => {
@@ -59,21 +67,25 @@ const Navbar = () => {
           className={`home-button ${location.pathname === '/' ? 'active-link' : ''}`}
         >
           <FaHome />
-        </button>
+          </button>
         {isAuthenticated ? (
           <>
-            <span className="user-name-button">{user.name}</span>
+            <button
+              className="user-name-button"
+              onClick={handleToggleEmail}
+            >
+              {showEmail ? user.email : user.name}
+            </button>
             <button onClick={signOut} className="sign-out-button">
               <FaSignOutAlt />
             </button>
           </>
         ) : (
-          <button className="sign-in-link" onClick={handleSignInClick}>
+          <button className="sign-in-link" onClick={() => navigate('/signin')}>
             Sign In
           </button>
         )}
       </div>
-      {showSignIn && <SignIn onClose={handleCloseModal} />}
     </nav>
   );
 };

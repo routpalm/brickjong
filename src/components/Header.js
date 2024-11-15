@@ -23,10 +23,10 @@ const Header = () => {
       <div className="header-left">
         <h1 className="header-logo">VisuaLoom</h1>
         <p className="header-slogan">
-          Weave. <span className="highlight">Share.</span> Explore.
+          Turn your photo gallery into something new.
         </p>
         <button onClick={handleButtonClick} className="cta-button">
-          LET'S GO
+          BEGIN
         </button>
       </div>
       <div className="header-right">
