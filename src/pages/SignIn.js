@@ -1,5 +1,5 @@
 // src/pages/SignIn.js
-import React from 'react';
+import React, { useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../AuthContext.js';
 import { useNavigate } from 'react-router-dom';
@@ -8,14 +8,32 @@ import './SignIn.css';
 const SignIn = ({ onClose }) => {
   const { googleSignIn } = useAuth();
   const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const handleLoginSuccess = async (response) => {
+  const handleLoginSuccess = async (credentialResponse) => {
     try {
-      await googleSignIn(response.credential);
-      onClose(); 
-      navigate('/'); 
+      // extract the Google ID token
+      const idToken = credentialResponse.credential;
+
+      // send the ID token to your backend
+      const response = await fetch('https://visualoom-8a10785743bd.herokuapp.com/auth/oauth2', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ idToken }), // send ID token for verification
+      });
+
+      const data = await response.json();
+      if (data.token) {
+        // store JWT in localStorage
+        localStorage.setItem('jwt', data.token);
+        setIsAuthenticated(true); // update authenticated state
+      } else {
+        console.error('Failed to obtain JWT from server');
+      }
     } catch (error) {
-      console.error('Error during Google login:', error);
+      console.error('Error during authentication:', error);
     }
   };
 
