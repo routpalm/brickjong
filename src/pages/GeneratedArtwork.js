@@ -1,12 +1,11 @@
 // GeneratedArtwork.js
 import React, { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Toolbar from '../components/Toolbar';
+import Toolbar from '../components/Toolbar.js';
 import p5 from 'p5';
-import { LinesSketch } from '../sketches/LinesSketch';
-import { WaveOscillator } from '../sketches/WaveOscillator';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import { LinesSketch } from '../sketches/LinesSketch.js';
+import { WaveOscillator } from '../sketches/WaveOscillator.js';
+import Navbar from '../components/Navbar.js';
 import Particles from 'react-tsparticles';
 import './GeneratedArtwork.css';
 import { loadFull } from 'tsparticles';

@@ -1,8 +1,8 @@
 // src/components/Navbar.js
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import SignIn from '../pages/SignIn';
-import { useAuth } from '../AuthContext';
+import SignIn from '../pages/SignIn.js';
+import { useAuth } from '../AuthContext.js';
 import './Navbar.css';
 import { FaHome, FaSignOutAlt } from 'react-icons/fa';
 

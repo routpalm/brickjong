@@ -1,6 +1,6 @@
 // src/pages/Info.js
 import React from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar.js';
 
 const Contact = () => {
 

@@ -1,10 +1,10 @@
 // src/pages/ExploreSeeds.js
 import React from 'react';
-import SeedItem from '../components/SeedItem';
+import SeedItem from '../components/SeedItem.js';
 import { useNavigate } from 'react-router-dom';
 import './ExploreSeeds.css'; 
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Navbar from '../components/Navbar.js';
+import Footer from '../components/Footer.js';
 import Seed1 from '../images/Seed1.png';
 import Seed2 from '../images/Seed2.png';
 import Seed3 from '../images/Seed3.png';

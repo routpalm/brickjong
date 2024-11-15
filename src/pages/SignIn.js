@@ -1,7 +1,7 @@
 // src/pages/SignIn.js
 import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../AuthContext.js';
 import { useNavigate } from 'react-router-dom';
 import './SignIn.css';
 
