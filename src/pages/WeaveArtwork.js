@@ -1,7 +1,7 @@
 // src/pages/WeaveArtwork.js
 import React, { useState, useEffect } from 'react';
-import AlgorithmSelector from '../components/AlgorithmSelector.js';
-import FileUploader from '../components/FileUploader.js';
+import AlgorithmSelector from '../components/algorithmSelector.js';
+import FileUploader from '../components/fileUploader.js';
 import useImageProcessor from '../hooks/useImageProcessor.js';
 import { useNavigate } from 'react-router-dom';
 import './WeaveArtwork.css';
@@ -13,6 +13,9 @@ import SampleAlgo2 from '../images/spiro.jpg';
 const algorithmImages = {
   "Lines": SampleAlgo1,
   "Wave": SampleAlgo2,
+  "Diagonals": SampleAlgo1,
+  "ConCirc":  SampleAlgo2,
+  "TruchRound": SampleAlgo2
 };
 
 const WeaveArtwork = () => {
