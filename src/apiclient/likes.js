@@ -35,7 +35,7 @@ export const deleteLike = async (likeId) => {
         const response = await apiClient.delete(`/likes/${likeId}`);
         return response.data;
     } catch (error) {
-        console.error("Error deleting Like", likeId, error);
+        console.error("Error deleting Like:", likeId, error);
         throw error;
     }
 }
