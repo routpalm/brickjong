@@ -4,6 +4,7 @@ import { useAuth } from '../AuthContext.js';
 import { useNavigate } from 'react-router-dom';
 import './SignIn.css';
 
+const BACKEND_AUTH_URL = 'https://visualoom-8a10785743bd.herokuapp.com/auth/oauth2'
 const SignIn = ({ onClose }) => {
   const { googleSignIn, isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const SignIn = ({ onClose }) => {
       const idToken = credentialResponse.credential;
 
       // Send ID token to the backend for verification
-      const response = await fetch('https://visualoom-8a10785743bd.herokuapp.com/auth/oauth2', {
+      const response = await fetch(BACKEND_AUTH_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

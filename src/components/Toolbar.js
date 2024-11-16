@@ -27,7 +27,7 @@ const Toolbar = ({ imageUrl, onRegenerate }) => {
 
       // pass individual items as params to createArtwork
       const artworkData = {
-        userId: userId,
+        userId: 1,
         algorithm: selectedAlgorithm,
         exifData, // Camera and location metadata
         colorPalette, // Extracted color palette

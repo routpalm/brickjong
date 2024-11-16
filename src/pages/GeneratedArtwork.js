@@ -39,7 +39,6 @@ const GeneratedArtwork = () => {
   return (
     <div className="generated-artwork">
       <h1>VisuaLoom</h1>
-      <p>Congrats on Your New Algorithm Art Work!</p>
 
       <div className="artwork-container" ref={canvasRef} id="canvasContainer"></div>
 

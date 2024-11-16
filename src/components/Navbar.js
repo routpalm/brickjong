@@ -1,4 +1,3 @@
-// src/components/Navbar.js
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SignIn from '../pages/SignIn.js';
@@ -6,14 +5,11 @@ import { useAuth } from '../AuthContext.js';
 import './Navbar.css';
 import { FaHome, FaSignOutAlt } from 'react-icons/fa';
 
-
-
-
 const Navbar = () => {
   const { isAuthenticated, user, signOut } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation(); 
-  const [showSignIn, setShowSignIn] = useState(false); 
+  const location = useLocation();
+  const [showSignIn, setShowSignIn] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
 
   const handleSignInClick = () => {
@@ -32,7 +28,7 @@ const Navbar = () => {
     if (isAuthenticated) {
       navigate(path);
     } else {
-      setShowSignIn(true); 
+      setShowSignIn(true);
     }
   };
 
@@ -67,13 +63,10 @@ const Navbar = () => {
           className={`home-button ${location.pathname === '/' ? 'active-link' : ''}`}
         >
           <FaHome />
-          </button>
+        </button>
         {isAuthenticated ? (
           <>
-            <button
-              className="user-name-button"
-              onClick={handleToggleEmail}
-            >
+            <button className="user-name-button" onClick={handleToggleEmail}>
               {showEmail ? user.email : user.name}
             </button>
             <button onClick={signOut} className="sign-out-button">
@@ -81,21 +74,14 @@ const Navbar = () => {
             </button>
           </>
         ) : (
-          <button className="sign-in-link" onClick={() => navigate('/signin')}>
+          <button className="sign-in-link" onClick={handleSignInClick}>
             Sign In
           </button>
         )}
       </div>
+      {showSignIn && <SignIn onClose={handleCloseModal} />}
     </nav>
   );
 };
 
 export default Navbar;
-
-
-
-
-
-
-
-
