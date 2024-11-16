@@ -1,7 +1,6 @@
 // ./src/apiclient/artworks.js
 
-import apiclient from 'apiclient'
-import apiClient from "apiclient";
+import apiclient from './apiClient.js'
 
 
 export const getArtworks = async (n, offset) => {
@@ -18,7 +17,7 @@ export const getArtworks = async (n, offset) => {
 
 export const getArtworkById = async (artworkId) => {
     try {
-        const response = await apiClient.get(`/artworks/${artworkId}`);
+        const response = await apiclient.get(`/artworks/${artworkId}`);
         return response.data;
     } catch (error) {
         console.error("Error getting artwork list:", artworkId, error);
@@ -28,7 +27,7 @@ export const getArtworkById = async (artworkId) => {
 // TODO: Work out params
 export const createArtwork = async (userId, params) => {
     try {
-        const response = await apiClient.post(`/artworks`, {
+        const response = await apiclient.post(`/artworks`, {
             params: params
         });
     } catch (error) {
@@ -38,7 +37,7 @@ export const createArtwork = async (userId, params) => {
 
 export const deleteArtwork = async (artworkId) => {
     try {
-        const response = await apiClient.delete(`/artworks/${artworkId}`);
+        const response = await apiclient.delete(`/artworks/${artworkId}`);
         return response.data;
     } catch (error) {
         console.error("Error deleting artwork:", artworkId, error);
