@@ -18,6 +18,10 @@ const GeneratedArtwork = () => {
       return;
     }
 
+     // save processedImageData to localStorage
+     localStorage.setItem('processedImageData', JSON.stringify(processedImageData));
+     localStorage.setItem('selectedAlgorithm', selectedAlgorithm);
+
     // Render the images based on selected algorithm
     let sketchInstance;
     if (selectedAlgorithm === 'Lines') {
