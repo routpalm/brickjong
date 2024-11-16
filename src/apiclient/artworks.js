@@ -1,12 +1,11 @@
 // ./src/apiclient/artworks.js
 
-import apiclient from 'apiclient'
-import apiClient from "apiclient";
+import apiClient from "./apiClient.js";
 
 
 export const getArtworks = async (n, offset) => {
     try {
-        const response = await apiclient.get(`/artworks`, {
+        const response = await apiClient.get(`/artworks`, {
             n: n,
             offset: offset
         })
@@ -25,14 +24,55 @@ export const getArtworkById = async (artworkId) => {
     }
 }
 
-// TODO: Work out params
-export const createArtwork = async (userId, params) => {
+export const createArtworkByParam = async (userId,
+                                    algorithm,
+                                    seed,
+                                    colVibrant,
+                                    colLightVibrant,
+                                    colDarkVibrant,
+                                    colMuted,
+                                    colLightMuted,
+                                    colDarkMuted,
+                                    param1,
+                                    param2,
+                                    param3,
+                                    param4,
+                                    param5,
+                                    param6,
+                                    param7,
+                                    param8) => {
     try {
         const response = await apiClient.post(`/artworks`, {
-            params: params
+            userId: userId,
+            algorithm: algorithm,
+            seed: seed,
+            colVibrant: colVibrant,
+            colLightVibrant: colLightVibrant,
+            colDarkVibrant: colDarkVibrant,
+            colMuted: colMuted,
+            colLightMuted: colLightMuted,
+            colDarkMuted: colDarkMuted,
+            param1: param1,
+            param2: param2,
+            param3: param3,
+            param4: param4,
+            param5: param5,
+            param6: param6,
+            param7: param7,
+            param8: param8
         });
+        return response.data;
     } catch (error) {
-        console.error("Error creating artwork:", userId, params, error)
+        console.error("Error creating artwork:", error)
+    }
+}
+
+export const createArtworkByObject = async ( artwork ) => {
+    try {
+        const response = await apiClient.post(`/artworks`, artwork);
+        return response.data;
+    } catch (error) {
+        console.error("Error creating artwork:", error)
     }
 }
 
