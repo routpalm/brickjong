@@ -15,7 +15,7 @@ export const getLikeById = async (likeId) => {
 
 // TODO: export const modifyLike = async (likeId, userId, artworkId) => {}
 
-export const createLike = async (userId, artworkId) => {
+export const createLikeByParam = async (userId, artworkId) => {
     try {
         const response = await apiClient.post(`/likes`, {
             userId: userId,
@@ -24,6 +24,16 @@ export const createLike = async (userId, artworkId) => {
         return response.data;
     } catch (error) {
         console.error("Error creating like:", userId, artworkId, error);
+        throw error;
+    }
+}
+
+export const createLikeByObject = async (like) => {
+    try {
+        const response = await apiClient.post(`/likes`, like);
+        return response.data;
+    } catch (error) {
+        console.error("Error creating like:", like, error);
         throw error;
     }
 }
