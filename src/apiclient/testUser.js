@@ -1,14 +1,23 @@
 // ./src/apiclient/testUser.js
 
-import { getUserById, createUser, modifyUser, deleteUser } from "./users.js";
+import { getUserById, createUserByParams, createUserByObject, modifyUser, deleteUser } from "./users.js";
 
 
-async function testCreateUser(googleId, email, name) {
+async function testCreateUserByParams(googleId, email, name) {
     try {
-        const result = await createUser(googleId, email, name);
+        const result = await createUserByParams(googleId, email, name);
         console.log(result);
     } catch (error) {
         console.error("An error occurred while creating the user:", error);
+    }
+}
+
+async function testCreateUserByObject(user){
+    try {
+        const result = await createUserByObject(user);
+        console.log(result);
+    } catch (error) {
+        console.error("An error occurred while creating the user:", user);
     }
 }
 
