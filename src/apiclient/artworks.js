@@ -1,22 +1,12 @@
 // ./src/apiclient/artworks.js
 
-import apiclient from './apiClient.js'
+import apiclient from 'apiclient'
+import apiClient from "apiclient";
 
-const BASE_URL = 'http://localhost:3001/artworks';
-
-export const createArtwork = async (artworkData) => {
-    try {
-        const response = await apiclient.post('/artworks', artworkData);
-        return response.data;
-    } catch (error) {
-        console.error('Error creating artwork:', error.response?.data || error.message);
-        throw error;
-    }
-};
 
 export const getArtworks = async (n, offset) => {
     try {
-        const response = await apiclient.get(`/artworks`, {
+        const response = await apiClient.get(`/artworks`, {
             n: n,
             offset: offset
         })
@@ -32,6 +22,17 @@ export const getArtworkById = async (artworkId) => {
         return response.data;
     } catch (error) {
         console.error("Error getting artwork list:", artworkId, error);
+    }
+}
+
+// TODO: Work out params
+export const createArtwork = async (userId, params) => {
+    try {
+        const response = await apiClient.post(`/artworks`, {
+            params: params
+        });
+    } catch (error) {
+        console.error("Error creating artwork:", userId, params, error)
     }
 }
 
