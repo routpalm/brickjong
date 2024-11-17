@@ -14,7 +14,7 @@ const Header = () => {
     if (isAuthenticated) {
       navigate('/weave-artwork');
     } else {
-      navigate('/sign-in');
+      navigate('/');
     }
   };
 

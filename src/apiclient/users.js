@@ -13,7 +13,15 @@ export const getUserById = async (id) => {
     }
 }
 
-// TODO: export const getUserArtworks = async (id) => {}
+export const getUserArtworks = async (userId, limit = 20, offset = 0) => {
+    try {
+        const response = await apiClient.get(`/users/${userId}/artwork?limit=${limit}&offset=${offset}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching user artworks:', error);
+        throw error;
+    }
+};
 
 // TODO: export const getUserLikes = async (id) => {}
 

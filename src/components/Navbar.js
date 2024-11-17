@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SignIn from '../pages/SignIn.js';
 import { useAuth } from '../AuthContext.js';
@@ -31,6 +31,12 @@ const Navbar = () => {
       setShowSignIn(true);
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setShowSignIn(false);
+    }
+  }, [isAuthenticated]);
 
   return (
     <nav className="navbar">
