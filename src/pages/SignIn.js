@@ -4,7 +4,9 @@ import { useAuth } from '../AuthContext.js';
 import { useNavigate } from 'react-router-dom';
 import './SignIn.css';
 
-const BACKEND_AUTH_URL = 'https://visualoom-8a10785743bd.herokuapp.com/auth/oauth2'
+//const BACKEND_AUTH_URL = 'https://visualoom-8a10785743bd.herokuapp.com/auth/oauth2'
+const BACKEND_AUTH_URL = 'http://localhost:3001/auth/oauth2'
+
 const SignIn = ({ onClose }) => {
   const { googleSignIn, isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -50,6 +52,7 @@ const SignIn = ({ onClose }) => {
         <button className="close-button" onClick={onClose}>X</button>
         <h2 className="sign-in-title gradient-text">Sign in to Visualoom</h2>
         <GoogleLogin
+          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           onSuccess={handleLoginSuccess}
           onError={handleLoginError}
           size="large"
