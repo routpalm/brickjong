@@ -83,9 +83,9 @@ export const Sslines = (p,processedImageData) => {
     for(let i = 0; i < wnum*20; i+=20){
       if(i < p.height/4){
         p.stroke(colors[0]);
-      } else if (p.height/4 < i < p.height/2) {
+      } else if (i >= p.height/4 && i<p.height/2) {
         p.stroke(colors[1]);
-      } else if (p.height/2 < i < 3*(p.height)/4) {
+      } else if (i >= p.height/2 && i<(3*p.height)/4) {
         p.stroke(colors[3]);
       } else {
         p.stroke(colors[4]);
