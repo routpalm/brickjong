@@ -4,12 +4,22 @@ import p5 from 'p5';
 import { LinesSketch } from '../sketches/LinesSketch.js';
 import { WaveOscillator } from '../sketches/WaveOscillator.js';
 import './MyGallery.css';
-import { getUserArtworks } from '../apiclient/users.js';
+import { getUserArtworks, mapJWTToUserId } from '../apiclient/users.js';
 
 const MyGallery = () => {
   const [artworks, setArtworks] = useState([]);
-  const userId = 1; // Replace with actual user ID
+  const [userId, setUserId] = useState(null);
   const canvasSize = 200; // Canvas size
+
+  const fetchUserId = async () => {
+    try {
+        const userId = await mapJWTToUserId();
+        console.log('Mapped User ID:', userId);
+        // Use the user ID in subsequent API calls
+    } catch (error) {
+        console.error('Failed to fetch user ID:', error);
+    }
+};
 
   const createSketch = (artwork, containerId) => {
     const container = document.getElementById(containerId);
@@ -32,16 +42,32 @@ const MyGallery = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchUserId = async () => {
       try {
-        const data = await getUserArtworks(userId);
-        setArtworks(data);
+        const id = await mapJWTToUserId();
+        console.log('Mapped User ID:', id);
+        setUserId(id); // Update state with user ID
       } catch (error) {
-        console.error('Error fetching artworks:', error);
+        console.error('Failed to fetch user ID:', error);
       }
     };
 
-    fetchData();
+    fetchUserId();
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      const fetchData = async () => {
+        try {
+          const data = await getUserArtworks(userId);
+          setArtworks(data);
+        } catch (error) {
+          console.error('Error fetching artworks:', error);
+        }
+      };
+
+      fetchData();
+    }
   }, [userId]);
 
   useEffect(() => {

@@ -1,6 +1,7 @@
 // ./src/apiclient/user.js
 
 import apiClient from "./apiClient.js";
+import { setAuthToken } from "./auth.js";
 
 
 export const getUserById = async (id) => {
@@ -22,6 +23,30 @@ export const getUserArtworks = async (userId, limit = 20, offset = 0) => {
         throw error;
     }
 };
+
+export const mapJWTToUserId = async () => {
+    const token = localStorage.getItem('jwt'); // Retrieve JWT from storage
+    if (!token) throw new Error('JWT not found');
+    setAuthToken(token);
+    try {
+        const response = await apiClient.get('/users/map-jwt');
+        return response.data.userId; // Extract user ID from the response
+    } catch (error) {
+        console.error('Error mapping JWT to user ID:', error);
+        throw error;
+    }
+};
+
+export const fetchUserProfile = async () => {
+    const token = localStorage.getItem('jwt');
+    try {
+        const response = await apiClient.get('/users/profile');
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching user profile:', error);
+    }
+};
+
 
 // TODO: export const getUserLikes = async (id) => {}
 
