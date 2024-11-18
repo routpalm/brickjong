@@ -11,16 +11,6 @@ const MyGallery = () => {
   const [userId, setUserId] = useState(null);
   const canvasSize = 200; // Canvas size
 
-  const fetchUserId = async () => {
-    try {
-        const userId = await mapJWTToUserId();
-        console.log('Mapped User ID:', userId);
-        // Use the user ID in subsequent API calls
-    } catch (error) {
-        console.error('Failed to fetch user ID:', error);
-    }
-};
-
   const createSketch = (artwork, containerId) => {
     const container = document.getElementById(containerId);
     if (!container) {
