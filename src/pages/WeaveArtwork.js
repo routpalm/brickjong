@@ -15,7 +15,8 @@ const algorithmImages = {
   "Wave": SampleAlgo2,
   "Diagonals": SampleAlgo1,
   "ConCirc":  SampleAlgo2,
-  "TruchRound": SampleAlgo2
+  "TruchRound": SampleAlgo2,
+  "Sslines" : SampleAlgo2
 };
 
 const WeaveArtwork = () => {

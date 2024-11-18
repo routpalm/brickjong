@@ -8,6 +8,7 @@ import { WaveOscillator } from '../sketches/WaveOscillator.js';
 import { ConCirc } from "../sketches/concirc.js";
 import { TruchetRound } from "../sketches/truchetTriangles.js";
 import { Diagonals } from "../sketches/diags.js";
+import { Sslines } from "../sketches/sslines.js";
 
 const GeneratedArtwork = () => {
   const navigate = useNavigate();
@@ -33,6 +34,8 @@ const GeneratedArtwork = () => {
       sketchInstance = new p5((p) => TrucherRound(p, processedImageData), canvasRef.current);
     } else if (selectedAlgorithm === 'Diagonals') {
       sketchInstance = new p5((p) => Diagonals(p, processedImageData), canvasRef.current);
+    } else if (selectedAlgorithm === 'Sslines') {
+      sketchInstance = new p5((p) => Sslines(p, processedImageData), canvasRef.current);
     } 
 
     return () => {
