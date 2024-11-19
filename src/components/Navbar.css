@@ -40,14 +40,57 @@
 }
 
 .user-name-button {
-    padding: 15px 10px;
-    background-color: transparent;
-    border: 2px solid #9a4dbf;
-    color: #9a4dbf;
-    border-radius: 5px;
-    font-size: 0.9rem;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center text horizontally */
+    align-items: center; /* Center text vertically */
+    padding: 15px 20px; /* Add padding */
+    background: linear-gradient(135deg, #9a4dbf, #ff7dcf); /* Gradient background */
+    border: none; /* Remove the border */
+    color: #ffffff; /* White text for contrast */
+    border-radius: 8px; /* Slightly rounded corners */
+    font-size: 1rem; /* Slightly larger font size */
     font-weight: bold;
-    cursor: default; 
+    cursor: pointer; /* Change cursor to pointer */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    position: relative; /* Needed for the sparkly effect */
+    overflow: hidden; /* Clip the sparkles inside the button */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effect */
+}
+
+/* Add sparkly effect using pseudo-elements */
+.user-name-button::before {
+    content: '';
+    position: absolute;
+    top: -50%; 
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.5) 10%, transparent 50%);
+    animation: sparkle 2s infinite linear;
+    opacity: 0.5;
+    pointer-events: none; /* Prevent interaction */
+}
+
+/* Hover effect */
+.user-name-button:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Active state */
+.user-name-button:active {
+    transform: scale(0.95); /* Slightly shrink when clicked */
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); /* Softer shadow on click */
+}
+
+/* Sparkle animation */
+@keyframes sparkle {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 .nav-button,

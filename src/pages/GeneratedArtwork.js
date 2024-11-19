@@ -10,6 +10,7 @@ import { TruchetRound } from "../sketches/truchetTriangles.js";
 import { Diagonals } from "../sketches/diags.js";
 import { Sslines } from "../sketches/sslines.js";
 
+
 const GeneratedArtwork = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,6 +22,10 @@ const GeneratedArtwork = () => {
       navigate('/weave-artwork');
       return;
     }
+
+     // save processedImageData to localStorage
+     localStorage.setItem('processedImageData', JSON.stringify(processedImageData));
+     localStorage.setItem('selectedAlgorithm', selectedAlgorithm);
 
     // Render the images based on selected algorithm
     let sketchInstance;
@@ -47,7 +52,6 @@ const GeneratedArtwork = () => {
   return (
     <div className="generated-artwork">
       <h1>VisuaLoom</h1>
-      <p>Congrats on Your New Algorithm Art Work!</p>
 
       <div className="artwork-container" ref={canvasRef} id="canvasContainer"></div>
 
