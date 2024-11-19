@@ -1,0 +1,94 @@
+/* GeneratedArtwork.css */
+.generated-artwork {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: transparent; 
+}
+
+.particles-background {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+    pointer-events: none; 
+}
+
+.column-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    z-index: 1; 
+}
+
+.artwork-column {
+    flex: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.artwork-container {
+    width: 512px;
+    height: 512px;
+    background-color: #e5e5e5; 
+    border-radius: 30px;
+    box-shadow: 10px 10px 10px #EADDFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 50px;
+}
+
+.congrats-message {
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #6e8efb 0%, #a777e3 50%, #b19cd9 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 100px;
+}
+.toolbar {
+    display: flex;
+    flex-direction: column; /* 确保按钮垂直排列 */
+    gap: 10px;
+    margin-left: -180px;
+}
+
+.toolbar-column {
+    display: flex;
+    flex-direction: column;
+    margin-top: 130px;
+    margin-left: -100px;
+    margin-right: 100px;
+}
+
+.toolbar-container button {
+    background-color: #a777e3; 
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 60px;
+    height: 40px;
+}
+
+.toolbar-container button:hover {
+    background-color: #933dbe;
+}
+
