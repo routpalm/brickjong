@@ -34,6 +34,9 @@ export const Sslines = (p,processedImageData) => {
   function drawsin(x,y,colors){
     p.push();
     p.translate(x,y);
+
+
+    //p.stroke(colors[(x*y)%5]);
     /*
     if(y < p.height/4){
       p.stroke(colors[0]);;
@@ -44,12 +47,12 @@ export const Sslines = (p,processedImageData) => {
 
     p.beginShape();
     for(let i = 0; i < p.width; i++){
-      let c = 50;
+      let c = 10;
       let j = c*p.sin(i);
-      p.vertex(i,j);
+      p.vertex(i,j*((randgen.next().value)/80));
       
     }
-    p.endShape(p.CLOSE);
+    p.endShape();
     p.pop();
   }
 
@@ -80,7 +83,8 @@ export const Sslines = (p,processedImageData) => {
     console.log(pixdata);
     let wnum = 100;
     p.noFill();
-    for(let i = 0; i < wnum*20; i+=20){
+    for(let i = 0; i < wnum*40; i+=40){
+      /*
       if(i < p.height/4){
         p.stroke(colors[0]);
       } else if (i >= p.height/4 && i<p.height/2) {
@@ -90,8 +94,27 @@ export const Sslines = (p,processedImageData) => {
       } else {
         p.stroke(colors[4]);
       }
+      */
+      let col = (randgen.next().value %5);
+      console.log(col);
+      p.stroke(colors[col]);
       drawsin(0,i,colors);
     }
+    for(let i = 0; i < wnum*80;i+=80){
+     let col = (randgen.next().value %5);
+      console.log(col);
+      p.stroke(colors[col]);
+      drawsin(p.width/col,i,colors);
+    } 
+    let c = randgen.next().value % 5
+    if(c < 2) {//not working atm
+      console.log(`c' ${c}`);
+      p.fill(colors[5]);
+      p.circle(p.width/2 + 100*c,p.height/2 + 50*c,50*c);
+      //p.circle(50,50,50);
+      p.noFill();
+    }
+    
 
 
 
