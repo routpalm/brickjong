@@ -1,7 +1,7 @@
 // src/pages/WeaveArtwork.js
 import React, { useState, useEffect } from 'react';
-import AlgorithmSelector from '../components/AlgorithmSelector.js';
-import FileUploader from '../components/FileUploader.js';
+import AlgorithmSelector from '../components/algorithmSelector.js';
+import FileUploader from '../components/fileUploader.js';
 import useImageProcessor from '../hooks/useImageProcessor.js';
 import { useNavigate } from 'react-router-dom';
 import './WeaveArtwork.css';
@@ -13,6 +13,10 @@ import SampleAlgo2 from '../images/spiro.jpg';
 const algorithmImages = {
   "Lines": SampleAlgo1,
   "Wave": SampleAlgo2,
+  "Diagonals": SampleAlgo1,
+  "ConCirc":  SampleAlgo2,
+  "TruchRound": SampleAlgo2,
+  "Sslines" : SampleAlgo2
 };
 
 const WeaveArtwork = () => {
@@ -57,7 +61,7 @@ const WeaveArtwork = () => {
           <h1 className="page-title">VisuaLoom</h1>
           <AlgorithmSelector selected={selectedAlgorithm} onChange={handleAlgorithmChange} />
           <p className="upload-instructions">
-            Upload Your Photo to Create ✨!
+          Let's weave something new.
           </p>
           <FileUploader onFileSelect={handleFileUpload} isUploading={isUploading} />
         </div>

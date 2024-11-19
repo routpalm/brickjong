@@ -1,5 +1,4 @@
-// src/components/Navbar.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SignIn from '../pages/SignIn.js';
 import { useAuth } from '../AuthContext.js';
@@ -9,11 +8,16 @@ import { FaHome, FaSignOutAlt } from 'react-icons/fa';
 const Navbar = () => {
   const { isAuthenticated, user, signOut } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation(); 
-  const [showSignIn, setShowSignIn] = useState(false); 
+  const location = useLocation();
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
 
   const handleSignInClick = () => {
     setShowSignIn(true);
+  };
+
+  const handleToggleEmail = () => {
+    setShowEmail((prev) => !prev); // Toggle email display
   };
 
   const handleCloseModal = () => {
@@ -24,9 +28,15 @@ const Navbar = () => {
     if (isAuthenticated) {
       navigate(path);
     } else {
-      setShowSignIn(true); 
+      setShowSignIn(true);
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setShowSignIn(false);
+    }
+  }, [isAuthenticated]);
 
   return (
     <nav className="navbar">
@@ -62,7 +72,9 @@ const Navbar = () => {
         </button>
         {isAuthenticated ? (
           <>
-            <span className="user-name-button">{user.name}</span>
+            <button className="user-name-button" onClick={handleToggleEmail}>
+              {showEmail ? user.email : user.name}
+            </button>
             <button onClick={signOut} className="sign-out-button">
               <FaSignOutAlt />
             </button>
@@ -79,11 +91,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-
-
-
-
-
-

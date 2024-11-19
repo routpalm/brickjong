@@ -1,0 +1,49 @@
+/* src/pages/MyGallery.css */
+
+.my-gallery {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .gallery-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .artwork-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 20px; /* Space between items */
+    justify-content: center;
+  }
+  
+  .artwork-wrapper {
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px; /* Ensure the size is fixed */
+    position: relative;
+  }
+  
+  .canvas-container {
+    width: 200px;
+    height: 200px;
+    background-color: #f0f0f0; /* Fallback background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .canvas-container > canvas {
+    width: 100%;
+    height: 100%;
+  }
+  

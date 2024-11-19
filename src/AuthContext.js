@@ -1,17 +1,32 @@
-// src/AuthContext.js
-import React, { createContext, useContext, useState } from 'react';
-import {jwtDecode} from 'jwt-decode'; 
-
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const googleSignIn = async (credential) => {
+  // Initialize the user state from localStorage on mount
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    //console.log("raw token:", token);
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        //console.log('Token:', decoded); 
+        setUser(decoded);
+      } catch (error) {
+        console.error('Failed to decode stored token:', error);
+        localStorage.removeItem('jwt'); // Clear invalid token
+      }
+    }
+  }, []);
+
+  const googleSignIn = async (token) => {
     try {
-      const decoded = jwtDecode(credential); 
-      setUser(decoded);
+      const decoded = jwtDecode(token);
+      setUser(decoded); // Update user state
+      localStorage.setItem('jwt', token); // Store JWT
     } catch (error) {
       console.error('Failed to decode Google token:', error);
     }
@@ -19,6 +34,7 @@ export const AuthProvider = ({ children }) => {
 
   const signOut = () => {
     setUser(null);
+    localStorage.removeItem('jwt'); // Clear JWT
   };
 
   return (
@@ -31,5 +47,3 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => {
   return useContext(AuthContext);
 };
-
-
