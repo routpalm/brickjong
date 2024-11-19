@@ -78,6 +78,8 @@ const Toolbar = ({ imageUrl, onRegenerate, onShare }) => {
         </button>
         <span className="tooltip">Back</span>
       </div>
+    </div>)
+}
 
 export default Toolbar;
 
