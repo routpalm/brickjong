@@ -4,6 +4,8 @@ import p5 from 'p5';
 import { LinesSketch } from '../sketches/LinesSketch.js';
 import { WaveOscillator } from '../sketches/WaveOscillator.js';
 import './MyGallery.css';
+import Navbar from '../components/Navbar.js';
+import Footer from '../components/Footer.js';
 import { getUserArtworks, mapJWTToUserId } from '../apiclient/users.js';
 
 const MyGallery = () => {
@@ -69,6 +71,7 @@ const MyGallery = () => {
 
   return (
     <div className="my-gallery">
+      <Navbar />
       <h1 className="gallery-title">My Gallery</h1>
       <div className="artwork-grid">
         {artworks.map((artwork) => (
@@ -80,10 +83,9 @@ const MyGallery = () => {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };
 
-
 export default MyGallery;
-
