@@ -84,4 +84,6 @@ const MyGallery = () => {
   );
 };
 
+
 export default MyGallery;
+

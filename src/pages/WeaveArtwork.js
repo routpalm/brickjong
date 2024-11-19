@@ -13,6 +13,10 @@ import SampleAlgo2 from '../images/spiro.jpg';
 const algorithmImages = {
   "Lines": SampleAlgo1,
   "Wave": SampleAlgo2,
+  "Diagonals": SampleAlgo1,
+  "ConCirc":  SampleAlgo2,
+  "TruchRound": SampleAlgo2,
+  "Sslines" : SampleAlgo2
 };
 
 const WeaveArtwork = () => {
