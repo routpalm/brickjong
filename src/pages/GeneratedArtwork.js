@@ -1,5 +1,4 @@
-// GeneratedArtwork.js
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Toolbar from '../components/Toolbar.js';
 import p5 from 'p5';
@@ -14,10 +13,19 @@ const GeneratedArtwork = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const canvasRef = useRef(null);
+  const [imageUrl, setImageUrl] = useState(''); 
+  const [showFireworks, setShowFireworks] = useState(false); 
   const { processedImageData, selectedAlgorithm } = location.state || {};
 
   const particlesInit = async (main) => {
     await loadFull(main);
+  };
+
+  const handleShare = () => {
+    setShowFireworks(true); 
+    setTimeout(() => {
+      setShowFireworks(false); 
+    }, 3000);
   };
 
   useEffect(() => {
@@ -33,6 +41,16 @@ const GeneratedArtwork = () => {
       sketchInstance = new p5((p) => WaveOscillator(p, processedImageData), canvasRef.current);
     }
 
+    const generateImageUrl = () => {
+      const canvas = canvasRef.current.querySelector('canvas');
+      if (canvas) {
+        const url = canvas.toDataURL('image/png');
+        setImageUrl(url);
+      }
+    };
+  
+    setTimeout(generateImageUrl, 1000);
+
     return () => {
       if (sketchInstance) sketchInstance.remove();
     };
@@ -40,58 +58,94 @@ const GeneratedArtwork = () => {
 
   return (
     <div className="generated-artwork">
-      <Particles
-        id="tsparticles"
-        className="particles-background"
-        init={particlesInit}
-        options={{
-          background: {
-            color: {
-              value: "#000000",
-            },
-          },
-          fpsLimit: 300,
-          particles: {
-            color: {
-              value: "#ffffff",
-            },
-            links: {
-              color: "#ffffff",
-              distance: 50,
-              enable: true,
-              opacity: 0.5,
-              width: 1,
-            },
-            move: {
-              directions: "none",
-              enable: true,
-              outModes: {
-                default: "bounce",
-              },
-              random: false,
-              speed: 2,
-              straight: false,
-            },
-            number: {
-              density: {
+      {showFireworks ? (
+        <Particles
+          id="tsparticles-fireworks"
+          className="fireworks-background"
+          init={particlesInit}
+          options={{
+            particles: {
+              number: { value: 500 },
+              color: { value: ["#EADDFF", "#AF52DE", "#71358F"] }, 
+              shape: { type: "circle" },
+              opacity: { value: 1 },
+              size: { value: { min: 3, max: 5 } },
+              move: {
                 enable: true,
-                area: 800,
+                speed: 6,
+                direction: "none",
+                outModes: {
+                  default: "destroy"
+                },
               },
-              value: 80,
             },
-            opacity: {
-              value: 0.5,
+            interactivity: {
+              detectsOn: "canvas",
+              events: {
+                onclick: { enable: true, mode: "push" },
+                resize: true
+              },
+              modes: {
+                push: { quantity: 4 },
+              }
             },
-            shape: {
-              type: "circle",
+            detectRetina: true,
+          }}
+        />
+      ) : (
+        <Particles
+          id="tsparticles"
+          className="particles-background"
+          init={particlesInit}
+          options={{
+            background: {
+              color: {
+                value: "#000000",
+              },
             },
-            size: {
-              value: { min: 1, max: 5 },
+            fpsLimit: 300,
+            particles: {
+              color: {
+                value: "#ffffff",
+              },
+              links: {
+                color: "#ffffff",
+                distance: 50,
+                enable: true,
+                opacity: 0.5,
+                width: 1,
+              },
+              move: {
+                directions: "none",
+                enable: true,
+                outModes: {
+                  default: "bounce",
+                },
+                random: false,
+                speed: 2,
+                straight: false,
+              },
+              number: {
+                density: {
+                  enable: true,
+                  area: 800,
+                },
+                value: 80,
+              },
+              opacity: {
+                value: 0.5,
+              },
+              shape: {
+                type: "circle",
+              },
+              size: {
+                value: { min: 1, max: 5 },
+              },
             },
-          },
-          detectRetina: true,
-        }}
-      />
+            detectRetina: true,
+          }}
+        />
+      )}
       <Navbar />
       <div className="column-container">
         <div className="artwork-column">
@@ -100,13 +154,16 @@ const GeneratedArtwork = () => {
         <div className="toolbar-column">
           <div className="toolbar-container">
             <Toolbar
-              imageUrl={processedImageData?.imageUrl}
+              imageUrl={imageUrl}
               onRegenerate={() => navigate('/weave-artwork')}
+              onShare={handleShare} 
             />
           </div>
         </div>
       </div>
-      <p className="congrats-message">Congrats on Your New Algorithm Art Work!</p>
+      {showFireworks && (
+        <p className="shared-message">🎉🎉Shared With Your Friends!!!</p>
+      )}
     </div>
   );
 };

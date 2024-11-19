@@ -1,10 +1,15 @@
-// src/components/Toolbar.js
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faArrowUp, faArrowDown, faUndo } from '@fortawesome/free-solid-svg-icons';
 
-const Toolbar = ({ imageUrl, onRegenerate }) => {
+const Toolbar = ({ imageUrl, onRegenerate, onShare }) => {
+
   const handleDownload = () => {
+    if (!imageUrl) {
+      console.error('Image URL is undefined or empty');
+      return;
+    }
+
     const link = document.createElement('a');
     link.href = imageUrl;
     link.download = 'generated-artwork.png';
@@ -13,30 +18,34 @@ const Toolbar = ({ imageUrl, onRegenerate }) => {
     document.body.removeChild(link);
   };
 
+  const handleShare = () => {
+    onShare(); 
+  };
+
   return (
     <div className="toolbar">
       <div className="toolbar-button-container">
         <button onClick={onRegenerate}>
           <FontAwesomeIcon icon={faPlus} />
-        </button> {/* Add to my gallery */}
+        </button>
         <span className="tooltip">Add To Gallery</span>
       </div>
       <div className="toolbar-button-container">
-        <button>
+        <button onClick={handleShare}>
           <FontAwesomeIcon icon={faArrowUp} />
-        </button> {/* Share with my friend */}
-        <span className="tooltip">Share<></></span>
+        </button>
+        <span className="tooltip">Share</span>
       </div>
       <div className="toolbar-button-container">
         <button onClick={handleDownload}>
           <FontAwesomeIcon icon={faArrowDown} />
-        </button> {/* Download */}
+        </button>
         <span className="tooltip">Download</span>
       </div>
       <div className="toolbar-button-container">
-        <button onClick={() => onRegenerate()}>
+        <button onClick={onRegenerate}>
           <FontAwesomeIcon icon={faUndo} />
-        </button> {/* Go Back */}
+        </button>
         <span className="tooltip">Back</span>
       </div>
     </div>
@@ -44,5 +53,4 @@ const Toolbar = ({ imageUrl, onRegenerate }) => {
 };
 
 export default Toolbar;
-
 
