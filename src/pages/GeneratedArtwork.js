@@ -51,7 +51,7 @@ const GeneratedArtwork = () => {
     } else if (selectedAlgorithm === 'ConCirc') {
       sketchInstance = new p5((p) => ConCirc(p, processedImageData), canvasRef.current);
     } else if (selectedAlgorithm === 'TruchRound') {
-      sketchInstance = new p5((p) => TrucherRound(p, processedImageData), canvasRef.current);
+      sketchInstance = new p5((p) => TruchetRound(p, processedImageData), canvasRef.current);
     } else if (selectedAlgorithm === 'Diagonals') {
       sketchInstance = new p5((p) => Diagonals(p, processedImageData), canvasRef.current);
     } else if (selectedAlgorithm === 'Sslines') {

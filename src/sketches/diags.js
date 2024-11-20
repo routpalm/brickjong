@@ -8,7 +8,7 @@
 */
 
 export const Diagonals = (p,processedImageData) => {
-  const size = 800;
+  const size = 512;
   const SQsize = size/10;
   const offset = SQsize/10;
 

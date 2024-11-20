@@ -8,7 +8,7 @@
 */
 
 export const Squigs = (p,processedImageData) => {
-  const size = 800;
+  const size = 512;
   const SQsize = size/10;
   const offset = SQsize/10;
   p.setup = function() {
@@ -77,6 +77,4 @@ function draw() {
   background(220);
   translate(width/2,height/2);
   squigs(0,0);
-}
-
-
+} */
