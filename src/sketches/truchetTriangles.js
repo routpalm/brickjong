@@ -41,7 +41,7 @@ export const TruchetRound = (p,processedImageData) => {
           p.arc(x,y,size,size,2*p.PI,p.HALF_PI);
           
           p.noFill();
-          p.stroke("white");
+          p.stroke(colors[2]);
           p.strokeWeight(size/20)
           p.arc(x+size,y+size,size,size,p.PI,p.PI+p.HALF_PI);
           p.arc(x,y,size,size,2*p.PI,p.HALF_PI);
@@ -60,7 +60,7 @@ export const TruchetRound = (p,processedImageData) => {
           p.arc(x+size,y,size,size,p.HALF_PI,p.PI);
           p.arc(x,y+size,size,size,p.PI+p.HALF_PI,2*p.PI);  
           p.noFill();
-          p.stroke("white");
+          p.stroke(colors[2]);
           p.strokeWeight(size/20)
           p.arc(x+size,y,size,size,p.HALF_PI,p.PI);
           p.arc(x,y+size,size,size,p.PI+p.HALF_PI,2*p.PI);  

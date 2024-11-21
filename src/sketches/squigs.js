@@ -12,7 +12,8 @@ export const Squigs = (p,processedImageData) => {
   const SQsize = size/10;
   const offset = SQsize/10;
   p.setup = function() {
-    let canvas = p.createCanvas(size, size);
+    let canvas = p.createCanvas(size, size,p.WEBGL);
+    p.angleMode(p.DEGREES);
     canvas.parent('canvasContainer');
     p.colorMode(p.HSB, 360, 100, 100);
     p.noLoop();
@@ -31,52 +32,72 @@ export const Squigs = (p,processedImageData) => {
     //console.log("loaded2");
     //p.background(220); // white background
 
+    function sircle(x,y,size,colors) {
+      p.beginShape();
+      for(let i = 0; i < 360; i++){
+        //let b = i * size;
+        /*
+        let u = p.cos(i*size);
+        let v = p.sin(i*size);
+        let z = p.sin(i*size);
+        /*/
+        let u = size * p.cos(i);
+        let v = size * p.sin(i);
+        let z = size * p.sin(i*randgen.next().value%5);//p.stroke(colors[randgen.next().value%5]);
+        
+        p.vertex(u,v,z);
+        //p.vertex(u,v);
+      }
+      p.endShape(p.CLOSE);
+    }
 
 
+
+  function* processData(pixdata){
+    //make a generator or iterator?
+    
+    let length = pixdata.length;
+    //index = index % length;
+    //console.log(`index: ${index}`);
+    while(true){
+      for(let i = 0; i < length;i++){
+        for(let j = 0; j < 4;j++){
+          yield parseInt(pixdata[i][j]);
+        }
+
+      }
+    }
+  }
 
     
+
+
+
       // color palette 
     const colors = processedImageData?.colorPalette || ["rgb(0, 0, 0)"]; // Fallback to black if colorPalette is missing
     const pixdata = processedImageData?.pixelCluster || ["rgb(0,0,0)"];    
     const randgen = processData(pixdata); //generator init
-    p.background(colors[4]);
+    p.background(colors[5]);
     console.log(`Running Squigs pattern with ${colors[0]} and ${colors[1]}`);
     console.log(pixdata);
+    //p.translate(p.width/2,p.height/2);
+    p.noFill();
+    
 
-
-
+    p.rotateX(75);
+    let MaxDiameter = p.width/2;
+    let spacing = 36; //multiple of 360
+    for(let i = 0; i < MaxDiameter; i+=spacing){
+      p.stroke(colors[randgen.next().value%5]);
+      p.strokeWeight(randgen.next().value%6);
+      sircle(0,0,i,colors);
+      
+    }
+    //p.box(70,70,70);
+    //sircle(0,0,10,colors);
+    //p.circle(0,0,100);
 
     p.noLoop();
   }
 };
-
-
-/*function setup() {
-  createCanvas(400, 400);
-  translate(width/2,height/2);
-  angleMode(DEGREES);
-}
-
-function squigs(x,y,colors){
-  fill("blue");
-  //let c = 50
-  
-  for(let j = 0; j < 10; j++){
-    beginShape();
-    let b = j * 10;
-    for(let i = 0;  i < 360; i++){
-      let u = sin(x*b);
-      let v = cos(y*b);
-      vertex(u,v);
-    }
-  }
-  endShape(CLOSE);
-}
-
-function draw() {
-  background(220);
-  translate(width/2,height/2);
-  squigs(0,0);
-}
-
 

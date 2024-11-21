@@ -17,6 +17,7 @@ const AlgorithmSelector = ({ selected, onChange }) => {
         <option value="TruchRound">Round Truchet</option>
         <option value="Diagonals">Diagonal Lines</option>
         <option value="Sslines">Overlapping Sines</option>
+        <option value="Squigs">Squigs</option>
       </select>
     </div>
   );

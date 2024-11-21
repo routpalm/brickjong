@@ -63,14 +63,28 @@ export const Sslines = (p,processedImageData) => {
       //index = index % length;
       //console.log(`index: ${index}`);
       while(true){
+        for(let i = 0; i < length; i++){
+          //const match = pixdata[i].match(/rgb\((\d+),((\d+)),((\d+)\))/);
+          console.log(pixdata[i]);
+          console.log(pixdata[i][2]);//is this what I want?
+          break;
+          /*if(match){
+            for(let j = 1; j <= 3;j++){
+              yield parseInt(match[j]);
+            }
+          }*/
+        }
+
+        /*
         for(let i = 0; i < length;i++){
           for(let j = 0; j < 4;j++){
             yield parseInt(pixdata[i][j]);
           }
 
         }
-      }  //yield pixdata[index];
+      }*/
     }
+  }
 
 
     
