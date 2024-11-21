@@ -12,13 +12,13 @@ const Homepage = () => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  const handleProtectedClick = (path) => {
-    if (isAuthenticated) {
-      navigate(path); 
-    } else {
-      navigate('/sign-in'); 
-    }
-  };
+   const handleProtectedClick = (path) => {
+     if (isAuthenticated) {
+       navigate(path); 
+     } else {
+       navigate('/sign-in'); 
+     }
+   };
 
   return (
     <div className="homepage">
