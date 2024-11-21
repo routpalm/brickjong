@@ -43,8 +43,9 @@ export const Squigs = (p,processedImageData) => {
         /*/
         let u = size * p.cos(i);
         let v = size * p.sin(i);
-        let z = size * p.sin(i*randgen.next().value%5);//p.stroke(colors[randgen.next().value%5]);
-        
+        let z = size/10 * p.sin(i*2);
+        //let z = (size + (360-i)) * p.sin(i*randgen.next().value%5);//p.stroke(colors[randgen.next().value%5]);
+        //let z = size * p.sin((360-i)*randgen.next().value%5);//p.stroke(colors[randgen.next().value%5]);
         p.vertex(u,v,z);
         //p.vertex(u,v);
       }
