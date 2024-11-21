@@ -2,7 +2,7 @@
 
 import apiclient from './apiClient.js'
 
-const BASE_URL = 'http://localhost:3001/artworks';
+const BASE_URL = 'https://visualoom-8a10785743bd.herokuapp.com/artworks';
 
 export const createArtwork = async (artworkData) => {
     try {

@@ -4,8 +4,8 @@ import { useAuth } from '../AuthContext.js';
 import { useNavigate } from 'react-router-dom';
 import './SignIn.css';
 
-//const BACKEND_AUTH_URL = 'https://visualoom-8a10785743bd.herokuapp.com/auth/oauth2'
-const BACKEND_AUTH_URL = 'http://localhost:3001/auth/oauth2'
+const BACKEND_AUTH_URL = 'https://visualoom-8a10785743bd.herokuapp.com/auth/oauth2';
+//const BACKEND_AUTH_URL = 'http://localhost:3001/auth/oauth2'
 
 const SignIn = ({ onClose }) => {
   const { googleSignIn, isAuthenticated } = useAuth();
