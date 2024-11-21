@@ -1,5 +1,4 @@
-export const TruchetRound = (p,processedImageData) => {
-  const size = 512;
+export const TruchetRound = (p,processedImageData, size = 512) => {
   const SQsize = size/10;
 
   p.setup = function() {
