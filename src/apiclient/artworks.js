@@ -1,7 +1,10 @@
 // ./src/apiclient/artworks.js
 
-import apiclient from './apiClient.js'
+import apiclient from 'apiclient'
+import apiClient from "apiclient";
 
+<<<<<<< HEAD
+=======
 const BASE_URL = 'https://visualoom-8a10785743bd.herokuapp.com/artworks';
 
 export const createArtwork = async (artworkData) => {
@@ -13,10 +16,11 @@ export const createArtwork = async (artworkData) => {
         throw error;
     }
 };
+>>>>>>> 400b68e92cbdd16716f37be58722989157f47c54
 
 export const getArtworks = async (n, offset) => {
     try {
-        const response = await apiclient.get(`/artworks`, {
+        const response = await apiClient.get(`/artworks`, {
             n: n,
             offset: offset
         })
@@ -32,6 +36,17 @@ export const getArtworkById = async (artworkId) => {
         return response.data;
     } catch (error) {
         console.error("Error getting artwork list:", artworkId, error);
+    }
+}
+
+// TODO: Work out params
+export const createArtwork = async (userId, params) => {
+    try {
+        const response = await apiClient.post(`/artworks`, {
+            params: params
+        });
+    } catch (error) {
+        console.error("Error creating artwork:", userId, params, error)
     }
 }
 

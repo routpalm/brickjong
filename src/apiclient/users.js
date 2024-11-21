@@ -50,7 +50,7 @@ export const fetchUserProfile = async () => {
 
 // TODO: export const getUserLikes = async (id) => {}
 
-export const createUser = async (googleId,
+export const createUserByParams = async (googleId,
                                  email,
                                  name) => {
     try {
@@ -62,6 +62,15 @@ export const createUser = async (googleId,
         return response.data;
     } catch (error) {
         console.error("Error creating user", googleId, email, name, error);
+        throw error;
+    }
+}
+
+export const createUserByObject = async ( user ) => {
+    try {
+        const response = await apiClient.post(`/users`, user)
+    } catch (error) {
+        console.error("Error creating user", user, error);
         throw error;
     }
 }
