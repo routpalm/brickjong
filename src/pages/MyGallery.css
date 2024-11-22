@@ -54,12 +54,13 @@
   .canvas-container {
     width: 200px;
     height: 200px;
-    background-color: #f0f0f0; /* Fallback background color */
+    background-color: #f0f0f0;
+    border: 1px solid #ddd; /* Debugging border */
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-  }
+}
   
   .canvas-container > canvas {
     width: 100%;

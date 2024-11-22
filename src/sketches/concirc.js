@@ -3,6 +3,7 @@ export const ConCirc = (p,processedImageData, size = 512) => {
 
   p.setup = () => {
     const canvas = p.createCanvas(size, size);
+    console.log(`Canvas created with size: ${size}x${size}`);
     if (p._userNode) {
       canvas.parent(p._userNode); // Ensure correct parent
     } else {
