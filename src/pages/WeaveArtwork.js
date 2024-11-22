@@ -12,6 +12,7 @@ import SSLine from '../images/SSLine.png';
 import Concirc from '../images/Concirc.png';
 import TruRound from '../images/TruRound.png';
 import Wave from '../images/Wave.png';
+import Squigs from '../images/squigs.png';
 
 
 const algorithmImages = {
@@ -19,7 +20,8 @@ const algorithmImages = {
   "Diagonals": DiaLines,
   "ConCirc":  Concirc,
   "TruchRound": TruRound,
-  "Sslines" : SSLine
+  "Sslines" : SSLine,
+  "Squigs": Squigs
 };
 
 const WeaveArtwork = () => {
