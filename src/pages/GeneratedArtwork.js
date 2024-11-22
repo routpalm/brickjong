@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Toolbar from '../components/Toolbar.js';
 import p5 from 'p5';
-import { LinesSketch } from '../sketches/LinesSketch.js';
 import { WaveOscillator } from '../sketches/WaveOscillator.js';
 import { ConCirc } from "../sketches/concirc.js";
 import { TruchetRound } from "../sketches/truchetTriangles.js";
@@ -44,9 +43,7 @@ const GeneratedArtwork = () => {
     
     // Render the images based on selected algorithm
     let sketchInstance;
-    if (selectedAlgorithm === 'Lines') {
-      sketchInstance = new p5((p) => LinesSketch(p, processedImageData), canvasRef.current);
-    } else if (selectedAlgorithm === 'Wave') {
+    if (selectedAlgorithm === 'Wave') {
       sketchInstance = new p5((p) => WaveOscillator(p, processedImageData), canvasRef.current);
     } else if (selectedAlgorithm === 'ConCirc') {
       sketchInstance = new p5((p) => ConCirc(p, processedImageData), canvasRef.current);
@@ -179,7 +176,7 @@ const GeneratedArtwork = () => {
         </div>
       </div>
       {showFireworks && (
-        <p className="shared-message">🎉🎉Shared With Your Friends!!!</p>
+        <p className="shared-message">🎉🎉 Shared!</p>
       )}
     </div>
   );

@@ -12,10 +12,8 @@ import DiaLines from '../images/DiaLines.png';
 import SSLine from '../images/SSLine.png';
 import Concirc from '../images/Concirc.png';
 import TruRound from '../images/TruRound.png';
-import Lines from '../images/Lines.png';
 
 const algorithmImages = {
-  "Lines": Lines,
   "Wave": SampleAlgo2,
   "Diagonals": DiaLines,
   "ConCirc":  Concirc,
@@ -24,7 +22,7 @@ const algorithmImages = {
 };
 
 const WeaveArtwork = () => {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState("Lines"); // Default algorithm is "Lines"
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState("ConCirc"); // Default algorithm is "ConCirc"
   const [isUploading, setIsUploading] = useState(false);
   const { processImage, processedImageData } = useImageProcessor();
   const navigate = useNavigate();

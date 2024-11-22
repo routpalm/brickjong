@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+// src/pages/MyGallery.js
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import p5 from 'p5';
-import { LinesSketch } from '../sketches/LinesSketch.js';
 import { WaveOscillator } from '../sketches/WaveOscillator.js';
 import './MyGallery.css';
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
 import { getUserArtworks, mapJWTToUserId } from '../apiclient/users.js';
 import { createLikeByParam } from '../apiclient/likes.js';
+import { ConCirc } from '../sketches/concirc.js';
+import { Diagonals } from '../sketches/diags.js';
+import { Sslines } from '../sketches/sslines.js';
 
 const MyGallery = () => {
   const [artworks, setArtworks] = useState([]);
@@ -16,7 +19,7 @@ const MyGallery = () => {
   const createSketch = (artwork, containerId) => {
     const container = document.getElementById(containerId);
     if (!container) {
-      console.error(`Container ${containerId} not found`);
+      console.error(`Container with ID "${containerId}" not found`);
       return;
     }
 
@@ -24,10 +27,16 @@ const MyGallery = () => {
       container.removeChild(container.firstChild);
     }
 
-    if (artwork.algorithm === 'Lines') {
-      new p5((p) => LinesSketch(p, artwork, canvasSize), container);
+    if (artwork.algorithm === 'ConCirc') {
+      new p5((p) => ConCirc(p, artwork, canvasSize), container);
     } else if (artwork.algorithm === 'Wave') {
       new p5((p) => WaveOscillator(p, artwork, canvasSize), container);
+    } else if (artwork.algorithm === 'Diagonals') {
+      new p5((p) => Diagonals(p, artwork, canvasSize), container);
+    } else if (artwork.algorithm === 'Sslines') {
+      new p5((p) => Sslines(p, artwork, canvasSize), container);
+    } else {
+      console.warn(`Unknown algorithm: ${artwork.algorithm}`);
     }
   };
 
@@ -45,6 +54,7 @@ const MyGallery = () => {
       try {
         const id = await mapJWTToUserId();
         setUserId(id);
+        console.log("User ID set to:", id);
       } catch (error) {
         console.error('Failed to fetch user ID:', error);
       }
@@ -58,6 +68,7 @@ const MyGallery = () => {
       const fetchData = async () => {
         try {
           const data = await getUserArtworks(userId);
+          console.log("Fetched Artworks Data:", data);
           setArtworks(data);
         } catch (error) {
           console.error('Error fetching artworks:', error);
@@ -69,11 +80,14 @@ const MyGallery = () => {
   }, [userId]);
 
   useEffect(() => {
-    artworks.forEach((artwork) => {
-      const containerId = `artwork-canvas-${artwork.id}`;
-      createSketch(artwork, containerId);
-    });
-  }, [artworks, canvasSize]);
+    if (artworks.length > 0) {
+      artworks.forEach((artwork) => {
+        const containerId = `artwork-canvas-${artwork.id}`;
+        console.log(`Creating sketch for container: ${containerId}`);
+        createSketch(artwork, containerId);
+      });
+    }
+  }, [artworks]);
 
   return (
     <div className="my-gallery">
