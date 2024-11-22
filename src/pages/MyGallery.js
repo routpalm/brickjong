@@ -10,6 +10,7 @@ import { createLikeByParam } from '../apiclient/likes.js';
 import { ConCirc } from '../sketches/concirc.js';
 import { Diagonals } from '../sketches/diags.js';
 import { Sslines } from '../sketches/sslines.js';
+import { TruchetRound } from '../sketches/truchetTriangles.js';
 
 const MyGallery = () => {
   const [artworks, setArtworks] = useState([]);
@@ -35,7 +36,9 @@ const MyGallery = () => {
       new p5((p) => Diagonals(p, artwork, canvasSize), container);
     } else if (artwork.algorithm === 'Sslines') {
       new p5((p) => Sslines(p, artwork, canvasSize), container);
-    } else {
+    } else if (artwork.algorithm === 'TruchRound') {
+      new p5((p) => TruchetRound(p, artwork, canvasSize), container);
+    }else {
       console.warn(`Unknown algorithm: ${artwork.algorithm}`);
     }
   };
