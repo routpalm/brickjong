@@ -1,12 +1,10 @@
 // ./src/apiclient/artworks.js
 
-import apiclient from 'apiclient'
-import apiClient from "apiclient";
-
+import apiclient from './apiClient.js'
 
 export const getArtworks = async (n, offset) => {
     try {
-        const response = await apiClient.get(`/artworks`, {
+        const response = await apiclient.get(`/artworks`, {
             n: n,
             offset: offset
         })
@@ -28,7 +26,7 @@ export const getArtworkById = async (artworkId) => {
 // TODO: Work out params
 export const createArtwork = async (userId, params) => {
     try {
-        const response = await apiClient.post(`/artworks`, {
+        const response = await apiclient.post(`/artworks`, {
             params: params
         });
     } catch (error) {

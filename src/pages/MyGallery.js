@@ -1,4 +1,3 @@
-// src/pages/MyGallery.js
 import React, { useEffect, useState } from 'react';
 import p5 from 'p5';
 import { LinesSketch } from '../sketches/LinesSketch.js';
@@ -7,6 +6,7 @@ import './MyGallery.css';
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
 import { getUserArtworks, mapJWTToUserId } from '../apiclient/users.js';
+import { createLikeByParam } from '../apiclient/likes.js';
 
 const MyGallery = () => {
   const [artworks, setArtworks] = useState([]);
@@ -19,13 +19,11 @@ const MyGallery = () => {
       console.error(`Container ${containerId} not found`);
       return;
     }
-    console.log(`creating sketch with c_id: ${containerId}`);
-    // Clear any existing content in the container
+
     while (container.firstChild) {
       container.removeChild(container.firstChild);
     }
 
-    // Create the appropriate sketch
     if (artwork.algorithm === 'Lines') {
       new p5((p) => LinesSketch(p, artwork, canvasSize), container);
     } else if (artwork.algorithm === 'Wave') {
@@ -33,12 +31,20 @@ const MyGallery = () => {
     }
   };
 
+  const handleLike = async (artworkId) => {
+    try {
+      await createLikeByParam(userId, artworkId);
+      alert('Artwork liked successfully!');
+    } catch (error) {
+      alert('Failed to like artwork. Please try again.');
+    }
+  };
+
   useEffect(() => {
     const fetchUserId = async () => {
       try {
         const id = await mapJWTToUserId();
-        console.log('Mapped User ID:', id);
-        setUserId(id); // Update state with user ID
+        setUserId(id);
       } catch (error) {
         console.error('Failed to fetch user ID:', error);
       }
@@ -67,7 +73,7 @@ const MyGallery = () => {
       const containerId = `artwork-canvas-${artwork.id}`;
       createSketch(artwork, containerId);
     });
-  }, [artworks, canvasSize]); // recreate sketches if artworks or canvas size changes
+  }, [artworks, canvasSize]);
 
   return (
     <div className="my-gallery">
@@ -80,6 +86,12 @@ const MyGallery = () => {
               className="canvas-container"
               id={`artwork-canvas-${artwork.id}`}
             ></div>
+            <button
+              className="like-button"
+              onClick={() => handleLike(artwork.id)}
+            >
+              Like
+            </button>
           </div>
         ))}
       </div>
