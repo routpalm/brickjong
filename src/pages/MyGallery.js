@@ -41,7 +41,7 @@ const MyGallery = () => {
       new p5((p) => Diagonals(p, artwork, canvasSize), container);
     } else if (artwork.algorithm === 'Sslines') {
       new p5((p) => Sslines(p, artwork, canvasSize), container);
-    } else if (artwork.algorithm === 'TruchetRound') {
+    } else if (artwork.algorithm === 'TruchRound') {
       new p5((p) => TruchetRound(p, artwork, canvasSize), container);
     }else if (artwork.algorithm === 'Lines') {
         new p5((p) => LinesSketch(p, artwork, canvasSize), container);
