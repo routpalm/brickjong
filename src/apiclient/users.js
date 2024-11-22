@@ -17,6 +17,7 @@ export const getUserById = async (id) => {
 export const getUserArtworks = async (userId, limit = 20, offset = 0) => {
     try {
         const response = await apiClient.get(`/users/${userId}/artwork?limit=${limit}&offset=${offset}`);
+        console.log("API Response:", response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching user artworks:', error);
@@ -30,6 +31,7 @@ export const mapJWTToUserId = async () => {
     setAuthToken(token);
     try {
         const response = await apiClient.get('/users/map-jwt');
+        console.log("Decoded JWT Response:", response.data); // Log the response
         return response.data.userId; // Extract user ID from the response
     } catch (error) {
         console.error('Error mapping JWT to user ID:', error);
@@ -50,7 +52,7 @@ export const fetchUserProfile = async () => {
 
 // TODO: export const getUserLikes = async (id) => {}
 
-export const createUser = async (googleId,
+export const createUserByParams = async (googleId,
                                  email,
                                  name) => {
     try {
@@ -62,6 +64,15 @@ export const createUser = async (googleId,
         return response.data;
     } catch (error) {
         console.error("Error creating user", googleId, email, name, error);
+        throw error;
+    }
+}
+
+export const createUserByObject = async ( user ) => {
+    try {
+        const response = await apiClient.post(`/users`, user)
+    } catch (error) {
+        console.error("Error creating user", user, error);
         throw error;
     }
 }

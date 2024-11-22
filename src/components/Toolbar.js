@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faArrowUp, faArrowDown, faUndo } from '@fortawesome/free-solid-svg-icons';
 import { createArtwork } from '../apiclient/artworks.js';
-
+import { mapJWTToUserId } from '../apiclient/users.js';
 
 const Toolbar = ({ imageUrl, onRegenerate, onShare }) => {
+  const [userId, setUserId] = useState(null);
+
+  // onmount, fetch userID
+  useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        const id = await mapJWTToUserId();
+        setUserId(id);
+      } catch (error) {
+        console.error('Failed to fetch user ID:', error);
+      }
+    };
+
+    fetchUserId();
+  }, []);
   const handleDownload = () => {
     if (!imageUrl) {
       console.error('Image URL is undefined or empty');
@@ -23,6 +38,7 @@ const Toolbar = ({ imageUrl, onRegenerate, onShare }) => {
     onShare(); 
   };
   
+  
   const handleSave = async () => {
     try {
       const processedImageData = JSON.parse(localStorage.getItem('processedImageData'));
@@ -38,13 +54,12 @@ const Toolbar = ({ imageUrl, onRegenerate, onShare }) => {
 
       // pass individual items as params to createArtwork
       const artworkData = {
-        userId: 1,
+        userId: userId,
         algorithm: selectedAlgorithm,
         exifData, // Camera and location metadata
         colorPalette, // Extracted color palette
         pixelCluster, // Random pixel clusters
       };
-
       await createArtwork(artworkData);
       alert('Artwork saved successfully!');
     } catch (error) {

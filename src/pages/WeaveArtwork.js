@@ -1,7 +1,7 @@
 // src/pages/WeaveArtwork.js
 import React, { useState, useEffect } from 'react';
 import AlgorithmSelector from '../components/algorithmSelector.js';
-import FileUploader from '../components/FileUploader.js';
+import FileUploader from '../components/fileUploader.js';
 import useImageProcessor from '../hooks/useImageProcessor.js';
 import { useNavigate } from 'react-router-dom';
 import './WeaveArtwork.css';
@@ -12,12 +12,13 @@ import DiaLines from '../images/DiaLines.png';
 import SSLine from '../images/SSLine.png';
 import Concirc from '../images/Concirc.png';
 import TruRound from '../images/TruRound.png';
+<<<<<<< HEAD
 import Lines from '../images/Lines.png';
 import Waves from '../images/Wave.png';
 
+
 const algorithmImages = {
-  "Lines": Lines,
-  "Wave": Waves,
+  "Wave": SampleAlgo2,
   "Diagonals": DiaLines,
   "ConCirc":  Concirc,
   "TruchRound": TruRound,
@@ -25,7 +26,7 @@ const algorithmImages = {
 };
 
 const WeaveArtwork = () => {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState("Lines"); // Default algorithm is "Lines"
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState("ConCirc"); // Default algorithm is "ConCirc"
   const [isUploading, setIsUploading] = useState(false);
   const { processImage, processedImageData } = useImageProcessor();
   const navigate = useNavigate();
