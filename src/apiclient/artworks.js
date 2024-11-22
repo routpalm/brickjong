@@ -34,7 +34,6 @@ export const createArtwork = async (artworkData) => {
     }
 };
 
-
 export const deleteArtwork = async (artworkId) => {
     try {
         const response = await apiclient.delete(`/artworks/${artworkId}`);
