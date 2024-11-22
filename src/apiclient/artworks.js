@@ -24,15 +24,16 @@ export const getArtworkById = async (artworkId) => {
 }
 
 // TODO: Work out params
-export const createArtwork = async (userId, params) => {
+export const createArtwork = async (artworkData) => {
     try {
-        const response = await apiclient.post(`/artworks`, {
-            params: params
-        });
+        const response = await apiclient.post('/artworks', artworkData);
+        return response.data;
     } catch (error) {
-        console.error("Error creating artwork:", userId, params, error)
+        console.error('Error creating artwork:', error.response?.data || error.message);
+        throw error;
     }
-}
+};
+
 
 export const deleteArtwork = async (artworkId) => {
     try {
