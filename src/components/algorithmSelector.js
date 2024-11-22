@@ -11,7 +11,6 @@ const AlgorithmSelector = ({ selected, onChange }) => {
         onChange={(e) => onChange(e.target.value)}
         className="algorithm-dropdown"
       >
-        <option value="Lines">Lines</option>
         <option value="Wave">Wave</option>
         <option value="ConCirc">Conecentric Circles</option>
         <option value="TruchRound">Round Truchet</option>

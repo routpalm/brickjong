@@ -7,8 +7,7 @@
 5. Dark Muted
 */
 
-export const Sslines = (p,processedImageData) => {
-  const size = 800;
+export const Sslines = (p,processedImageData, size = 512) => {
   const SQsize = size/10;
   const offset = SQsize/10;
   p.setup = function() {

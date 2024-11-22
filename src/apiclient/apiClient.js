@@ -4,7 +4,7 @@ import axios from 'axios'
 
 
 const apiClient = axios.create({
-    baseURL: process.env.BACK_END_API_URL || 'http://localhost:3001',
+    baseURL: process.env.REACT_APP_BACK_END_API_URL,
     headers: {
         'content-type': 'application/json'
     },

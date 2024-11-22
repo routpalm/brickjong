@@ -7,8 +7,7 @@
 5. Dark Muted
 */
 
-export const Squigs = (p,processedImageData) => {
-  const size = 800;
+export const Squigs = (p,processedImageData, size = 512) => {
   const SQsize = size/10;
   const offset = SQsize/10;
   p.setup = function() {
@@ -101,4 +100,3 @@ export const Squigs = (p,processedImageData) => {
     p.noLoop();
   }
 };
-

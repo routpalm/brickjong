@@ -1,21 +1,19 @@
-export const ConCirc = (p,processedImageData) => {
-  const size = 800;
+export const ConCirc = (p,processedImageData, size = 512) => {
   //const SQsize = size/10;
 
-  p.setup = function() {
-    let canvas = p.createCanvas(size, size);
-    canvas.parent('canvasContainer');
+  p.setup = () => {
+    const canvas = p.createCanvas(size, size);
+    console.log(`Canvas created with size: ${size}x${size}`);
+    if (p._userNode) {
+      canvas.parent(p._userNode); // Ensure correct parent
+    } else {
+      console.error("No parent node found for the canvas.");
+    }
     p.colorMode(p.HSB, 360, 100, 100);
     p.noLoop();
     //p.strokeCap(p.SQUARE);
     //console.log("loaded");
     // listen for imageProcessed event to proceed
-    document.addEventListener("imageProcessed", function() {
-      console.log("'imageProcessed' event received in TruchetRound.");
-      if (window.processedImageData) {
-        p.redraw(); // draw
-      }
-    });
   };
 
 

@@ -7,8 +7,7 @@
 5. Dark Muted
 */
 
-export const Diagonals = (p,processedImageData) => {
-  const size = 800;
+export const Diagonals = (p,processedImageData, size = 512) => {
   const SQsize = size/10;
   const offset = SQsize/10;
 
