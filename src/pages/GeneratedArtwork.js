@@ -7,10 +7,15 @@ import { ConCirc } from "../sketches/concirc.js";
 import { TruchetRound } from "../sketches/truchetTriangles.js";
 import { Diagonals } from "../sketches/diags.js";
 import { Sslines } from "../sketches/sslines.js";
+import { Squigs } from "../sketches/squigs.js";
 import Navbar from '../components/Navbar.js';
 import Particles from 'react-tsparticles';
 import './GeneratedArtwork.css';
 import { loadFull } from 'tsparticles';
+
+
+
+
 
 const GeneratedArtwork = () => {
   const navigate = useNavigate();
@@ -53,6 +58,8 @@ const GeneratedArtwork = () => {
       sketchInstance = new p5((p) => Diagonals(p, processedImageData), canvasRef.current);
     } else if (selectedAlgorithm === 'Sslines') {
       sketchInstance = new p5((p) => Sslines(p, processedImageData), canvasRef.current);
+    } else if (selectedAlgorithm === 'Squigs') {
+      sketchInstance = new p5((p) => Squigs(p, processedImageData), canvasRef.current);
     } 
 
     const generateImageUrl = () => {
