@@ -36,7 +36,7 @@ const MyGallery = () => {
       new p5((p) => Diagonals(p, artwork, canvasSize), container);
     } else if (artwork.algorithm === 'Sslines') {
       new p5((p) => Sslines(p, artwork, canvasSize), container);
-    } else if (artwork.algorithm === 'TruchRound') {
+    } else if (artwork.algorithm === 'TruchetRound') {
       new p5((p) => TruchetRound(p, artwork, canvasSize), container);
     }else {
       console.warn(`Unknown algorithm: ${artwork.algorithm}`);

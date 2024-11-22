@@ -1,24 +1,21 @@
 // src/pages/WeaveArtwork.js
 import React, { useState, useEffect } from 'react';
 import AlgorithmSelector from '../components/algorithmSelector.js';
-import FileUploader from '../components/fileUploader.js';
+import FileUploader from '../components/FileUploader.js';
 import useImageProcessor from '../hooks/useImageProcessor.js';
 import { useNavigate } from 'react-router-dom';
 import './WeaveArtwork.css';
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
-import SampleAlgo2 from '../images/spiro.jpg';
 import DiaLines from '../images/DiaLines.png';
 import SSLine from '../images/SSLine.png';
 import Concirc from '../images/Concirc.png';
 import TruRound from '../images/TruRound.png';
-<<<<<<< HEAD
-import Lines from '../images/Lines.png';
-import Waves from '../images/Wave.png';
+import Wave from '../images/Wave.png';
 
 
 const algorithmImages = {
-  "Wave": SampleAlgo2,
+  "Wave": Wave,
   "Diagonals": DiaLines,
   "ConCirc":  Concirc,
   "TruchRound": TruRound,

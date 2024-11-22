@@ -14,9 +14,6 @@ import './GeneratedArtwork.css';
 import { loadFull } from 'tsparticles';
 
 
-
-
-
 const GeneratedArtwork = () => {
   const navigate = useNavigate();
   const location = useLocation();

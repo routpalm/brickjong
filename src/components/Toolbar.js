@@ -20,6 +20,7 @@ const Toolbar = ({ imageUrl, onRegenerate, onShare }) => {
 
     fetchUserId();
   }, []);
+  
   const handleDownload = () => {
     if (!imageUrl) {
       console.error('Image URL is undefined or empty');
