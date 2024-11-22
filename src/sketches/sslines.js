@@ -12,7 +12,11 @@ export const Sslines = (p,processedImageData, size = 512) => {
   const offset = SQsize/10;
   p.setup = function() {
     let canvas = p.createCanvas(size, size);
-    canvas.parent('canvasContainer');
+    if (p._userNode) {
+      canvas.parent(p._userNode); // Ensure correct parent
+    } else {
+      console.error("No parent node found for the canvas.");
+    }
     p.colorMode(p.HSB, 360, 100, 100);
     p.noLoop();
     p.strokeCap(p.SQUARE);

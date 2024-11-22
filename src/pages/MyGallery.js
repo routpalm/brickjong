@@ -11,6 +11,7 @@ import { ConCirc } from '../sketches/concirc.js';
 import { Diagonals } from '../sketches/diags.js';
 import { Sslines } from '../sketches/sslines.js';
 import { TruchetRound } from '../sketches/truchetTriangles.js';
+import { LinesSketch } from '../sketches/lines.js';
 
 const MyGallery = () => {
   const [artworks, setArtworks] = useState([]);
@@ -28,6 +29,10 @@ const MyGallery = () => {
       container.removeChild(container.firstChild);
     }
 
+    if (artwork.colorPalette && typeof artwork.colorPalette === 'string') {
+      artwork.colorPalette = JSON.parse(artwork.colorPalette);
+    }
+ 
     if (artwork.algorithm === 'ConCirc') {
       new p5((p) => ConCirc(p, artwork, canvasSize), container);
     } else if (artwork.algorithm === 'Wave') {
@@ -38,6 +43,8 @@ const MyGallery = () => {
       new p5((p) => Sslines(p, artwork, canvasSize), container);
     } else if (artwork.algorithm === 'TruchetRound') {
       new p5((p) => TruchetRound(p, artwork, canvasSize), container);
+    }else if (artwork.algorithm === 'Lines') {
+        new p5((p) => LinesSketch(p, artwork, canvasSize), container);
     }else {
       console.warn(`Unknown algorithm: ${artwork.algorithm}`);
     }

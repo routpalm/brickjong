@@ -14,6 +14,9 @@ export const ConCirc = (p,processedImageData, size = 512) => {
     //p.strokeCap(p.SQUARE);
     //console.log("loaded");
     // listen for imageProcessed event to proceed
+    if (processedImageData && processedImageData.colorPalette) {
+      p.redraw();
+    }
   };
 
 
@@ -39,7 +42,8 @@ export const ConCirc = (p,processedImageData, size = 512) => {
 
     
       // color palette 
-      const colors = processedImageData?.colorPalette || ["rgb(0, 0, 0)","rgb(255,255,255)","rgb(0, 0, 0)","rgb(255,255,255)"]; // Fallback to black if colorPalette is missing
+      const colors = processedImageData?.colorPalette || ["rgb(1, 2, 55)"];
+      //const colors = processedImageData?.colorPalette || ["rgb(0, 0, 0)","rgb(255,255,255)","rgb(0, 0, 0)","rgb(255,255,255)"]; // Fallback to black if colorPalette is missing
       p.background(colors[4]);
       console.log(`Running Concentric Circle pattern with ${colors[0]} and ${colors[1]}`);
       console.log(numcirc);
