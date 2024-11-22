@@ -43,9 +43,9 @@ export const Squigs = (p,processedImageData) => {
         /*/
         let u = size * p.cos(i);
         let v = size * p.sin(i);
-        let z = size/10 * p.sin(i*2);
+        //let z = size/5 * p.sin(i*2);
         //let z = (size + (360-i)) * p.sin(i*randgen.next().value%5);//p.stroke(colors[randgen.next().value%5]);
-        //let z = size * p.sin((360-i)*randgen.next().value%5);//p.stroke(colors[randgen.next().value%5]);
+        let z = size * p.sin((360-i)*randgen.next().value%5);//p.stroke(colors[randgen.next().value%5]);
         p.vertex(u,v,z);
         //p.vertex(u,v);
       }
@@ -85,16 +85,16 @@ export const Squigs = (p,processedImageData) => {
     p.noFill();
     
 
-    p.rotateX(75);
+    p.rotateX(60);
     let MaxDiameter = p.width/2;
     let spacing = 36; //multiple of 360
     for(let i = 0; i < MaxDiameter; i+=spacing){
       p.stroke(colors[randgen.next().value%5]);
-      p.strokeWeight(randgen.next().value%6);
+      p.strokeWeight(randgen.next().value%8);
       sircle(0,0,i,colors);
       
     }
-    //p.box(70,70,70);
+    //p.box(size,size,size);
     //sircle(0,0,10,colors);
     //p.circle(0,0,100);
 
