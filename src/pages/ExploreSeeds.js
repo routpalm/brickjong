@@ -10,9 +10,9 @@ import { Diagonals } from '../sketches/diags.js';
 import { Sslines } from '../sketches/sslines.js';
 import { TruchetRound } from '../sketches/truchetTriangles.js';
 import { LinesSketch } from '../sketches/lines.js';
-import { createLikeByParam, deleteLike, getLikesByUserId } from '../apiclient/likes.js';
+import { createLikeByParam, deleteLike} from '../apiclient/likes.js';
 import { mapJWTToUserId } from '../apiclient/users.js';
-import { getRecentArtworksWithLikes } from '../apiclient/artworks.js';
+import { getArtworkById, getRecentArtworksWithLikes } from '../apiclient/artworks.js';
 import apiClient from '../apiclient/apiClient.js';
 
 const ExploreSeeds = () => {
@@ -36,6 +36,7 @@ const ExploreSeeds = () => {
     };
     fetchUserId();
   }, []);
+
 
   useEffect(() => {
     const fetchArtworks = async () => {
@@ -103,44 +104,51 @@ const ExploreSeeds = () => {
 
   const handleLike = async (artworkId) => {
     if (!userId) {
-      alert('Please log in to like artworks.');
-      return;
+        alert('Please log in to like artworks.');
+        return;
     }
-  
+
     if (isLiking) {
-      return;
+        return;
     }
-  
+
     console.log(`Handling like for artwork ID: ${artworkId}`);
-    setIsLiking(true); 
-  
+    setIsLiking(true);
+
     try {
-      const seedItem = seedData.find((item) => item.id === artworkId);
-      if (seedItem.userLiked) {
-        console.warn(`User already liked artwork with ID: ${artworkId}. Cannot like again.`);
-        alert('You have already liked this artwork.');
-      } else {
-        const response = await createLikeByParam(userId, artworkId);
-        if (response && response.id) {
-          console.log(`Like added for artworkId: ${artworkId}`);
-          console.log(response);
-          
-          setSeedData((prevData) =>
-            prevData.map((item) =>
-              item.id === artworkId ? { ...item, userLiked: true, likes: item.likes + 1 } : item
-            )
-          );
-        } else {
-          console.error('Failed to create like on server. Response:', response);
+        const artworkDetails = await getArtworkById(artworkId);
+        if (!artworkDetails) {
+            console.error('Failed to fetch artwork details.');
+            return;
         }
-      }
+
+        // Check if the user already liked the artwork
+        const userAlreadyLiked = artworkDetails.likes.some((like) => like.userId === userId);
+        if (userAlreadyLiked) {
+            console.warn(`User already liked artwork with ID: ${artworkId}. Cannot like again.`);
+            alert('You have already liked this artwork.');
+        } else {
+            const response = await createLikeByParam(userId, artworkId);
+            if (response && response.id) {
+                console.log(`Like added for artworkId: ${artworkId}`);
+                console.log(response);
+
+                setSeedData((prevData) =>
+                    prevData.map((item) =>
+                        item.id === artworkId ? { ...item, userLiked: true, likes: item.likes + 1 } : item
+                    )
+                );
+            } else {
+                console.error('Failed to create like on server. Response:', response);
+            }
+        }
     } catch (error) {
-      console.error('Failed to handle like operation:', error);
+        console.error('Failed to handle like operation:', error);
     } finally {
-      setIsLiking(false); 
+        setIsLiking(false);
     }
-  };
-  
+};
+
 
   return (
     <div className="explore-seeds content">
@@ -153,24 +161,24 @@ const ExploreSeeds = () => {
         </select>
       </div>
       <div className="seeds-grid">
-        {seedData.map((seed) => (
-          <div className="seed-wrapper" key={seed.id}>
-            <div
-              className="canvas-container"
-              id={`seed-canvas-${seed.id}`}
-              ref={(el) => (canvasRefs.current[`seed-canvas-${seed.id}`] = el)}
-              onClick={() => navigate(`/seed-detail/${seed.id}`, { state: seed })}
-            ></div>
-            <div className="seed-info">
-              <p className="seed-author">Creator: {seed.user?.name.split(' ')[0]}</p>
-              <p className="seed-likes">Likes: {seed.likes}</p>
-              <button onClick={() => handleLike(seed.id)} className="like-button">
-                {seed.userLiked ? 'Unlike' : 'Like'}
-              </button>
-            </div>
+        {seedData && seedData.length > 0 ? (seedData.map((seed) => (
+        <div className="seed-wrapper" key={seed.id}>
+          <div className="canvas-container" id={`seed-canvas-${seed.id}`} ref={(el) => (canvasRefs.current[`seed-canvas-${seed.id}`] = el)}
+          onClick={() => navigate(`/seed-detail/${seed.id}`, { state: seed })}>
           </div>
-        ))}
+        <div className="seed-info">
+          <p className="seed-author">Creator: {seed.user?.name.split(' ')[0]}</p>
+          <p className="seed-likes">Likes: {seed.likes}</p>
+          <button onClick={() => handleLike(seed.id)} className="like-button">
+            {seed.userLiked ? 'Unlike' : 'Like'}
+          </button>
+        </div>
       </div>
+    ))
+  ) : (
+    <p>Loading seeds...</p>
+  )}
+</div>
       <Footer />
     </div>
   );
