@@ -26,13 +26,13 @@ export const getUserArtworks = async (userId, limit = 20, offset = 0) => {
 };
 
 export const mapJWTToUserId = async () => {
-    const token = localStorage.getItem('jwt'); // Retrieve JWT from storage
+    const token = localStorage.getItem('jwt'); // retrieve JWT from storage
     if (!token) throw new Error('JWT not found');
     setAuthToken(token);
     try {
         const response = await apiClient.get('/users/map-jwt');
-        console.log("Decoded JWT Response:", response.data); // Log the response
-        return response.data.userId; // Extract user ID from the response
+        console.log("Decoded JWT Response:", response.data);
+        return response.data.userId;
     } catch (error) {
         console.error('Error mapping JWT to user ID:', error);
         throw error;
@@ -49,8 +49,6 @@ export const fetchUserProfile = async () => {
     }
 };
 
-
-// TODO: export const getUserLikes = async (id) => {}
 
 export const createUserByParams = async (googleId,
                                  email,
