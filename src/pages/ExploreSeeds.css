@@ -51,45 +51,78 @@
     }
   }
   
-  .seed-item {
+  .seed-card {
+    background-color: #ffffff; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 10px;
-    transition: box-shadow 0.3s ease;
+    margin-bottom:20px;
   }
   
-  .seed-item:hover {
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  .seed-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
   }
   
-  .seed-image {
-    width: 180px;
-    height: 180px;
-    border-radius: 10px;
-    object-fit: cover;
-    margin-bottom: 10px;
+  .canvas-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 8px; 
+    overflow: hidden; 
+    margin-bottom: 15px; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
-  .seed-button {
-    padding: 8px 16px;
-    background-color: transparent;
-    border: 1px solid #9a4dbf;
-    color: #9a4dbf;
-    border-radius: 5px;
+  
+  .seed-info {
+    text-align: center; 
+    width: 100%;
+  }
+  
+  .seed-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px; 
+  }
+  
+  .seed-author {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 550;
+    color: #333;
+    margin: 0;
+  }
+  
+  .like-section {
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
-  .seed-button:hover {
-    background-color: #9a4dbf;
-    color: #fff;
+  .like-icon {
+    font-size: 1.5rem;
+    color: #e25555;
+    margin-right: 5px;
+    transition: transform 0.2s ease;
   }
-
-
   
+  .like-count {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .like-section:hover .like-icon {
+    transform: scale(1.1); 
+  }
+  
+  .seed-algo {
+    font-size: 0.9rem;
+    color: #777; 
+    margin-top: 5px;
+    text-align: left;
+  }

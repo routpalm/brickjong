@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import p5 from 'p5';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import './ExploreSeeds.css';
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
@@ -169,31 +172,33 @@ return (
     <MiniNavbar
       onSearch={handleSearch}
       onFilterChange={handleFilterChange}
-      currentFilter={sortOrder}
-    />
+      currentFilter={sortOrder}/>
     <div className="seeds-grid">
-      {filteredSeeds && filteredSeeds.length > 0 ? (
-        filteredSeeds.map((seed) => (
-          <div className="seed-wrapper" key={seed.id}>
-            <div
-              className="canvas-container"
-              id={`seed-canvas-${seed.id}`}
-              ref={(el) => (canvasRefs.current[`seed-canvas-${seed.id}`] = el)}
-              onClick={() => navigate(`/seed-detail/${seed.id}`, { state: seed })}
-            />
-            <div className="seed-info">
-              <p className="seed-author">Creator: {seed.user?.name.split(' ')[0]}</p>
-              <p className="seed-likes">Likes: {seed.likes}</p>
-              <button onClick={() => handleLike(seed.id)} className="like-button">
-                {seed.userLiked ? 'Unlike' : 'Like'}
-              </button>
+    {filteredSeeds && filteredSeeds.length > 0 ? (filteredSeeds.map((seed) => (
+      <div className="seed-card" key={seed.id}>
+        <div
+          className="canvas-container"
+          id={`seed-canvas-${seed.id}`}
+          ref={(el) => (canvasRefs.current[`seed-canvas-${seed.id}`] = el)}
+          onClick={() => navigate(`/seed-detail/${seed.id}`, { state: seed })}
+        />
+        <div className="seed-info">
+          <div className="seed-info-header">
+            <p className="seed-author">Creator: {seed.user?.name.split(' ')[0]}</p>
+            <div className="like-section" onClick={() => handleLike(seed.id)}>
+              <FontAwesomeIcon icon={seed.userLiked ? solidHeart : regularHeart} className="like-icon" />
+              <span className="like-count">{seed.likes}</span>
             </div>
           </div>
-        ))
-      ) : (
-        <p>No seeds found...</p>
-      )}
-    </div>
+          <p className="seed-algo">Algorithm: {seed.algorithm}</p>
+        </div>
+      </div>
+    ))
+  ) : (
+    <p>No seeds found...</p>
+  )}
+</div>
+
     <Footer />
   </div>
 );
