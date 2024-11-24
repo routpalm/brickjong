@@ -179,9 +179,7 @@ return (
         <div
           className="canvas-container"
           id={`seed-canvas-${seed.id}`}
-          ref={(el) => (canvasRefs.current[`seed-canvas-${seed.id}`] = el)}
-          onClick={() => navigate(`/seed-detail/${seed.id}`, { state: seed })}
-        />
+          ref={(el) => (canvasRefs.current[`seed-canvas-${seed.id}`] = el)}/>
         <div className="seed-info">
           <div className="seed-info-header">
             <p className="seed-author">Creator: {seed.user?.name.split(' ')[0]}</p>
