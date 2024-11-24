@@ -1,10 +1,20 @@
 /* src/pages/ExploreSeeds.css */
 
 .explore-seeds {
-    padding: 20px;
     text-align: center;
     font-family: Arial, sans-serif;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 50px;
   }
+
+  .content {
+    flex: 1;
+}
+
   
   .explore-seeds h1 {
     font-size: 2rem;
@@ -18,6 +28,8 @@
     grid-template-columns: repeat(4, 1fr); /* Set to 4 columns */
     gap: 20px;
     justify-items: center;
+    margin-bottom: 50px;
+    margin-top: 30px;
   }
   
   /* responsive settings for phones/pads */
@@ -78,5 +90,6 @@
     background-color: #9a4dbf;
     color: #fff;
   }
-  
+
+
   

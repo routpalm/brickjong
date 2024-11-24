@@ -1,7 +1,6 @@
 // ./src/apiclient/artworks.js
 
 import apiclient from './apiClient.js'
-import { getLikesCountByArtworkId } from './likes.js';
 
 export const getArtworks = async (n, offset) => {
     try {
@@ -18,58 +17,22 @@ export const getArtworks = async (n, offset) => {
 
 export const getRecentArtworksWithLikes = async () => {
     try {
-        const artworksResponse = await apiclient.get(`/artworks`, {
-            params: {
-                limit: 20,
-                order: 'desc',
-            },
-        });
+        const artworksResponse = await apiclient.get('/artworks');
         const artworks = artworksResponse.data;
-
-        const artworksWithLikes = await Promise.all(
-            artworks.map(async (artwork) => {
-                const likes = await getLikesCountByArtworkId(artwork.id);
-                return {
-                    ...artwork,
-                    likes: likes, 
-                };
-            })
-        );
+        const artworksWithLikes = artworks.map((artwork) => {
+            return {
+                ...artwork,
+                likes: artwork.likes?.length || 0, 
+            };
+        });
 
         return artworksWithLikes;
     } catch (error) {
         console.error('Error getting recent artworks with likes:', error);
+        throw error;  
     }
 };
 
-export const getRecentArtworks = async () => {
-    try {
-        const response = await apiclient.get(`/artworks`, {
-            params: {
-                limit: 20,
-                order: 'desc', 
-            },
-        });
-        return response.data;
-    } catch (error) {
-        console.error("Error getting recent artworks:", error);
-    }
-};
-
-export const getMostLikedArtworks = async () => {
-    try {
-        const response = await apiclient.get(`/artworks`, {
-            params: {
-                limit: 20,
-                order: 'desc', 
-                sortBy: 'likes'
-            },
-        });
-        return response.data;
-    } catch (error) {
-        console.error("Error getting most liked artworks:", error);
-    }
-};
 
 
 export const getArtworkById = async (artworkId) => {

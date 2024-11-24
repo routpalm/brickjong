@@ -24,19 +24,6 @@ export const getLikesByUserId = async (userId) => {
 }
 
 
-export const getLikesCountByArtworkId = async (artworkId) => {
-    try {
-        const response = await apiClient.get(`/likes`);
-        const allLikes = response.data;
-        const filteredLikes = allLikes.filter((like) => like.artworkId === artworkId);
-        
-        return filteredLikes.length;
-    } catch (error) {
-        console.error("Error getting likes count for artwork:", artworkId, error);
-        throw error;
-    }
-};
-
 // TODO: export const modifyLike = async (likeId, userId, artworkId) => {}
 
 export const createLikeByParam = async (userId, artworkId) => {

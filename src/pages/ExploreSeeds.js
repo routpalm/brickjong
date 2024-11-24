@@ -4,21 +4,23 @@ import { useNavigate } from 'react-router-dom';
 import './ExploreSeeds.css';
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
+import MiniNavbar from '../components/MiniNavbar.js';
 import { WaveOscillator } from '../sketches/WaveOscillator.js';
 import { ConCirc } from '../sketches/concirc.js';
 import { Diagonals } from '../sketches/diags.js';
 import { Sslines } from '../sketches/sslines.js';
 import { TruchetRound } from '../sketches/truchetTriangles.js';
 import { LinesSketch } from '../sketches/lines.js';
-import { createLikeByParam, deleteLike, getLikesByUserId } from '../apiclient/likes.js';
+import { createLikeByParam, deleteLike} from '../apiclient/likes.js';
 import { mapJWTToUserId } from '../apiclient/users.js';
-import { getRecentArtworksWithLikes } from '../apiclient/artworks.js';
+import { getArtworkById, getRecentArtworksWithLikes } from '../apiclient/artworks.js';
 import apiClient from '../apiclient/apiClient.js';
 
 const ExploreSeeds = () => {
   const navigate = useNavigate();
   const [seedData, setSeedData] = useState([]);
   const [sortOrder, setSortOrder] = useState('newest');
+  const [searchQuery, setSearchQuery] = useState('');
   const [userId, setUserId] = useState(null);
   const [isLiking, setIsLiking] = useState(false);
   const canvasRefs = useRef({});
@@ -36,6 +38,7 @@ const ExploreSeeds = () => {
     };
     fetchUserId();
   }, []);
+
 
   useEffect(() => {
     const fetchArtworks = async () => {
@@ -92,75 +95,92 @@ const ExploreSeeds = () => {
     }
   };
 
-  const handleSortChange = (event) => {
-    setSortOrder(event.target.value);
-    if (event.target.value === 'mostLiked') {
+  const handleSearch = (query) => {
+    setSearchQuery(query);  
+  };
+
+  const handleFilterChange = (filter) => {
+    setSortOrder(filter);
+    if (filter === 'mostLiked') {
       setSeedData((prevData) => [...prevData].sort((a, b) => b.likes - a.likes));
-    } else if (event.target.value === 'newest') {
+    } else if (filter === 'newest') {
       setSeedData((prevData) => [...prevData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
     }
   };
 
+  const filteredSeeds = seedData
+    .filter((seed) =>
+      seed.user?.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      seed.algorithm?.toLowerCase().includes(searchQuery.toLowerCase()) 
+    );
+
+  
   const handleLike = async (artworkId) => {
     if (!userId) {
-      alert('Please log in to like artworks.');
-      return;
+        alert('Please log in to like artworks.');
+        return;
     }
-  
-    if (isLiking) {
-      return;
-    }
-  
-    console.log(`Handling like for artwork ID: ${artworkId}`);
-    setIsLiking(true); 
-  
-    try {
-      const seedItem = seedData.find((item) => item.id === artworkId);
-      if (seedItem.userLiked) {
-        console.warn(`User already liked artwork with ID: ${artworkId}. Cannot like again.`);
-        alert('You have already liked this artwork.');
-      } else {
-        const response = await createLikeByParam(userId, artworkId);
-        if (response && response.id) {
-          console.log(`Like added for artworkId: ${artworkId}`);
-          console.log(response);
-          
-          setSeedData((prevData) =>
-            prevData.map((item) =>
-              item.id === artworkId ? { ...item, userLiked: true, likes: item.likes + 1 } : item
-            )
-          );
-        } else {
-          console.error('Failed to create like on server. Response:', response);
-        }
-      }
-    } catch (error) {
-      console.error('Failed to handle like operation:', error);
-    } finally {
-      setIsLiking(false); 
-    }
-  };
-  
 
-  return (
-    <div className="explore-seeds content">
-      <Navbar />
-      <div className="sort-options">
-        <label>Sort By:</label>
-        <select value={sortOrder} onChange={handleSortChange}>
-          <option value="newest">Newest</option>
-          <option value="mostLiked">Most Liked</option>
-        </select>
-      </div>
-      <div className="seeds-grid">
-        {seedData.map((seed) => (
+    if (isLiking) {
+        return;
+    }
+
+    console.log(`Handling like for artwork ID: ${artworkId}`);
+    setIsLiking(true);
+
+    try {
+        const artworkDetails = await getArtworkById(artworkId);
+        if (!artworkDetails) {
+            console.error('Failed to fetch artwork details.');
+            return;
+        }
+
+        // Check if the user already liked the artwork
+        const userAlreadyLiked = artworkDetails.likes.some((like) => like.userId === userId);
+        if (userAlreadyLiked) {
+            console.warn(`User already liked artwork with ID: ${artworkId}. Cannot like again.`);
+            alert('You have already liked this artwork.');
+        } else {
+            const response = await createLikeByParam(userId, artworkId);
+            if (response && response.id) {
+                console.log(`Like added for artworkId: ${artworkId}`);
+                console.log(response);
+
+                setSeedData((prevData) =>
+                    prevData.map((item) =>
+                        item.id === artworkId ? { ...item, userLiked: true, likes: item.likes + 1 } : item
+                    )
+                );
+            } else {
+                console.error('Failed to create like on server. Response:', response);
+            }
+        }
+    } catch (error) {
+        console.error('Failed to handle like operation:', error);
+    } finally {
+        setIsLiking(false);
+    }
+};
+
+
+return (
+  <div className="explore-seeds content">
+    <Navbar />
+    <MiniNavbar
+      onSearch={handleSearch}
+      onFilterChange={handleFilterChange}
+      currentFilter={sortOrder}
+    />
+    <div className="seeds-grid">
+      {filteredSeeds && filteredSeeds.length > 0 ? (
+        filteredSeeds.map((seed) => (
           <div className="seed-wrapper" key={seed.id}>
             <div
               className="canvas-container"
               id={`seed-canvas-${seed.id}`}
               ref={(el) => (canvasRefs.current[`seed-canvas-${seed.id}`] = el)}
               onClick={() => navigate(`/seed-detail/${seed.id}`, { state: seed })}
-            ></div>
+            />
             <div className="seed-info">
               <p className="seed-author">Creator: {seed.user?.name.split(' ')[0]}</p>
               <p className="seed-likes">Likes: {seed.likes}</p>
@@ -169,11 +189,14 @@ const ExploreSeeds = () => {
               </button>
             </div>
           </div>
-        ))}
-      </div>
-      <Footer />
+        ))
+      ) : (
+        <p>No seeds found...</p>
+      )}
     </div>
-  );
+    <Footer />
+  </div>
+);
 };
 
 export default ExploreSeeds;
