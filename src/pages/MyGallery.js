@@ -102,7 +102,6 @@ const MyGallery = () => {
   return (
     <div className="my-gallery">
       <Navbar />
-      <h1 className="gallery-title">My Gallery</h1>
       <div className="artwork-grid">
         {artworks.map((artwork) => (
           <div className="artwork-wrapper" key={artwork.id}>

@@ -1,23 +1,22 @@
 /* src/pages/MyGallery.css */
 
 .my-gallery {
-    padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 50px;
   }
   
-  .gallery-title {
-    text-align: center;
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-  }
   
   .artwork-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 columns */
     gap: 20px; /* Space between items */
     justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
   }
   
   .artwork-wrapper {
