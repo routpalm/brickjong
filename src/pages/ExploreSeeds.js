@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './ExploreSeeds.css';
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
+import MiniNavbar from '../components/MiniNavbar.js';
 import { WaveOscillator } from '../sketches/WaveOscillator.js';
 import { ConCirc } from '../sketches/concirc.js';
 import { Diagonals } from '../sketches/diags.js';
@@ -19,6 +20,7 @@ const ExploreSeeds = () => {
   const navigate = useNavigate();
   const [seedData, setSeedData] = useState([]);
   const [sortOrder, setSortOrder] = useState('newest');
+  const [searchQuery, setSearchQuery] = useState('');
   const [userId, setUserId] = useState(null);
   const [isLiking, setIsLiking] = useState(false);
   const canvasRefs = useRef({});
@@ -93,15 +95,26 @@ const ExploreSeeds = () => {
     }
   };
 
-  const handleSortChange = (event) => {
-    setSortOrder(event.target.value);
-    if (event.target.value === 'mostLiked') {
+  const handleSearch = (query) => {
+    setSearchQuery(query);  
+  };
+
+  const handleFilterChange = (filter) => {
+    setSortOrder(filter);
+    if (filter === 'mostLiked') {
       setSeedData((prevData) => [...prevData].sort((a, b) => b.likes - a.likes));
-    } else if (event.target.value === 'newest') {
+    } else if (filter === 'newest') {
       setSeedData((prevData) => [...prevData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
     }
   };
 
+  const filteredSeeds = seedData
+    .filter((seed) =>
+      seed.user?.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      seed.algorithm?.toLowerCase().includes(searchQuery.toLowerCase()) 
+    );
+
+  
   const handleLike = async (artworkId) => {
     if (!userId) {
         alert('Please log in to like artworks.');
@@ -150,38 +163,40 @@ const ExploreSeeds = () => {
 };
 
 
-  return (
-    <div className="explore-seeds content">
-      <Navbar />
-      <div className="sort-options">
-        <label>Sort By:</label>
-        <select value={sortOrder} onChange={handleSortChange}>
-          <option value="newest">Newest</option>
-          <option value="mostLiked">Most Liked</option>
-        </select>
-      </div>
-      <div className="seeds-grid">
-        {seedData && seedData.length > 0 ? (seedData.map((seed) => (
-        <div className="seed-wrapper" key={seed.id}>
-          <div className="canvas-container" id={`seed-canvas-${seed.id}`} ref={(el) => (canvasRefs.current[`seed-canvas-${seed.id}`] = el)}
-          onClick={() => navigate(`/seed-detail/${seed.id}`, { state: seed })}>
+return (
+  <div className="explore-seeds content">
+    <Navbar />
+    <MiniNavbar
+      onSearch={handleSearch}
+      onFilterChange={handleFilterChange}
+      currentFilter={sortOrder}
+    />
+    <div className="seeds-grid">
+      {filteredSeeds && filteredSeeds.length > 0 ? (
+        filteredSeeds.map((seed) => (
+          <div className="seed-wrapper" key={seed.id}>
+            <div
+              className="canvas-container"
+              id={`seed-canvas-${seed.id}`}
+              ref={(el) => (canvasRefs.current[`seed-canvas-${seed.id}`] = el)}
+              onClick={() => navigate(`/seed-detail/${seed.id}`, { state: seed })}
+            />
+            <div className="seed-info">
+              <p className="seed-author">Creator: {seed.user?.name.split(' ')[0]}</p>
+              <p className="seed-likes">Likes: {seed.likes}</p>
+              <button onClick={() => handleLike(seed.id)} className="like-button">
+                {seed.userLiked ? 'Unlike' : 'Like'}
+              </button>
+            </div>
           </div>
-        <div className="seed-info">
-          <p className="seed-author">Creator: {seed.user?.name.split(' ')[0]}</p>
-          <p className="seed-likes">Likes: {seed.likes}</p>
-          <button onClick={() => handleLike(seed.id)} className="like-button">
-            {seed.userLiked ? 'Unlike' : 'Like'}
-          </button>
-        </div>
-      </div>
-    ))
-  ) : (
-    <p>Loading seeds...</p>
-  )}
-</div>
-      <Footer />
+        ))
+      ) : (
+        <p>No seeds found...</p>
+      )}
     </div>
-  );
+    <Footer />
+  </div>
+);
 };
 
 export default ExploreSeeds;
