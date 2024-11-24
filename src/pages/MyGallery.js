@@ -1,10 +1,16 @@
 // src/pages/MyGallery.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import p5 from 'p5';
-import { LinesSketch } from '../sketches/LinesSketch.js';
 import { WaveOscillator } from '../sketches/WaveOscillator.js';
 import './MyGallery.css';
+import Navbar from '../components/Navbar.js';
+import Footer from '../components/Footer.js';
 import { getUserArtworks, mapJWTToUserId } from '../apiclient/users.js';
+import { createLikeByParam } from '../apiclient/likes.js';
+import { ConCirc } from '../sketches/concirc.js';
+import { Diagonals } from '../sketches/diags.js';
+import { Sslines } from '../sketches/sslines.js';
+import { TruchetRound } from '../sketches/truchetTriangles.js';
 
 const MyGallery = () => {
   const [artworks, setArtworks] = useState([]);
@@ -14,20 +20,35 @@ const MyGallery = () => {
   const createSketch = (artwork, containerId) => {
     const container = document.getElementById(containerId);
     if (!container) {
-      console.error(`Container ${containerId} not found`);
+      console.error(`Container with ID "${containerId}" not found`);
       return;
     }
-    console.log(`creating sketch with c_id: ${containerId}`);
-    // Clear any existing content in the container
+
     while (container.firstChild) {
       container.removeChild(container.firstChild);
     }
 
-    // Create the appropriate sketch
-    if (artwork.algorithm === 'Lines') {
-      new p5((p) => LinesSketch(p, artwork, canvasSize), container);
+    if (artwork.algorithm === 'ConCirc') {
+      new p5((p) => ConCirc(p, artwork, canvasSize), container);
     } else if (artwork.algorithm === 'Wave') {
       new p5((p) => WaveOscillator(p, artwork, canvasSize), container);
+    } else if (artwork.algorithm === 'Diagonals') {
+      new p5((p) => Diagonals(p, artwork, canvasSize), container);
+    } else if (artwork.algorithm === 'Sslines') {
+      new p5((p) => Sslines(p, artwork, canvasSize), container);
+    } else if (artwork.algorithm === 'TruchRound') {
+      new p5((p) => TruchetRound(p, artwork, canvasSize), container);
+    }else {
+      console.warn(`Unknown algorithm: ${artwork.algorithm}`);
+    }
+  };
+
+  const handleLike = async (artworkId) => {
+    try {
+      await createLikeByParam(userId, artworkId);
+      alert('Artwork liked successfully!');
+    } catch (error) {
+      alert('Failed to like artwork. Please try again.');
     }
   };
 
@@ -35,8 +56,8 @@ const MyGallery = () => {
     const fetchUserId = async () => {
       try {
         const id = await mapJWTToUserId();
-        console.log('Mapped User ID:', id);
-        setUserId(id); // Update state with user ID
+        setUserId(id);
+        console.log("User ID set to:", id);
       } catch (error) {
         console.error('Failed to fetch user ID:', error);
       }
@@ -50,6 +71,7 @@ const MyGallery = () => {
       const fetchData = async () => {
         try {
           const data = await getUserArtworks(userId);
+          console.log("Fetched Artworks Data:", data);
           setArtworks(data);
         } catch (error) {
           console.error('Error fetching artworks:', error);
@@ -61,14 +83,18 @@ const MyGallery = () => {
   }, [userId]);
 
   useEffect(() => {
-    artworks.forEach((artwork) => {
-      const containerId = `artwork-canvas-${artwork.id}`;
-      createSketch(artwork, containerId);
-    });
-  }, [artworks, canvasSize]); // recreate sketches if artworks or canvas size changes
+    if (artworks.length > 0) {
+      artworks.forEach((artwork) => {
+        const containerId = `artwork-canvas-${artwork.id}`;
+        console.log(`Creating sketch for container: ${containerId}`);
+        createSketch(artwork, containerId);
+      });
+    }
+  }, [artworks]);
 
   return (
     <div className="my-gallery">
+      <Navbar />
       <h1 className="gallery-title">My Gallery</h1>
       <div className="artwork-grid">
         {artworks.map((artwork) => (
@@ -77,13 +103,18 @@ const MyGallery = () => {
               className="canvas-container"
               id={`artwork-canvas-${artwork.id}`}
             ></div>
+            <button
+              className="like-button"
+              onClick={() => handleLike(artwork.id)}
+            >
+              Like
+            </button>
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };
 
-
 export default MyGallery;
-

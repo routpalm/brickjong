@@ -7,20 +7,22 @@ import { useNavigate } from 'react-router-dom';
 import './WeaveArtwork.css';
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
-import SampleAlgo1 from '../images/bauhaus.png';
 import SampleAlgo2 from '../images/spiro.jpg';
+import DiaLines from '../images/DiaLines.png';
+import SSLine from '../images/SSLine.png';
+import Concirc from '../images/Concirc.png';
+import TruRound from '../images/TruRound.png';
 
 const algorithmImages = {
-  "Lines": SampleAlgo1,
   "Wave": SampleAlgo2,
-  "Diagonals": SampleAlgo1,
-  "ConCirc":  SampleAlgo2,
-  "TruchRound": SampleAlgo2,
-  "Sslines" : SampleAlgo2
+  "Diagonals": DiaLines,
+  "ConCirc":  Concirc,
+  "TruchRound": TruRound,
+  "Sslines" : SSLine
 };
 
 const WeaveArtwork = () => {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState("Lines"); // Default algorithm is "Lines"
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState("ConCirc"); // Default algorithm is "ConCirc"
   const [isUploading, setIsUploading] = useState(false);
   const { processImage, processedImageData } = useImageProcessor();
   const navigate = useNavigate();

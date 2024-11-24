@@ -1,4 +1,4 @@
-export const WaveOscillator = (p, processedImageData, canvasSize) => {
+export const WaveOscillator = (p, processedImageData, canvasSize=512) => {
   let angleOffset = 0;
   const numShapes = 15;
   const baseWaveRadius = canvasSize / 2 - 20; // Adjusted for canvas size

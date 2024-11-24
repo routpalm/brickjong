@@ -1,10 +1,13 @@
-export const TruchetRound = (p,processedImageData) => {
-  const size = 800;
+export const TruchetRound = (p,processedImageData, size = 512) => {
   const SQsize = size/10;
 
-  p.setup = function() {
-    let canvas = p.createCanvas(size, size);
-    canvas.parent('canvasContainer');
+  p.setup = () => {
+    const canvas = p.createCanvas(size, size);
+    if (p._userNode) {
+      canvas.parent(p._userNode); // Ensure correct parent
+    } else {
+      console.error("No parent node found for the canvas.");
+    }
     p.colorMode(p.HSB, 360, 100, 100);
     p.noLoop();
     p.strokeCap(p.SQUARE);
