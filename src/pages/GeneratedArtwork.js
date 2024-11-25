@@ -8,6 +8,8 @@ import { TruchetRound } from "../sketches/truchetTriangles.js";
 import { Diagonals } from "../sketches/diags.js";
 import { Sslines } from "../sketches/sslines.js";
 import { Squigs } from "../sketches/squigs.js";
+import { Noisy } from "../sketches/noise1.js"
+import { Tunnel } from "../sketches/tunnel.js"
 import Navbar from '../components/Navbar.js';
 import Particles from 'react-tsparticles';
 import './GeneratedArtwork.css';
@@ -60,6 +62,10 @@ const GeneratedArtwork = () => {
       sketchInstance = new p5((p) => Sslines(p, processedImageData), canvasRef.current);
     } else if (selectedAlgorithm === 'Squigs') {
       sketchInstance = new p5((p) => Squigs(p, processedImageData), canvasRef.current);
+    } else if (selectedAlgorithm === 'Noisy') {
+      sketchInstance = new p5((p) => Noisy(p, processedImageData), canvasRef.current);
+    } else if (selectedAlgorithm === 'Tunnel') {
+      sketchInstance = new p5((p) => Tunnel(p, processedImageData), canvasRef.current);
     } 
 
     const generateImageUrl = () => {
