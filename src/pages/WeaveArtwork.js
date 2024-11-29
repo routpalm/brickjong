@@ -1,7 +1,7 @@
 // src/pages/WeaveArtwork.js
 import React, { useState, useEffect } from 'react';
 import AlgorithmSelector from '../components/algorithmSelector.js';
-import FileUploader from '../components/fileUploader.js';
+import FileUploader from '../components/FileUploader.js';
 import useImageProcessor from '../hooks/useImageProcessor.js';
 import { useNavigate } from 'react-router-dom';
 import './WeaveArtwork.css';

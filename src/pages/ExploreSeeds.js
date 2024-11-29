@@ -227,16 +227,17 @@ const ExploreSeeds = () => {
                     </p>
                     <div
                       className="like-section"
+                      data-testid="like-button"
                       onClick={() => handleLike(seed.id)}
                     >
                       <FontAwesomeIcon
                         icon={seed.userLiked ? solidHeart : regularHeart}
                         className="like-icon"
                       />
-                      <span className="like-count">{seed.likes}</span>
+                      <span className="like-count" data-testid="like-count">{seed.likes}</span>
                     </div>
                   </div>
-                  <p className="seed-algo">Algorithm: {seed.algorithm}</p>
+                  <p className="seed-algo" data-testid="seed-algo">Algorithm: {seed.algorithm}</p>
                 </div>
               </div>
             ))

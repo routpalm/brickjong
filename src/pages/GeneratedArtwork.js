@@ -180,7 +180,7 @@ const GeneratedArtwork = () => {
         </div>
       </div>
       {showFireworks && (
-        <p className="shared-message">🎉🎉 Shared!</p>
+        <p className="shared-message" data-testid="shared-message">🎉🎉 Shared!</p>
       )}
     </div>
   );
