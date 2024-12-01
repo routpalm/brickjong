@@ -33,7 +33,7 @@ export const Noisy = (p,processedImageData, size = 512) => {
 
     
   function npoint(x,y,colors){
-    let n = 5 * p.noise(x,y);
+    let n = 5 * p.noise(x/100,y/100);
     n = Math.floor(n);
     //console.log(n);
     //console.log(`x: ${x} y: ${y}`);
