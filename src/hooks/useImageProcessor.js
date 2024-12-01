@@ -55,8 +55,8 @@ const useImageProcessor = () => {
   // Helper function to extract a cluster of random pixels
   const getRandomPixelCluster = (imageData, clusterSize = 3) => {
     const { data, width, height } = imageData;
-    const randomX = Math.floor(Math.random() * (width - clusterSize));
-    const randomY = Math.floor(Math.random() * (height - clusterSize));
+    const randomX = Math.floor((width - clusterSize)/2);
+    const randomY = Math.floor((height - clusterSize)/2);//set region to middle of image
 
     const cluster = [];
     for (let y = 0; y < clusterSize; y++) {
