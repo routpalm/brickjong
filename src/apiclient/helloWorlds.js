@@ -1,10 +1,14 @@
 // ./src/apiclient/helloWorlds.js
+// purpose: provides functions to test backend capabilities
+// creation date: 2024-11-01
+// author: Brett DeWitt
+
 
 import apiClient from './apiClient.js';
 
 
 /**
- * Fetches a list of HelloWorld objects with optional pagination.
+ * Fetches a list of HelloWorld objects
  *
  * @param {number} n - The number of HelloWorld objects to retrieve.
  * @param {number} offset - The starting point in the list to retrieve results from (for pagination).

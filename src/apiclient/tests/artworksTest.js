@@ -1,6 +1,6 @@
 // ./src/apiclient/testArtworks.js
 
-import { getArtworks, getArtworkById, createArtworkByParam, createArtworkByObject, deleteArtwork } from "./artworks.js";
+import { getArtworks, getArtworkById, createArtworkByParam, createArtworkByObject, deleteArtwork } from "../artworks.js";
 
 const BASE_URL = 'http://localhost:3001/artworks';
 
