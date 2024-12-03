@@ -1,4 +1,8 @@
 // ./src/apiclient/helloWorlds.js
+// purpose: provides functions to test backend capabilities
+// creation date: 2024-11-01
+// author: Brett DeWitt
+
 
 import apiClient from './apiClient.js';
 

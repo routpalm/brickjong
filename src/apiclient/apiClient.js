@@ -1,6 +1,6 @@
 // ./src/apiclient/apiClient.js
 // purpose: sets up the axios API client for making HTTP requests to the backend
-// creation date: 2024-11-24
+// creation date: 2024-11-12
 // authors: Brett DeWitt, Nicholas Anthony
 // part of the frontend system, this file is used to handle communication with the backend by creating a reusable instance of axios with predefined settings.
 // modifications: none

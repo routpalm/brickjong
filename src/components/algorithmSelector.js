@@ -1,6 +1,6 @@
 // ./src/components/algorithmSelector.js
 // purpose: provides a dropdown component for selecting an algorithm used in the artwork generation process
-// creation date: 2024-11-24
+// creation date: 2024-10-15
 // authors: Nicholas Anthony, Tong Guan
 // part of the UI for the artwork generation feature, this component allows users to choose from a predefined set of algorithms to customize their artwork
 // modifications: none

@@ -1,6 +1,6 @@
 // ./src/apiclient/user.js
 // purpose: provides functions for interacting with the backend to manage user-related data
-// creation date: 2024-11-24
+// creation date: 2024-11-12
 // authors: Brett DeWitt, Nicholas Anthony
 // part of the frontend API client, this file handles communication with the backend for CRUD operations on users, as well as mapping JWTs to user IDs
 // modifications: none

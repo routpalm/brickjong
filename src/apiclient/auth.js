@@ -1,6 +1,6 @@
 // ./src/apiclient/auth.js
 // purpose: provides a function for augmenting headers to include authorization (JWT)
-// creation date: 2024-11-24
+// creation date: 2024-11-12
 // authors: Brett DeWitt
 // modifications: none
 

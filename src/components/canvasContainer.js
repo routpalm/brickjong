@@ -1,6 +1,6 @@
 // ./src/components/canvasContainer.js
 // purpose: provides a reusable component for rendering a container element for a canvas, using a reference for direct DOM manipulation
-// creation date: 2024-11-24
+// creation date: 2024-10-14
 // authors: Nicholas Anthony
 // this component acts as a wrapper for p5.js sketches, e.g consistent structure for canvas-related DOM elements
 // modifications: none

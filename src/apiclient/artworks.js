@@ -1,6 +1,6 @@
 // ./src/apiclient/artworks.js
 // purpose: provides functions for interacting with the backend to perform CRUD operations on artworks
-// creation date: 2024-11-24
+// creation date: 2024-11-12
 // authors: Brett DeWitt, Nicholas Anthony
 // part of the frontend API client, this file is used to handle communication with the backend related to artworks, including fetching, creating, and deleting artworks.
 // modifications: none
