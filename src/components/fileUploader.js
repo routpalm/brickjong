@@ -14,11 +14,12 @@ const FileUploader = ({ onFileSelect, isUploading }) => {
       {isUploading ? (
         <button className="upload-button" disabled>Uploading...</button>
       ) : (
-        <label className="upload-button">
+        <label htmlFor="imageUpload" className="upload-button">
           Upload
           <input
             type="file"
             id="imageUpload"
+            data-testid="imageUpload"
             accept="image/*"
             onChange={handleFileChange}
             style={{ display: 'none' }}
