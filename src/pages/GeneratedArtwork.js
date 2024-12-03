@@ -8,7 +8,8 @@ import { TruchetRound } from "../sketches/truchetTriangles.js";
 import { Diagonals } from "../sketches/diags.js";
 import { Sslines } from "../sketches/sslines.js";
 import { Squigs } from "../sketches/squigs.js";
-import { Noisy } from "../sketches/noise1.js"
+import { Noisy } from "../sketches/noise1.js";
+import { Noisy2 } from "../sketches/noisy2.js"
 import { Tunnel } from "../sketches/tunnel.js"
 import Navbar from '../components/Navbar.js';
 import Particles from 'react-tsparticles';
@@ -64,6 +65,8 @@ const GeneratedArtwork = () => {
       sketchInstance = new p5((p) => Squigs(p, processedImageData), canvasRef.current);
     } else if (selectedAlgorithm === 'Noisy') {
       sketchInstance = new p5((p) => Noisy(p, processedImageData), canvasRef.current);
+      } else if (selectedAlgorithm === 'Noisy2') {
+      sketchInstance = new p5((p) => Noisy2(p, processedImageData), canvasRef.current);
     } else if (selectedAlgorithm === 'Tunnel') {
       sketchInstance = new p5((p) => Tunnel(p, processedImageData), canvasRef.current);
     } 
