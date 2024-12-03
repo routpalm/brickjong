@@ -1,26 +1,31 @@
 // src/pages/WeaveArtwork.js
 import React, { useState, useEffect } from 'react';
 import AlgorithmSelector from '../components/algorithmSelector.js';
-import FileUploader from '../components/fileUploader.js';
+import FileUploader from '../components/FileUploader.js';
 import useImageProcessor from '../hooks/useImageProcessor.js';
 import { useNavigate } from 'react-router-dom';
 import './WeaveArtwork.css';
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
-import SampleAlgo1 from '../images/bauhaus.png';
-import SampleAlgo2 from '../images/spiro.jpg';
+import DiaLines from '../images/DiaLines.png';
+import SSLine from '../images/SSLine.png';
+import Concirc from '../images/Concirc.png';
+import TruRound from '../images/TruRound.png';
+import Wave from '../images/Wave.png';
+import Squigs from '../images/squigs.png';
+
 
 const algorithmImages = {
-  "Lines": SampleAlgo1,
-  "Wave": SampleAlgo2,
-  "Diagonals": SampleAlgo1,
-  "ConCirc":  SampleAlgo2,
-  "TruchRound": SampleAlgo2,
-  "Sslines" : SampleAlgo2
+  "Wave": Wave,
+  "Diagonals": DiaLines,
+  "ConCirc":  Concirc,
+  "TruchRound": TruRound,
+  "Sslines" : SSLine,
+  "Squigs": Squigs
 };
 
 const WeaveArtwork = () => {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState("Lines"); // Default algorithm is "Lines"
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState("ConCirc"); // Default algorithm is "ConCirc"
   const [isUploading, setIsUploading] = useState(false);
   const { processImage, processedImageData } = useImageProcessor();
   const navigate = useNavigate();

@@ -1,10 +1,13 @@
-export const TruchetRound = (p,processedImageData) => {
-  const size = 800;
+export const TruchetRound = (p,processedImageData, size = 512) => {
   const SQsize = size/10;
 
-  p.setup = function() {
-    let canvas = p.createCanvas(size, size);
-    canvas.parent('canvasContainer');
+  p.setup = () => {
+    const canvas = p.createCanvas(size, size);
+    if (p._userNode) {
+      canvas.parent(p._userNode); // Ensure correct parent
+    } else {
+      console.error("No parent node found for the canvas.");
+    }
     p.colorMode(p.HSB, 360, 100, 100);
     p.noLoop();
     p.strokeCap(p.SQUARE);
@@ -41,7 +44,7 @@ export const TruchetRound = (p,processedImageData) => {
           p.arc(x,y,size,size,2*p.PI,p.HALF_PI);
           
           p.noFill();
-          p.stroke("white");
+          p.stroke(colors[2]);
           p.strokeWeight(size/20)
           p.arc(x+size,y+size,size,size,p.PI,p.PI+p.HALF_PI);
           p.arc(x,y,size,size,2*p.PI,p.HALF_PI);
@@ -60,7 +63,7 @@ export const TruchetRound = (p,processedImageData) => {
           p.arc(x+size,y,size,size,p.HALF_PI,p.PI);
           p.arc(x,y+size,size,size,p.PI+p.HALF_PI,2*p.PI);  
           p.noFill();
-          p.stroke("white");
+          p.stroke(colors[2]);
           p.strokeWeight(size/20)
           p.arc(x+size,y,size,size,p.HALF_PI,p.PI);
           p.arc(x,y+size,size,size,p.PI+p.HALF_PI,2*p.PI);  

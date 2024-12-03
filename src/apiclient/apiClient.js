@@ -4,7 +4,9 @@ import axios from 'axios'
 
 
 const apiClient = axios.create({
-    baseURL: 'https://visualoom-8a10785743bd.herokuapp.com',
+
+    baseURL: process.env.REACT_APP_BACK_END_API_URL,
+
     headers: {
         'content-type': 'application/json'
     },

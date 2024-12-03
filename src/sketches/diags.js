@@ -7,8 +7,7 @@
 5. Dark Muted
 */
 
-export const Diagonals = (p,processedImageData) => {
-  const size = 800;
+export const Diagonals = (p,processedImageData, size = 512) => {
   const SQsize = size/10;
   const offset = SQsize/10;
 
@@ -93,7 +92,11 @@ export const Diagonals = (p,processedImageData) => {
 
   p.setup = function() {
     let canvas = p.createCanvas(size, size);
-    canvas.parent('canvasContainer');
+    if (p._userNode) {
+      canvas.parent(p._userNode); // Ensure correct parent
+    } else {
+      console.error("No parent node found for the canvas.");
+    }
     p.colorMode(p.HSB, 360, 100, 100);
     p.noLoop();
     p.strokeCap(p.SQUARE);

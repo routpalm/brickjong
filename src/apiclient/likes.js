@@ -13,9 +13,20 @@ export const getLikeById = async (likeId) => {
     }
 }
 
+export const getLikesByUserId = async (userId) => {
+    try {
+        const response = await apiClient.get(`/likes`);
+        return response.data;
+    } catch (error) {
+        console.error("Error getting likes for user:", userId, error);
+        throw error;
+    }
+}
+
+
 // TODO: export const modifyLike = async (likeId, userId, artworkId) => {}
 
-export const createLike = async (userId, artworkId) => {
+export const createLikeByParam = async (userId, artworkId) => {
     try {
         const response = await apiClient.post(`/likes`, {
             userId: userId,
@@ -28,6 +39,16 @@ export const createLike = async (userId, artworkId) => {
     }
 }
 
+export const createLikeByObject = async (like) => {
+    try {
+        const response = await apiClient.post(`/likes`, like);
+        return response.data;
+    } catch (error) {
+        console.error("Error creating like:", like, error);
+        throw error;
+    }
+}
+
 // TODO: export const modifyLike = async (likeId, userId, artworkId) => {}
 
 export const deleteLike = async (likeId) => {
@@ -35,7 +56,7 @@ export const deleteLike = async (likeId) => {
         const response = await apiClient.delete(`/likes/${likeId}`);
         return response.data;
     } catch (error) {
-        console.error("Error deleting Like", likeId, error);
+        console.error("Error deleting Like:", likeId, error);
         throw error;
     }
 }

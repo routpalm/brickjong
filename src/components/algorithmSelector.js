@@ -11,12 +11,15 @@ const AlgorithmSelector = ({ selected, onChange }) => {
         onChange={(e) => onChange(e.target.value)}
         className="algorithm-dropdown"
       >
-        <option value="Lines">Lines</option>
         <option value="Wave">Wave</option>
-        <option value="ConCirc">Conecentric Circles</option>
+        <option value="ConCirc">Concentric Circles</option>
         <option value="TruchRound">Round Truchet</option>
         <option value="Diagonals">Diagonal Lines</option>
         <option value="Sslines">Overlapping Sines</option>
+        <option value="Squigs">Squigs</option>
+        <option value="Noisy">Noisy</option>
+        <option value="Noisy2">Noisy 2</option>
+        <option value="Tunnel">Tunnel</option>
       </select>
     </div>
   );
