@@ -4,7 +4,7 @@ import apiClient from './apiClient.js';
 
 
 /**
- * Fetches a list of HelloWorld objects with optional pagination.
+ * Fetches a list of HelloWorld objects
  *
  * @param {number} n - The number of HelloWorld objects to retrieve.
  * @param {number} offset - The starting point in the list to retrieve results from (for pagination).
@@ -13,7 +13,7 @@ import apiClient from './apiClient.js';
  */
 export const getHelloWorlds = async (n, offset) => {
     try {
-        const response = await apiClient.(`/helloworlds/`, {
+        const response = await apiClient.get(`/helloworlds/`, {
             params: {
                 n: n,
                 offset: offset
