@@ -15,6 +15,9 @@ export const ConCirc = (p,processedImageData, size = 512) => {
     //p.strokeCap(p.SQUARE);
     //console.log("loaded");
     // listen for imageProcessed event to proceed
+    if (processedImageData && processedImageData.colorPalette) {
+      p.redraw();
+    }
   };
 
 

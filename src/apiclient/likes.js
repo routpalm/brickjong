@@ -13,6 +13,17 @@ export const getLikeById = async (likeId) => {
     }
 }
 
+export const getLikesByUserId = async (userId) => {
+    try {
+        const response = await apiClient.get(`/likes`);
+        return response.data;
+    } catch (error) {
+        console.error("Error getting likes for user:", userId, error);
+        throw error;
+    }
+}
+
+
 // TODO: export const modifyLike = async (likeId, userId, artworkId) => {}
 
 export const createLikeByParam = async (userId, artworkId) => {

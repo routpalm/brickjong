@@ -12,7 +12,11 @@ export const Sslines = (p,processedImageData, size = 512) => {
   const offset = SQsize/10;
   p.setup = function() {
     let canvas = p.createCanvas(size, size);
-    canvas.parent('canvasContainer');
+    if (p._userNode) {
+      canvas.parent(p._userNode); // Ensure correct parent
+    } else {
+      console.error("No parent node found for the canvas.");
+    }
     p.colorMode(p.HSB, 360, 100, 100);
     p.noLoop();
     p.strokeCap(p.SQUARE);
@@ -56,19 +60,34 @@ export const Sslines = (p,processedImageData, size = 512) => {
   }
 
   function* processData(pixdata){
-    
-    let length = pixdata.length;
-    while(true){
-      for(let i = 0; i < length;i++){
-        for(let j = 0; j < 4;j++){
-          yield parseInt(pixdata[i][j]);
+      //make a generator or iterator?
+      
+      let length = pixdata.length;
+      //index = index % length;
+      //console.log(`index: ${index}`);
+      while(true){
+        for(let i = 0; i < length; i++){
+          //const match = pixdata[i].match(/rgb\((\d+),((\d+)),((\d+)\))/);
+          console.log(pixdata[i]);
+          console.log(pixdata[i][2]);//is this what I want?
+          break;
+          /*if(match){
+            for(let j = 1; j <= 3;j++){
+              yield parseInt(match[j]);
+            }
+          }*/
         }
 
-      }
+        /*
+        for(let i = 0; i < length;i++){
+          for(let j = 0; j < 4;j++){
+            yield parseInt(pixdata[i][j]);
+          }
+
+        }
+      }*/
     }
   }
-
-    
 
 
     

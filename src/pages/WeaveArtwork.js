@@ -7,18 +7,21 @@ import { useNavigate } from 'react-router-dom';
 import './WeaveArtwork.css';
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
-import SampleAlgo2 from '../images/spiro.jpg';
 import DiaLines from '../images/DiaLines.png';
 import SSLine from '../images/SSLine.png';
 import Concirc from '../images/Concirc.png';
 import TruRound from '../images/TruRound.png';
+import Wave from '../images/Wave.png';
+import Squigs from '../images/squigs.png';
+
 
 const algorithmImages = {
-  "Wave": SampleAlgo2,
+  "Wave": Wave,
   "Diagonals": DiaLines,
   "ConCirc":  Concirc,
   "TruchRound": TruRound,
-  "Sslines" : SSLine
+  "Sslines" : SSLine,
+  "Squigs": Squigs
 };
 
 const WeaveArtwork = () => {

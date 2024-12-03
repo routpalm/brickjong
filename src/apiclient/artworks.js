@@ -2,6 +2,7 @@
 
 import apiclient from './apiClient.js'
 
+
 export const getArtworks = async (n, offset) => {
     try {
         const response = await apiclient.get(`/artworks`, {
@@ -13,6 +14,27 @@ export const getArtworks = async (n, offset) => {
         console.error("Error getting artworks list:", n, offset, error);
     }
 }
+
+
+export const getRecentArtworksWithLikes = async () => {
+    try {
+        const artworksResponse = await apiclient.get('/artworks');
+        const artworks = artworksResponse.data;
+        const artworksWithLikes = artworks.map((artwork) => {
+            return {
+                ...artwork,
+                likes: artwork.likes?.length || 0, 
+            };
+        });
+
+        return artworksWithLikes;
+    } catch (error) {
+        console.error('Error getting recent artworks with likes:', error);
+        throw error;  
+    }
+};
+
+
 
 export const getArtworkById = async (artworkId) => {
     try {
@@ -37,7 +59,11 @@ export const createArtwork = async (artworkData) => {
 export const deleteArtwork = async (artworkId) => {
     try {
         const response = await apiclient.delete(`/artworks/${artworkId}`);
-        return response.data;
+        if (response.status === 204) {
+            return response.data;
+        } else {
+            throw new Error(`Unexpected status code: ${response.status}`);
+        }
     } catch (error) {
         console.error("Error deleting artwork:", artworkId, error);
     }
