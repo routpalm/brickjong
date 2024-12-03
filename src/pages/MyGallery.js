@@ -56,10 +56,24 @@ const MyGallery = () => {
 
   useEffect(() => {
     const displayedArtworks = filter === 'my-artworks' ? artworks : likedArtworks;
-    displayedArtworks.forEach((artwork) => {
-      createSketch(artwork);
+
+    Object.keys(canvasRefs.current).forEach((key) => {
+        const id = key.split('gallery-canvas-')[1];
+        if (!displayedArtworks.find((artwork) => artwork.id === parseInt(id))) {
+            const container = canvasRefs.current[key];
+            if (container) {
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
+                delete canvasRefs.current[key];
+            }
+        }
     });
-  }, [filter, artworks, likedArtworks]);
+
+    displayedArtworks.forEach((artwork) => {
+        createSketch(artwork);
+    });
+}, [filter, artworks, likedArtworks]);
 
   const createSketch = (artwork) => {
     const containerId = `gallery-canvas-${artwork.id}`;
@@ -100,15 +114,24 @@ const MyGallery = () => {
 
   const handleDelete = async (artworkId) => {
     try {
-      // Remove artwork on the backend
-      await deleteArtwork(artworkId);
-      // Update post-deletion state
-      setArtworks((prevArtworks) => prevArtworks.filter((art) => art.id !== artworkId));
-      alert('Artwork deleted successfully!');
+        await deleteArtwork(artworkId);
+        console.log(`Deleting artwork ID: ${artworkId}...`);
+
+        const containerId = `gallery-canvas-${artworkId}`;
+        if (canvasRefs.current[containerId]) {
+            const container = canvasRefs.current[containerId];
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+            delete canvasRefs.current[containerId];
+        }
+        setArtworks((prevArtworks) => prevArtworks.filter((art) => art.id !== artworkId));
+        alert('Artwork deleted successfully!');
     } catch (error) {
-      alert('Failed to delete artwork. Please try again.');
+        console.error('Failed to delete artwork:', error);
+        alert('Failed to delete artwork. Please try again.');
     }
-  };
+};
 
   return (
     <div className="my-gallery">

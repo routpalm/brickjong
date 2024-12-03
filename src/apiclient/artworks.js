@@ -59,7 +59,11 @@ export const createArtwork = async (artworkData) => {
 export const deleteArtwork = async (artworkId) => {
     try {
         const response = await apiclient.delete(`/artworks/${artworkId}`);
-        return response.data;
+        if (response.status === 204) {
+            return response.data;
+        } else {
+            throw new Error(`Unexpected status code: ${response.status}`);
+        }
     } catch (error) {
         console.error("Error deleting artwork:", artworkId, error);
     }
