@@ -7,6 +7,7 @@
 
 import apiClient from './apiClient.js'; // imports the preconfigured axios instance for API communication
 
+
 /**
  * fetches a list of artworks based on offset
  * 
@@ -43,6 +44,7 @@ export const getRecentArtworksWithLikes = async () => {
                 likes: artwork.likes?.length || 0, // adds 'likes' field with a count of likes
             };
         });
+
 
         return artworksWithLikes;
     } catch (error) {

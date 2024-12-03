@@ -81,6 +81,7 @@ export const fetchUserProfile = async () => {
     }
 };
 
+
 /**
  * creates a user using individual parameters for their details.
  * 

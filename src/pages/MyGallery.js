@@ -11,6 +11,11 @@ import { Diagonals } from '../sketches/diags.js';
 import { Sslines } from '../sketches/sslines.js';
 import { TruchetRound } from '../sketches/truchetTriangles.js';
 import { LinesSketch } from '../sketches/lines.js';
+import { Squigs } from "../sketches/squigs.js";
+import { Noisy } from "../sketches/noise1.js";
+import { Noisy2 } from "../sketches/noisy2.js"
+import { Tunnel } from "../sketches/tunnel.js"
+
 
 const MyGallery = () => {
   const [artworks, setArtworks] = useState([]);
@@ -103,6 +108,10 @@ const MyGallery = () => {
       Sslines: (p) => Sslines(p, artwork, canvasSize),
       TruchRound: (p) => TruchetRound(p, artwork, canvasSize),
       Lines: (p) => LinesSketch(p, artwork, canvasSize),
+      Tunnel: (p) => Tunnel(p,artwork, canvasSize),
+      Squigs: (p) => Squigs(p, artwork, canvasSize),
+      Noisy: (p) => Noisy(p,artwork, canvasSize),
+      Noisy2: (p) => Noisy2(p, artwork, canvasSize)
     };
 
     if (sketchMapping[artwork.algorithm]) {
