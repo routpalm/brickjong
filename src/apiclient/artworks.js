@@ -2,6 +2,7 @@
 
 import apiclient from './apiClient.js'
 
+
 export const getArtworks = async (n, offset) => {
     try {
         const response = await apiclient.get(`/artworks`, {
