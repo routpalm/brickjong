@@ -13,6 +13,9 @@ import Concirc from '../images/Concirc.png';
 import TruRound from '../images/TruRound.png';
 import Wave from '../images/Wave.png';
 import Squigs from '../images/squigs.png';
+import Noisy from '../images/Noisy.png';
+import Noisy2 from '../images/Noisy2.png';
+import Tunnel from '../images/Tunnel.png';
 
 
 const algorithmImages = {
@@ -21,7 +24,10 @@ const algorithmImages = {
   "ConCirc":  Concirc,
   "TruchRound": TruRound,
   "Sslines" : SSLine,
-  "Squigs": Squigs
+  "Squigs": Squigs,
+  "Noisy": Noisy,
+  "Noisy2": Noisy2,
+  "Tunnel" : Tunnel
 };
 
 const WeaveArtwork = () => {

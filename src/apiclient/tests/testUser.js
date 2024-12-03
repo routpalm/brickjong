@@ -1,6 +1,6 @@
 // ./src/apiclient/testUser.js
 
-import { getUserById, createUserByParams, createUserByObject, modifyUser, deleteUser } from "./users.js";
+import { getUserById, createUserByParams, createUserByObject, modifyUser, deleteUser } from "../users.js";
 
 
 async function testCreateUserByParams(googleId, email, name) {

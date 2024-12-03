@@ -1,6 +1,6 @@
 // ./src/apiclient/testHelloWorld.js
 
-import { getHelloWorlds, getHelloWorldById, createHelloWorld, modifyHelloWorldById, deleteHelloWorldById } from "./helloWorlds.js"
+import { getHelloWorlds, getHelloWorldById, createHelloWorld, modifyHelloWorldById, deleteHelloWorldById } from "../helloWorlds.js"
 
 
 async function testCreateHelloWorld(message) {

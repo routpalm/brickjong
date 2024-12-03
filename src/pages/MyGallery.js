@@ -11,6 +11,11 @@ import { Diagonals } from '../sketches/diags.js';
 import { Sslines } from '../sketches/sslines.js';
 import { TruchetRound } from '../sketches/truchetTriangles.js';
 import { LinesSketch } from '../sketches/lines.js';
+import { Squigs } from "../sketches/squigs.js";
+import { Noisy } from "../sketches/noise1.js";
+import { Noisy2 } from "../sketches/noisy2.js"
+import { Tunnel } from "../sketches/tunnel.js"
+
 
 const MyGallery = () => {
   const [artworks, setArtworks] = useState([]);
@@ -56,10 +61,24 @@ const MyGallery = () => {
 
   useEffect(() => {
     const displayedArtworks = filter === 'my-artworks' ? artworks : likedArtworks;
-    displayedArtworks.forEach((artwork) => {
-      createSketch(artwork);
+
+    Object.keys(canvasRefs.current).forEach((key) => {
+        const id = key.split('gallery-canvas-')[1];
+        if (!displayedArtworks.find((artwork) => artwork.id === parseInt(id))) {
+            const container = canvasRefs.current[key];
+            if (container) {
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
+                delete canvasRefs.current[key];
+            }
+        }
     });
-  }, [filter, artworks, likedArtworks]);
+
+    displayedArtworks.forEach((artwork) => {
+        createSketch(artwork);
+    });
+}, [filter, artworks, likedArtworks]);
 
   const createSketch = (artwork) => {
     const containerId = `gallery-canvas-${artwork.id}`;
@@ -89,6 +108,10 @@ const MyGallery = () => {
       Sslines: (p) => Sslines(p, artwork, canvasSize),
       TruchRound: (p) => TruchetRound(p, artwork, canvasSize),
       Lines: (p) => LinesSketch(p, artwork, canvasSize),
+      Tunnel: (p) => Tunnel(p,artwork, canvasSize),
+      Squigs: (p) => Squigs(p, artwork, canvasSize),
+      Noisy: (p) => Noisy(p,artwork, canvasSize),
+      Noisy2: (p) => Noisy2(p, artwork, canvasSize)
     };
 
     if (sketchMapping[artwork.algorithm]) {
@@ -100,15 +123,24 @@ const MyGallery = () => {
 
   const handleDelete = async (artworkId) => {
     try {
-      // Remove artwork on the backend
-      await deleteArtwork(artworkId);
-      // Update post-deletion state
-      setArtworks((prevArtworks) => prevArtworks.filter((art) => art.id !== artworkId));
-      alert('Artwork deleted successfully!');
+        await deleteArtwork(artworkId);
+        console.log(`Deleting artwork ID: ${artworkId}...`);
+
+        const containerId = `gallery-canvas-${artworkId}`;
+        if (canvasRefs.current[containerId]) {
+            const container = canvasRefs.current[containerId];
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+            delete canvasRefs.current[containerId];
+        }
+        setArtworks((prevArtworks) => prevArtworks.filter((art) => art.id !== artworkId));
+        alert('Artwork deleted successfully!');
     } catch (error) {
-      alert('Failed to delete artwork. Please try again.');
+        console.error('Failed to delete artwork:', error);
+        alert('Failed to delete artwork. Please try again.');
     }
-  };
+};
 
   return (
     <div className="my-gallery">

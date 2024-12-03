@@ -41,22 +41,25 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <span className="team-name">Brick Jong</span>
+        <span className="team-name" data-testid="team-name">Brick Jong</span>
       </div>
       <div className="navbar-center">
         <button
+          data-testid="weave-artwork-button"
           onClick={() => handleProtectedClick('/weave-artwork')}
           className={`nav-button ${location.pathname === '/weave-artwork' ? 'active-link' : ''}`}
         >
           Weave Artwork
         </button>
         <button
+          data-testid="explore-seeds-button"
           onClick={() => handleProtectedClick('/explore-seeds')}
           className={`nav-button ${location.pathname === '/explore-seeds' ? 'active-link' : ''}`}
         >
           Explore Seeds
         </button>
         <button
+          data-testid="my-gallery-button"
           onClick={() => handleProtectedClick('/my-gallery')}
           className={`nav-button ${location.pathname === '/my-gallery' ? 'active-link' : ''}`}
         >
@@ -65,6 +68,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-right">
         <button
+          data-testid="home-button"
           onClick={() => navigate('/')}
           className={`home-button ${location.pathname === '/' ? 'active-link' : ''}`}
         >
@@ -72,15 +76,27 @@ const Navbar = () => {
         </button>
         {isAuthenticated ? (
           <>
-            <button className="user-name-button" onClick={handleToggleEmail}>
+            <button 
+              data-testid="user-button"
+              className="user-name-button" 
+              onClick={handleToggleEmail}
+            >
               {showEmail ? user.email : user.name}
             </button>
-            <button onClick={signOut} className="sign-out-button">
+            <button 
+              data-testid="sign-out-button"
+              onClick={signOut} 
+              className="sign-out-button"
+            >
               <FaSignOutAlt />
             </button>
           </>
         ) : (
-          <button className="sign-in-link" onClick={handleSignInClick}>
+          <button 
+            data-testid="sign-in-button"
+            className="sign-in-link" 
+            onClick={handleSignInClick}
+          >
             Sign In
           </button>
         )}

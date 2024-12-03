@@ -1,6 +1,6 @@
 // ./src/apiclient/testLikes.js
 
-import { getLikeById, createLikeByParam, createLikeByObject, deleteLike } from "./likes.js";
+import { getLikeById, createLikeByParam, createLikeByObject, deleteLike } from "../likes.js";
 
 
 async function testGetLikeById(likeId) {
