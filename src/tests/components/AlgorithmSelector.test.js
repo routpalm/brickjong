@@ -17,7 +17,7 @@ describe('AlgorithmSelector Component', () => {
     expect(screen.getByRole('combobox')).toBeInTheDocument();
     
     const options = screen.getAllByRole('option');
-    expect(options).toHaveLength(6);
+    expect(options).toHaveLength(9);
     expect(options[0]).toHaveValue('Wave');
     expect(options[1]).toHaveValue('ConCirc');
     expect(options[2]).toHaveValue('TruchRound');
