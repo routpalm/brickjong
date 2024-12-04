@@ -35,8 +35,6 @@ export const Noisy = (p,processedImageData, size = 512) => {
   function npoint(x,y,colors){
     let n = 5 * p.noise(x/100,y/100);
     n = Math.floor(n);
-    //console.log(n);
-    //console.log(`x: ${x} y: ${y}`);
     p.stroke(colors[n]);
     p.point(x,y);
   }
@@ -53,7 +51,6 @@ export const Noisy = (p,processedImageData, size = 512) => {
     console.log(`Running Noisy pattern with ${colors[0]} and ${colors[1]}`);
    
   p.noiseSeed(randgen.next().value);    
-  //p.strokeWeight(1);
 
   for(let i = 0; i < p.width; i++){
     for(let j = 0; j < p.height; j++){
