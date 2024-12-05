@@ -6,7 +6,7 @@
 4. Light Muted
 5. Dark Muted
 */
-
+import { pRandom } from "./pRandom.js";
 export const Diagonals = (p,processedImageData, size = 512) => {
   const SQsize = size/10;
   const offset = SQsize/10;
@@ -74,21 +74,6 @@ export const Diagonals = (p,processedImageData, size = 512) => {
     p.strokeWeight(10);
   }
 
-  function* processData(pixdata){
-    //make a generator or iterator?
-    
-    let length = pixdata.length;
-    //index = index % length;
-    //console.log(`index: ${index}`);
-    while(true){
-      for(let i = 0; i < length;i++){
-        for(let j = 0; j < 4;j++){
-          yield parseInt(pixdata[i][j]);
-        }
-
-      }
-    }  //yield pixdata[index];
-  }
 
   p.setup = function() {
     let canvas = p.createCanvas(size, size);
@@ -97,13 +82,13 @@ export const Diagonals = (p,processedImageData, size = 512) => {
     } else {
       console.error("No parent node found for the canvas.");
     }
-    p.colorMode(p.HSB, 360, 100, 100);
+    p.colorMode(p.RGB);
     p.noLoop();
     p.strokeCap(p.SQUARE);
     //console.log("loaded");
     // listen for imageProcessed event to proceed
     document.addEventListener("imageProcessed", function() {
-      console.log("'imageProcessed' event received in Diagonals.");
+
       if (window.processedImageData) {
         p.redraw(); // draw
       }
@@ -121,18 +106,16 @@ export const Diagonals = (p,processedImageData, size = 512) => {
       // color palette 
     const colors = processedImageData?.colorPalette || ["rgb(0, 0, 0)"]; // Fallback to black if colorPalette is missing
     const pixdata = processedImageData?.pixelCluster || ["rgb(0,0,0)"];    
-    const randgen = processData(pixdata); //generator init
+    const randgen = pRandom(pixdata); //generator init
     p.background(colors[4]);
-    console.log(`Running Diagonals pattern with ${colors[0]} and ${colors[1]}`);
-    console.log(pixdata);
+
 
     p.strokeWeight(10);
     for (let x = p.width; x > 0-SQsize; x -= SQsize){
       for(let y = p.height; y > 0-SQsize; y -= SQsize){
-        let val = p.random();
-        if (val > .5){
-          diag(x,y,SQsize,colors);
-          console.log(`randgen: ${(randgen.next()).value}`);        
+        let val = randgen.next().value;
+        if (val > 128){
+          diag(x,y,SQsize,colors);        
           
         } else {
           diag2(x,y,SQsize,colors)
