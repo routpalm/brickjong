@@ -6,7 +6,7 @@
 4. Light Muted
 5. Dark Muted
 */
-
+import { pRandom } from "./pRandom.js";
 export const Squigs = (p,processedImageData, size = 512) => {
   const SQsize = size/10;
   const offset = SQsize/10;
@@ -18,13 +18,13 @@ export const Squigs = (p,processedImageData, size = 512) => {
     } else {
       console.error("No parent node found for the canvas.");
     }
-    p.colorMode(p.HSB, 360, 100, 100);
+    p.colorMode(p.RGB);
     p.noLoop();
     p.strokeCap(p.SQUARE);
     //console.log("loaded");
     // listen for imageProcessed event to proceed
     document.addEventListener("imageProcessed", function() {
-      console.log("'imageProcessed' event received in Diagonals.");
+      
       if (window.processedImageData) {
         p.redraw(); // draw
       }
@@ -57,33 +57,16 @@ export const Squigs = (p,processedImageData, size = 512) => {
 
 
 
-  function* processData(pixdata){
-    //make a generator or iterator?
-    
-    let length = pixdata.length;
-    //index = index % length;
-    //console.log(`index: ${index}`);
-    while(true){
-      for(let i = 0; i < length;i++){
-        for(let j = 0; j < 4;j++){
-          yield parseInt(pixdata[i][j]);
-        }
-
-      }
-    }
-  }
-
-    
+ 
 
 
 
       // color palette 
     const colors = processedImageData?.colorPalette || ["rgb(0, 0, 0)"]; // Fallback to black if colorPalette is missing
     const pixdata = processedImageData?.pixelCluster || ["rgb(0,0,0)"];    
-    const randgen = processData(pixdata); //generator init
+    const randgen = pRandom(pixdata); //generator init
     p.background(colors[5]);
-    console.log(`Running Squigs pattern with ${colors[0]} and ${colors[1]}`);
-    console.log(pixdata);
+
     //p.translate(p.width/2,p.height/2);
     p.noFill();
     
@@ -97,9 +80,6 @@ export const Squigs = (p,processedImageData, size = 512) => {
       sircle(0,0,i,colors);
       
     }
-    //p.box(size,size,size);
-    //sircle(0,0,10,colors);
-    //p.circle(0,0,100);
 
     p.noLoop();
   }
