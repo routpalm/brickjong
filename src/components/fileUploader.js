@@ -1,9 +1,9 @@
 // ./src/components/fileUploader.js
+// Brick Jong
 // purpose: provides a user interface for uploading image files and triggers a callback when a file is selected
 // creation date: 2024-10-03
 // authors: Nicholas Anthony
 // integrates with the parent component's state to handle file selection and uploading status
-// modifications: none
 
 import React from 'react';
 

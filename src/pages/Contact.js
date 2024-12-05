@@ -1,8 +1,19 @@
+// src/pages/Contact.js
+// Brick Jong
+// purpose: provide a contact page for more "about us"-style info and a way for users to provide feedback.
+// author: Tong Guan
+// creation date: 11-30-2024
+
 import React from 'react';
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
 import './Contact.css';
 
+/**
+ * renders a contact page showing project details, team members, and a github repository link.
+ * no arguments expected
+ * returns: jsx element representing a styled contact page with navbar, footer, and info sections.
+ */
 const Contact = () => {
   return (
     <div className="contact">
@@ -23,8 +34,8 @@ const Contact = () => {
           <ul>
             <li><b>Brett:</b> Backend development and Database Management.</li>
             <li><b>Tong:</b> UI/UX Design and Frontend Implementation.</li>
-            <li><b>Jordan:</b> Developed the Generative Algorithms for Art</li>
-            <li><b>Nick:</b> Worked closely with all team members to integrate the various components seamlessly.</li>
+            <li><b>Jordan:</b> Developed the Generative Algorithms for Art.</li>
+            <li><b>Nick:</b> Integrations, Prototypes, & Authentication Whiz.</li>
           </ul>
         </div>
 
