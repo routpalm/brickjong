@@ -1,6 +1,21 @@
+// src/pages/GeneratedArtwork.js
+// Brick Jong
+// authors: 
+
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+
+// component imports
 import Toolbar from '../components/Toolbar.js';
+import Navbar from '../components/Navbar.js';
+
+// styling imports
+import Particles from 'react-tsparticles';
+import './GeneratedArtwork.css';
+import { loadFull } from 'tsparticles';
+
+
+//sketch imports
 import p5 from 'p5';
 import { WaveOscillator } from '../sketches/WaveOscillator.js';
 import { ConCirc } from "../sketches/concirc.js";
@@ -11,10 +26,7 @@ import { Squigs } from "../sketches/squigs.js";
 import { Noisy } from "../sketches/noise1.js";
 import { Noisy2 } from "../sketches/noisy2.js"
 import { Tunnel } from "../sketches/tunnel.js"
-import Navbar from '../components/Navbar.js';
-import Particles from 'react-tsparticles';
-import './GeneratedArtwork.css';
-import { loadFull } from 'tsparticles';
+
 
 
 const GeneratedArtwork = () => {

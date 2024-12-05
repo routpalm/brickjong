@@ -51,7 +51,7 @@ const SignIn = ({ onClose }) => {
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="close-button" onClick={onClose}>X</button>
         <h2 className="sign-in-title gradient-text">Sign in to Visualoom</h2>
-        <p>During the trail period, your generated artworks will be displayed as Seeds on the Explore Seeds Page</p>
+        <p> By signing in, you agree that during the trial period, your generated artworks will be displayed on the Explore Seeds Page.</p>
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           onSuccess={handleLoginSuccess}
