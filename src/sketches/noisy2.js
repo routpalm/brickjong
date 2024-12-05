@@ -51,7 +51,7 @@ export const Noisy2 = (p,processedImageData, size = 512) => {
     const randgen = pRandom(pixdata); //generator init
     
 
-  //p.background(colors[5]);
+  p.background(colors[5]);
   p.noiseSeed(randgen.next().value);    
   //p.strokeWeight(1);
 
