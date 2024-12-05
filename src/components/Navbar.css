@@ -1,3 +1,12 @@
+/* 
+    src/components/Navbar.css
+    authors: Nicholas Anthony, Tong Guan
+    Nick: Gradient for the profile box
+    Tong: Everything else
+    Stylesheet for the Navbar component
+*/
+
+
 .navbar {
     width: 100%;
     display: flex;
@@ -40,21 +49,21 @@
 }
 
 .user-name-button {
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center text horizontally */
-    align-items: center; /* Center text vertically */
-    padding: 15px 20px; /* Add padding */
-    background: linear-gradient(135deg, #9a4dbf, #ff7dcf); /* Gradient background */
-    border: none; /* Remove the border */
-    color: #ffffff; /* White text for contrast */
-    border-radius: 8px; /* Slightly rounded corners */
-    font-size: 1rem; /* Slightly larger font size */
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #9a4dbf, #ff7dcf); 
+    border: none; 
+    color: #ffffff; 
+    border-radius: 8px; 
+    font-size: 1rem; 
     font-weight: bold;
-    cursor: pointer; /* Change cursor to pointer */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    position: relative; /* Needed for the sparkly effect */
-    overflow: hidden; /* Clip the sparkles inside the button */
-    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effect */
+    cursor: pointer; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    position: relative; 
+    overflow: hidden; 
+    transition: transform 0.2s, box-shadow 0.2s; 
 }
 
 /* Add sparkly effect using pseudo-elements */

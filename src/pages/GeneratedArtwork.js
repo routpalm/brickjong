@@ -1,6 +1,9 @@
 // src/pages/GeneratedArtwork.js
 // Brick Jong
-// authors: 
+// purpose: show user's generated artwork after uploading and processing. 
+// authors: Nicholas Anthony, Tong Guan
+// Nick: image rendering
+// Tong: Styling, page structure, particle effect, handling share/toolbar
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
