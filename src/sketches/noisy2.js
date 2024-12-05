@@ -12,14 +12,18 @@ export const Noisy2 = (p,processedImageData, size = 512) => {
   const offset = SQsize/10;
   p.setup = function() {
     let canvas = p.createCanvas(size, size);
-    canvas.parent('canvasContainer');
-    p.colorMode(p.HSB, 360, 100, 100);
+    if (p._userNode) {
+      canvas.parent(p._userNode); // Ensure correct parent
+    } else {
+      console.error("No parent node found for the canvas.");
+    }
+    p.colorMode(p.RGB);
     p.noLoop();
     p.strokeCap(p.SQUARE);
     //console.log("loaded");
     // listen for imageProcessed event to proceed
     document.addEventListener("imageProcessed", function() {
-      console.log("'imageProcessed' event received in Sslines.");
+
       if (window.processedImageData) {
         p.redraw(); // draw
       }
@@ -27,16 +31,12 @@ export const Noisy2 = (p,processedImageData, size = 512) => {
   };
 
   p.draw = () => {
-    //console.log("loaded2");
-    //p.background(220); // white background
-
 
     
   function npoint(x,y,colors){
     let n = 5 * p.noise(x/1,y/1);
     n = Math.floor(n);
-    //console.log(n);
-    //console.log(`x: ${x} y: ${y}`);
+
     p.fill(colors[n]);
     p.square(x,y,10);
   }
@@ -50,8 +50,8 @@ export const Noisy2 = (p,processedImageData, size = 512) => {
     const pixdata = processedImageData?.pixelCluster || ["rgb(0,0,0)"];    
     const randgen = pRandom(pixdata); //generator init
     
-    console.log(`Running Noisy pattern with ${colors[0]} and ${colors[1]}`);
-   
+
+  p.background(colors[5]);
   p.noiseSeed(randgen.next().value);    
   //p.strokeWeight(1);
 
@@ -59,7 +59,7 @@ export const Noisy2 = (p,processedImageData, size = 512) => {
   for(let i = 0; i < p.width; i+=h){
     for(let j = 0; j < p.height; j+=h){
       npoint(i,j,colors);
-      h = (randgen.next().value * randgen.next().value)/1000;
+      h = (randgen.next().value * randgen.next().value)/2000;
 
     }
   }

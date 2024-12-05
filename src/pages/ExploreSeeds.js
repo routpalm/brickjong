@@ -28,6 +28,10 @@ import { Diagonals } from '../sketches/diags.js';
 import { Sslines } from '../sketches/sslines.js';
 import { TruchetRound } from '../sketches/truchetTriangles.js';
 import { LinesSketch } from '../sketches/lines.js';
+import { Squigs } from "../sketches/squigs.js";
+import { Noisy } from "../sketches/noise1.js";
+import { Noisy2 } from "../sketches/noisy2.js"
+import { Tunnel } from "../sketches/tunnel.js"
 
 // api client imports
 import { createLikeByParam, deleteLike } from '../apiclient/likes.js';
