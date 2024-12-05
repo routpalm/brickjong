@@ -1,4 +1,5 @@
 // ./src/apiclient/helloWorlds.js
+// Brick Jong
 // purpose: provides functions to test backend capabilities
 // creation date: 2024-11-01
 // author: Brett DeWitt

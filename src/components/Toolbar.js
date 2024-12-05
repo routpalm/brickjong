@@ -1,3 +1,11 @@
+// src/components/Toolbar.js
+// Brick Jong
+// purpose: provides a toolbar for the Generated Artwork page that allows users to save, share, download, and go back
+// authors: Nicholas Anthony, Tong Guan
+// Nick: JWT mapping for grabbing user ID, handling saving
+// Tong: Styling, download and share functions
+// creation date: 10-20-24
+
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faArrowUp, faArrowDown, faUndo } from '@fortawesome/free-solid-svg-icons';

@@ -1,9 +1,11 @@
 // ./src/apiclient/user.js
+// Brick Jong
 // purpose: provides functions for interacting with the backend to manage user-related data
 // creation date: 2024-11-12
-// authors: Brett DeWitt, Nicholas Anthony
+// authors: Nicholas Anthony, Brett DeWitt
+// Nick: modifications for initial prototypes to better integrate into the frontend components
+// Brett: initial prototypes for functions
 // part of the frontend API client, this file handles communication with the backend for CRUD operations on users, as well as mapping JWTs to user IDs
-// modifications: none
 
 import apiClient from "./apiClient.js"; // preconfigured axios instance
 import { setAuthToken } from "./auth.js"; // utility to set authorization header for requests
