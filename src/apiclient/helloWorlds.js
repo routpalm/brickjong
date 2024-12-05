@@ -17,7 +17,7 @@ import apiClient from './apiClient.js';
  */
 export const getHelloWorlds = async (n, offset) => {
     try {
-        const response = await apiClient.(`/helloworlds/`, {
+        const response = await apiClient.get(`/helloworlds/`, {
             params: {
                 n: n,
                 offset: offset
