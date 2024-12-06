@@ -1,7 +1,20 @@
+/**
+ * truchetTriangles.js
+ * 
+ * Nov. 8 2024
+ * 
+ * Purpose: Defines Round Truchet algorithm in algoritm generator
+ * https://en.wikipedia.org/wiki/Truchet_tiles
+ * 
+ * Part of image generator
+ * 
+ */ 
+
+//import psuedorandom module
 import { pRandom } from "./pRandom.js";
 export const TruchetRound = (p,processedImageData, size = 512) => {
   const SQsize = size/10;
-
+//p5 setup function
   p.setup = () => {
     const canvas = p.createCanvas(size, size);
     if (p._userNode) {
@@ -10,7 +23,7 @@ export const TruchetRound = (p,processedImageData, size = 512) => {
       console.error("No parent node found for the canvas.");
     }
     p.colorMode(p.RGB);
-    p.noLoop();
+    p.noLoop();//don't loop sketch
     p.strokeCap(p.SQUARE);
 
     // listen for imageProcessed event to proceed
@@ -35,6 +48,7 @@ export const TruchetRound = (p,processedImageData, size = 512) => {
       const pixdata = processedImageData?.pixelCluster || ["rgb(0,0,0)"];    
       const randgen = pRandom(pixdata); //generator init
 
+          //define truchet tile
           function roundTruch1b(x,y,size){
           p.fill(colors[0]);
           p.noStroke();
@@ -54,7 +68,7 @@ export const TruchetRound = (p,processedImageData, size = 512) => {
           
         }
 
-
+        //define alternate tile
         function roundTruch2b(x,y,size){
           p.fill(colors[0]);
           p.noStroke();
@@ -73,11 +87,12 @@ export const TruchetRound = (p,processedImageData, size = 512) => {
           
         }
 
-
+        //place tiles in rows and cols
       for (let x = p.width; x > 0-SQsize; x -= SQsize){
         for(let y = p.height; y > 0-SQsize; y -= SQsize){
-          let val = randgen.next().value;
-          if (val > 128){
+          let val = randgen.next().value+randgen.next().value;
+          //use average of two values
+          if (val/2 > (128){
             roundTruch1b(x,y,SQsize);        
           
           } else {
