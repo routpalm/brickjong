@@ -1,3 +1,9 @@
+// src/index.js
+// Brick Jong
+// purpose: the root file of our web app, this file initializes the web app and further integrates Google OAuth.
+// author: Tong Guan
+// creation date: 09-24-2024
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from "./App.js"

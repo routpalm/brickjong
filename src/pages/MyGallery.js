@@ -1,10 +1,24 @@
+// src/pages/MyGallery.js
+// Brick Jong
+// purpose: crucial page of ux where users can see their saved and liked artworks. fetches artworks from backend through 
+// the API and redraws sketches inside instantiated canvas containers
+// author: Nicholas Anthony
+// creation date: 11-14-24
+
 import React, { useEffect, useState, useRef } from 'react';
-import p5 from 'p5';
+
 import './MyGallery.css';
+
+// component imports
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
+
+// api imports
 import { mapJWTToUserId, getUserArtworks, getUserById } from '../apiclient/users.js';
 import { deleteArtwork, getArtworkById } from '../apiclient/artworks.js';
+
+// sketch imports
+import p5 from 'p5';
 import { WaveOscillator } from '../sketches/WaveOscillator.js';
 import { ConCirc } from '../sketches/concirc.js';
 import { Diagonals } from '../sketches/diags.js';
@@ -16,27 +30,39 @@ import { Noisy } from "../sketches/noise1.js";
 import { Noisy2 } from "../sketches/noisy2.js"
 import { Tunnel } from "../sketches/tunnel.js"
 
-
+/**
+ * renders the my gallery page
+ * arguments: none
+ * returns: jsx element representing the user's gallery page
+ * this component:
+ *   - fetches user's own artworks and liked artworks from the backend after user id is obtained
+ *   - lets the user switch between viewing 'my-artworks' and 'liked-artworks'
+ *   - uses p5.js sketches to display each artwork visually
+ *   - allows deletion of user-owned artworks
+ *   - depends on auth state to determine which artworks to fetch
+ */
 const MyGallery = () => {
   const [artworks, setArtworks] = useState([]);
   const [likedArtworks, setLikedArtworks] = useState([]);
-  const [filter, setFilter] = useState('my-artworks'); // 'my-artworks' or 'liked-artworks'
+  const [filter, setFilter] = useState('my-artworks'); // either 'my-artworks' or 'liked-artworks'
   const [userId, setUserId] = useState(null);
   const canvasRefs = useRef({});
   const canvasSize = 200;
 
+  // fetch user id on mount by mapping jwt to user id
   useEffect(() => {
     const fetchUserId = async () => {
       try {
         const id = await mapJWTToUserId();
         setUserId(id);
       } catch (error) {
-        console.error('Failed to fetch user ID:', error);
+        console.error('failed to fetch user id:', error);
       }
     };
     fetchUserId();
   }, []);
 
+  // once userId is set, fetch user artworks and liked artworks
   useEffect(() => {
     if (userId) {
       const fetchArtworks = async () => {
@@ -45,8 +71,10 @@ const MyGallery = () => {
           setArtworks(userArtworks);
 
           const user = await getUserById(userId);
-          console.log("User: ", user);  
+          //console.log("user: ", user);
           const likes = user.likes;
+
+          // fetch each liked artwork by id
           const likedArtworks = await Promise.all(
             likes.map((like) => getArtworkById(like.artworkId))
           );
@@ -59,45 +87,54 @@ const MyGallery = () => {
     }
   }, [userId]);
 
+  // whenever filter, artworks, or likedArtworks change, update displayed sketches
   useEffect(() => {
     const displayedArtworks = filter === 'my-artworks' ? artworks : likedArtworks;
 
+    // remove sketches for artworks no longer displayed
     Object.keys(canvasRefs.current).forEach((key) => {
-        const id = key.split('gallery-canvas-')[1];
-        if (!displayedArtworks.find((artwork) => artwork.id === parseInt(id))) {
-            const container = canvasRefs.current[key];
-            if (container) {
-                while (container.firstChild) {
-                    container.removeChild(container.firstChild);
-                }
-                delete canvasRefs.current[key];
-            }
+      const id = key.split('gallery-canvas-')[1];
+      if (!displayedArtworks.find((artwork) => artwork.id === parseInt(id))) {
+        const container = canvasRefs.current[key];
+        if (container) {
+          while (container.firstChild) {
+            container.removeChild(container.firstChild);
+          }
+          delete canvasRefs.current[key];
         }
+      }
     });
 
+    // create sketches for the currently displayed artworks
     displayedArtworks.forEach((artwork) => {
-        createSketch(artwork);
+      createSketch(artwork);
     });
-}, [filter, artworks, likedArtworks]);
+  }, [filter, artworks, likedArtworks]);
 
+  /**
+   * creates a p5 sketch inside the corresponding container for the given artwork
+   * @param {Object} artwork - an object containing artwork details, including 'algorithm' and 'colorPalette'
+   * no return value, but updates the dom by rendering the sketch in the container
+   */
   const createSketch = (artwork) => {
     const containerId = `gallery-canvas-${artwork.id}`;
     let container = canvasRefs.current[containerId];
     if (!container) {
-      console.error(`Container with ID "${containerId}" not found`);
+      console.error(`container with id "${containerId}" not found`);
       return;
     }
 
-    // clear prev sketches
+    // clear previous sketches from container
     while (container.firstChild) {
       container.removeChild(container.firstChild);
     }
 
+    // parse colorPalette if needed
     if (artwork.colorPalette && typeof artwork.colorPalette === 'string') {
       try {
         artwork.colorPalette = JSON.parse(artwork.colorPalette);
       } catch (error) {
-        console.error('Failed to parse colorPalette:', error);
+        console.error('failed to parse colorPalette:', error);
       }
     }
 
@@ -108,44 +145,49 @@ const MyGallery = () => {
       Sslines: (p) => Sslines(p, artwork, canvasSize),
       TruchRound: (p) => TruchetRound(p, artwork, canvasSize),
       Lines: (p) => LinesSketch(p, artwork, canvasSize),
-      Tunnel: (p) => Tunnel(p,artwork, canvasSize),
+      Tunnel: (p) => Tunnel(p, artwork, canvasSize),
       Squigs: (p) => Squigs(p, artwork, canvasSize),
-      Noisy: (p) => Noisy(p,artwork, canvasSize),
+      Noisy: (p) => Noisy(p, artwork, canvasSize),
       Noisy2: (p) => Noisy2(p, artwork, canvasSize)
     };
 
     if (sketchMapping[artwork.algorithm]) {
       new p5(sketchMapping[artwork.algorithm], container);
     } else {
-      console.warn(`Unknown algorithm: ${artwork.algorithm}`);
+      console.warn(`unknown algorithm: ${artwork.algorithm}`);
     }
   };
 
+  /**
+   * handles deleting a user's own artwork from the backend and updates the ui accordingly
+   * @param {number} artworkId - the id of the artwork to delete
+   */
   const handleDelete = async (artworkId) => {
     try {
-        await deleteArtwork(artworkId);
-        console.log(`Deleting artwork ID: ${artworkId}...`);
+      await deleteArtwork(artworkId);
+      console.log(`deleting artwork id: ${artworkId}...`);
 
-        const containerId = `gallery-canvas-${artworkId}`;
-        if (canvasRefs.current[containerId]) {
-            const container = canvasRefs.current[containerId];
-            while (container.firstChild) {
-                container.removeChild(container.firstChild);
-            }
-            delete canvasRefs.current[containerId];
+      const containerId = `gallery-canvas-${artworkId}`;
+      if (canvasRefs.current[containerId]) {
+        const container = canvasRefs.current[containerId];
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
         }
-        setArtworks((prevArtworks) => prevArtworks.filter((art) => art.id !== artworkId));
-        alert('Artwork deleted successfully!');
+        delete canvasRefs.current[containerId];
+      }
+      setArtworks((prevArtworks) => prevArtworks.filter((art) => art.id !== artworkId));
+      alert('artwork deleted successfully!');
     } catch (error) {
-        console.error('Failed to delete artwork:', error);
-        alert('Failed to delete artwork. Please try again.');
+      console.error('failed to delete artwork:', error);
+      alert('failed to delete artwork. please try again.');
     }
-};
+  };
 
   return (
+    // main container for my gallery page
     <div className="my-gallery">
       <Navbar />
-      <h1 className="gallery-title">My Gallery</h1>
+      <h1 className="gallery-title">my gallery</h1>
       <div className="filter-buttons">
         <button
           onClick={() => setFilter('my-artworks')}

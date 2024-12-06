@@ -92,9 +92,9 @@ const Toolbar = ({ imageUrl, onRegenerate, onShare }) => {
         pixelCluster,
       };
       await createArtwork(artworkData);
-      alert('artwork saved successfully!');
+      //alert('artwork saved successfully!');
     } catch (error) {
-      alert('failed to save artwork. please try again.');
+      alert('Your session has expired. Please log out and sign back in.');
     }
   };
 
