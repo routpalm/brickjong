@@ -1,7 +1,8 @@
 // ./src/components/algorithmSelector.js
+// Brick Jong
 // purpose: provides a dropdown component for selecting an algorithm used in the artwork generation process
 // creation date: 2024-10-15
-// authors: Nicholas Anthony, Tong Guan
+// authors: Nicholas Anthony
 // part of the UI for the artwork generation feature, this component allows users to choose from a predefined set of algorithms to customize their artwork
 // modifications: none
 

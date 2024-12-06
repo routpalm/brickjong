@@ -1,9 +1,11 @@
 // ./src/apiclient/artworks.js
+// Brick Jong
 // purpose: provides functions for interacting with the backend to perform CRUD operations on artworks
 // creation date: 2024-11-12
-// authors: Brett DeWitt, Nicholas Anthony
+// authors: Nicholas Anthony, Brett DeWitt
+// Brett: prototypes for functions
+// Nick: modifications for debugging and pagination
 // part of the frontend API client, this file is used to handle communication with the backend related to artworks, including fetching, creating, and deleting artworks.
-// modifications: none
 
 import apiClient from './apiClient.js'; // imports the preconfigured axios instance for API communication
 

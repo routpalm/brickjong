@@ -1,8 +1,9 @@
 // ./src/components/FeaturedImages.js
+// Brick Jong
 // purpose: displays a gallery of featured sample artwork images in a consistent layout
 // creation date: 2024-11-24
 // authors: Tong Guan
-// this simple component showcases sample images on the algorithm selector page
+// showcases sample images on the algorithm selector page
 // modifications: none
 
 import React from 'react';
