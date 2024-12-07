@@ -1,8 +1,19 @@
+// src/pages/Privacy.js
+// Brick Jong
+// purpose: returns a Privacy page that outlines how the project protects users' privacy.
+// author: Tong Guan
+// creation date: 11-28-24
+
 import React from 'react';
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
 import './Privacy.css';
 
+/**
+ * renders the privacy page
+ * arguments: none
+ * returns: jsx element representing the privacy page
+ */
 const Privacy = () => {
   return (
     <div className="privacy">

@@ -1,4 +1,9 @@
 // src/routes/AppRoutes.js
+// Brick Jong
+// purpose: provide a centralized routes component to be placed in App.js. 
+// author: Tong Guan
+// creation date: 10-26-24
+
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Homepage from '../pages/HomePage.js';
@@ -11,6 +16,14 @@ import Privacy from '../pages/Privacy.js';
 import Contact from '../pages/Contact.js';
 import { useAuth } from '../AuthContext.js';
 
+/**
+ * organizes the website's routes
+ * 
+ * this component structures the routes of the website and also protects the sign-in protected pages 
+ * by requiring the user to be authenticated.
+ *
+ * @returns {JSX.Element} app routes
+ */
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth(); 
 

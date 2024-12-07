@@ -1,3 +1,4 @@
+
 /**
  * diags.js
  * 
@@ -49,7 +50,6 @@ export const Diagonals = (p,processedImageData, size = 512) => {
     p.strokeWeight(2);
     p.line(x+offset,y+offset,x+size-offset,y+size-offset);//draw inner line
     p.strokeWeight(10);
-
     p.stroke(colors[4]);
     p.noFill();
     p.square(x,y,size);
@@ -66,15 +66,15 @@ export const Diagonals = (p,processedImageData, size = 512) => {
    */
   function diag2(x,y,size,colors){
     //top right to bottom left of square
+
     p.stroke(colors[1]);
-    
-    p.line(x+size,y,x,y+size);
+    p.line(x + size, y, x, y + size);
 
     p.stroke(colors[3]);
     p.strokeWeight(2);
-    p.line(x+size-offset,y+offset,x+offset,y+size-offset);
-    p.strokeWeight(10);
+    p.line(x + size - offset, y + offset, x + offset, y + size - offset);
 
+    p.strokeWeight(10);
     p.stroke(colors[4]);
     p.noFill();
     p.square(x,y,size);
@@ -82,7 +82,10 @@ export const Diagonals = (p,processedImageData, size = 512) => {
 
     if(val/2 >128){addTriangle2(x,y,size,colors)};
 
+
+    if (p.random(0, 1) > 0.5) addTriangle2(x, y, size, colors);
   }
+
     /**
    * addTriangle: draws a triangle
    * x,y (number) coordiantes to start shape at
@@ -97,13 +100,18 @@ export const Diagonals = (p,processedImageData, size = 512) => {
 
     if(val/2 >128){
       p.triangle(x+size-(1*offset),y+(1*offset),x+size-(1*offset),y+size-(3*offset),x+(3*offset),y+(1*offset));
+
     } else {
-      p.triangle(x+offset,y+(3*offset),x+offset,y+size-offset,x+size-(3*offset),y+size-offset);
+      p.triangle(
+        x + offset,
+        y + 3 * offset,
+        x + offset,
+        y + size - offset,
+        x + size - 3 * offset,
+        y + size - offset
+      );
     }
     p.strokeWeight(10);
-
-
-
   }
     /**
    * addTriangle2: draws alternate triangle
@@ -113,27 +121,44 @@ export const Diagonals = (p,processedImageData, size = 512) => {
    * 
    */
   function addTriangle2(x,y,size,colors){
+
     p.stroke(colors[1]);
     p.strokeWeight(5);
-    if(p.random(0,1)>.5){
-      p.triangle(x+(offset),y+size-(3*offset),x+offset,y+offset,x+size-(3*offset),y+offset);
+    if (p.random(0, 1) > 0.5) {
+      p.triangle(
+        x + offset,
+        y + size - 3 * offset,
+        x + offset,
+        y + offset,
+        x + size - 3 * offset,
+        y + offset
+      );
     } else {
-      p.triangle(x+size-offset,y+(3*offset),x+size-offset,y+size-offset,x+(3*offset),y+size-offset);
+      p.triangle(
+        x + size - offset,
+        y + 3 * offset,
+        x + size - offset,
+        y + size - offset,
+        x + 3 * offset,
+        y + size - offset
+      );
     }
     p.strokeWeight(10);
   }
 
-  //p5 setup function 
-  p.setup = function() {
-    let canvas = p.createCanvas(size, size);
+
+  // setup initializes the canvas and properties
+  p.setup = function () {
+    const canvas = p.createCanvas(size, size);
     if (p._userNode) {
-      canvas.parent(p._userNode); // Ensure correct parent
+      canvas.parent(p._userNode); // attach to parent node
     } else {
       console.error("No parent node found for the canvas.");
     }
     p.colorMode(p.RGB);//canvas parameters
     p.noLoop();
     p.strokeCap(p.SQUARE);
+
     
     // listen for imageProcessed event to proceed
     document.addEventListener("imageProcessed", function() {
@@ -161,16 +186,13 @@ export const Diagonals = (p,processedImageData, size = 512) => {
         if (val/2 > 128){
           diag(x,y,SQsize,colors);        //if pseudorandom value is a certain
           
+
         } else {
-          diag2(x,y,SQsize,colors)
+          diag2(x, y, SQsize, colors);
         }
-    
       }
     }
 
     p.noLoop();
-  }
+  };
 };
-
-
-

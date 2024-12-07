@@ -30,15 +30,15 @@ const AlgorithmSelector = ({ selected, onChange }) => {
         onChange={(e) => onChange(e.target.value)} // handles changes in selection
         className="algorithm-dropdown"
       >
-        <option value="Wave">wave</option>
-        <option value="ConCirc">concentric circles</option>
-        <option value="TruchRound">round truchet</option>
-        <option value="Diagonals">diagonal lines</option>
-        <option value="Sslines">overlapping sines</option>
-        <option value="Squigs">squigs</option>
-        <option value="Noisy">noisy</option>
-        <option value="Noisy2">noisy 2</option>
-        <option value="Tunnel">tunnel</option>
+        <option value="Wave">Wave</option>
+        <option value="ConCirc">Concentric Circles</option>
+        <option value="TruchRound">Round Truchet</option>
+        <option value="Diagonals">Diagonal Lines</option>
+        <option value="Sslines">Overlapping Sines</option>
+        <option value="Squigs">Squigs</option>
+        <option value="Noisy">Noisy</option>
+        <option value="Noisy2">Noisy 2</option>
+        <option value="Tunnel">Tunnel</option>
       </select>
     </div>
   );

@@ -1,3 +1,9 @@
+// src/pages/Info.js
+// Brick Jong
+// purpose: provide an info page that explains to an uninformed user the concept of algorithmic art.
+// author: Tong Guan
+// creation date: 11-27-24
+
 import React from 'react';
 import Navbar from '../components/Navbar.js';
 import Footer from '../components/Footer.js';
@@ -5,6 +11,11 @@ import Info1 from '../images/Info1.png';
 import Info2 from '../images/Info2.png';
 import './Info.css';
 
+/**
+ * renders the info page
+ * arguments: none
+ * returns: jsx element representing the info page
+ */
 const Info = () => {
   return (
     <div className="info">

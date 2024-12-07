@@ -1,9 +1,12 @@
-/* src/components/Header.css */
+/* 
+    src/components/Header.css
+    author: Tong Guan
+    Stylesheet for the Header component
+*/
 
-/* Import Oleo Script Swash Caps Font */
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps:wght@700&display=swap');
 
-/* Keyframes for shifting gradient */
+/* keyframes for shifting gradient */
 @keyframes gradientShift {
     0% {
         background-position: 0% 50%;
@@ -52,11 +55,11 @@
     margin-left: 3px;
     font-weight: bold; 
     background: linear-gradient(90deg, #6e8efb, #a777e3, #b19cd9, #ffacb7);
-    background-size: 300% 300%; /* Make gradient cover a larger area for smooth animation */
+    background-size: 300% 300%;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradientShift 6s ease infinite; /* Infinite looping gradient animation */
+    animation: gradientShift 6s ease infinite;
 }
 
 .header-slogan .highlight {

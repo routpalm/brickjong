@@ -1,6 +1,24 @@
+// src/pages/GeneratedArtwork.js
+// Brick Jong
+// purpose: show user's generated artwork after uploading and processing. 
+// authors: Nicholas Anthony, Tong Guan
+// Nick: image rendering & page mount
+// Tong: Styling, page structure, particle effects, handling share/toolbar
+
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+
+// component imports
 import Toolbar from '../components/Toolbar.js';
+import Navbar from '../components/Navbar.js';
+
+// styling imports
+import Particles from 'react-tsparticles';
+import './GeneratedArtwork.css';
+import { loadFull } from 'tsparticles';
+
+
+//sketch imports
 import p5 from 'p5';
 import { WaveOscillator } from '../sketches/WaveOscillator.js';
 import { ConCirc } from "../sketches/concirc.js";
@@ -11,42 +29,57 @@ import { Squigs } from "../sketches/squigs.js";
 import { Noisy } from "../sketches/noise1.js";
 import { Noisy2 } from "../sketches/noisy2.js"
 import { Tunnel } from "../sketches/tunnel.js"
-import Navbar from '../components/Navbar.js';
-import Particles from 'react-tsparticles';
-import './GeneratedArtwork.css';
-import { loadFull } from 'tsparticles';
 
 
+
+/**
+ * renders the generated artwork page
+ * arguments: none
+ * returns: jsx element representing the generated artwork page
+ * this component:
+ *   - uses processed image data and selected algorithm passed via location state
+ *   - sets up a p5.js sketch on a canvas to display the generated art
+ *   - provides toolbar actions: save, share, download, and return
+ *   - shows fireworks animation when sharing occurs
+ */
 const GeneratedArtwork = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const canvasRef = useRef(null);
-  const [imageUrl, setImageUrl] = useState(''); 
-  const [showFireworks, setShowFireworks] = useState(false); 
+  const [imageUrl, setImageUrl] = useState(''); // holds a data url for the rendered canvas
+  const [showFireworks, setShowFireworks] = useState(false); // controls fireworks animation
   const { processedImageData, selectedAlgorithm } = location.state || {};
 
+  /**
+   * initializes particles instance for tsparticles
+   * @param {object} main - the tsparticles instance
+   */
   const particlesInit = async (main) => {
     await loadFull(main);
   };
 
+  /**
+   * handles sharing action by triggering fireworks animation temporarily
+   */
   const handleShare = () => {
-    setShowFireworks(true); 
+    setShowFireworks(true);
     setTimeout(() => {
-      setShowFireworks(false); 
+      setShowFireworks(false);
     }, 3000);
   };
 
   useEffect(() => {
+    // if no processed image data available, redirect user back to weave-artwork page
     if (!processedImageData) {
       navigate('/weave-artwork');
       return;
     }
-    
-    // save processedImageData to localStorage
+
+    // store processed image data and selected algorithm in local storage for persistence
     localStorage.setItem('processedImageData', JSON.stringify(processedImageData));
     localStorage.setItem('selectedAlgorithm', selectedAlgorithm);
-    
-    // Render the images based on selected algorithm
+
+    // select appropriate sketch based on selectedAlgorithm
     let sketchInstance;
     if (selectedAlgorithm === 'Wave') {
       sketchInstance = new p5((p) => WaveOscillator(p, processedImageData), canvasRef.current);
@@ -62,12 +95,15 @@ const GeneratedArtwork = () => {
       sketchInstance = new p5((p) => Squigs(p, processedImageData), canvasRef.current);
     } else if (selectedAlgorithm === 'Noisy') {
       sketchInstance = new p5((p) => Noisy(p, processedImageData), canvasRef.current);
-      } else if (selectedAlgorithm === 'Noisy2') {
+    } else if (selectedAlgorithm === 'Noisy2') {
       sketchInstance = new p5((p) => Noisy2(p, processedImageData), canvasRef.current);
     } else if (selectedAlgorithm === 'Tunnel') {
       sketchInstance = new p5((p) => Tunnel(p, processedImageData), canvasRef.current);
-    } 
+    }
 
+    /**
+     * generates a data url from the rendered canvas for downloading
+     */
     const generateImageUrl = () => {
       const canvas = canvasRef.current.querySelector('canvas');
       if (canvas) {
@@ -75,7 +111,8 @@ const GeneratedArtwork = () => {
         setImageUrl(url);
       }
     };
-  
+
+    // delay generating the image url to ensure canvas is rendered
     setTimeout(generateImageUrl, 1000);
 
     return () => {
@@ -84,7 +121,9 @@ const GeneratedArtwork = () => {
   }, [processedImageData, selectedAlgorithm, navigate]);
 
   return (
+    // main container for generated artwork page
     <div className="generated-artwork">
+      {/* conditionally display fireworks animation on share */}
       {showFireworks ? (
         <Particles
           id="tsparticles-fireworks"
@@ -176,10 +215,12 @@ const GeneratedArtwork = () => {
       <Navbar />
       <div className="column-container">
         <div className="artwork-column">
+          {/* container for p5.js sketch canvas */}
           <div className="artwork-container" ref={canvasRef} id="canvasContainer"></div>
         </div>
         <div className="toolbar-column">
           <div className="toolbar-container">
+            {/* toolbar to handle saving, sharing, downloading, and going back */}
             <Toolbar
               imageUrl={imageUrl}
               onRegenerate={() => navigate('/weave-artwork')}
@@ -189,6 +230,7 @@ const GeneratedArtwork = () => {
         </div>
       </div>
       {showFireworks && (
+        // message displayed during fireworks to indicate sharing success
         <p className="shared-message" data-testid="shared-message">🎉🎉 Shared!</p>
       )}
     </div>
