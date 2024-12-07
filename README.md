@@ -5,7 +5,7 @@
 ## Brief Description of the System
 The frontend system of VisuaLoom provides a user interface for uploading images and selecting generative art algorithms. It transforms user-uploaded images into algorithmic artworks. Users can choose from various algorithms, process their images, and view or save the generated art. This frontend communicates with the backend ([found here](https://www.github.com/routpalm/visualoom-backend)) for authentication, user sessions, and data storage.
 
-## Authors (Alphabetically by Last Name)
+## Authors
 - Nicholas Anthony
 - Tong Guan
 - Jordan Poppe
