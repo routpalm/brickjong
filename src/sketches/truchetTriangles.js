@@ -106,7 +106,7 @@ export const TruchetRound = (p,processedImageData, size = 512) => {
         for(let y = p.height; y > 0-SQsize; y -= SQsize){
           let val = randgen.next().value+randgen.next().value;
           //use average of two values
-          if (val/2 > (128){
+          if (val/2 > (128)){
             roundTruch1b(x,y,SQsize);        
           
           } else {
