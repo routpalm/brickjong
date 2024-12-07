@@ -124,7 +124,8 @@ export const Diagonals = (p,processedImageData, size = 512) => {
 
     p.stroke(colors[1]);
     p.strokeWeight(5);
-    if (p.random(0, 1) > 0.5) {
+    let val = randgen.next().value + randgen.next().value;
+    if (val/2 > 128) {
       p.triangle(
         x + offset,
         y + size - 3 * offset,
