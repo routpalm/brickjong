@@ -1,6 +1,29 @@
+/**
+ * lines.js
+ * ********* This algorithm is unused in our final project ***************
+ * Author: Nick Anthony
+ * Oct. 30 2024
+ * 
+ * Purpose: Defines lines algorithm in algoritm generator
+ * 
+ * 
+ * Part of image generator
+ * 
+ */ 
+
+//import psuedorandom module
+import { pRandom } from "./pRandom.js";
+
+/**
+ * Generates a sketch with lines, using colors and patterns derived from processed image data.
+ *
+ * @param {object} p - p5.js instance for the sketch.
+ * @param {object} processedImageData - Contains image-derived data such as color palette and pixel clusters.
+ * @param {number} [size=512] - The canvas size in pixels (default is 512x512).
+ */
 export const LinesSketch = (p, processedImageData) => {
     const size = 512;
-    const numlines = 8;
+    const numlines = 8;//parameters for image generation
   
     p.setup = () => {
       const canvas = p.createCanvas(size, size);
