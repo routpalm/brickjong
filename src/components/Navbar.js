@@ -132,7 +132,7 @@ const Navbar = () => {
             className="sign-in-link"
             onClick={handleSignInClick}
           >
-            sign in
+            Sign In
           </button>
         )}
       </div>

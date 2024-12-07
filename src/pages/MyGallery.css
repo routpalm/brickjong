@@ -1,4 +1,8 @@
-/* src/pages/MyGallery.css */
+/*
+    src/pages/MyGallery.css
+    author: Nicholas Anthony
+    Stylesheet for the My Gallery page
+*/
 
 .my-gallery {
   padding: 20px;
@@ -9,11 +13,11 @@
 .gallery-title {
   text-align: center;
   font-size: 3rem;
-  color: #4b2e83; /* A rich purple to give an artsy feel */
+  color: #4b2e83; 
   margin-bottom: 20px;
-  font-family: 'Playfair Display', serif; /* A decorative serif font */
-  letter-spacing: 2px; /* Adds spacing for elegance */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 2px; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
 .gallery-grid {
@@ -80,7 +84,7 @@
 }
 
 .delete-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3; 
 }
 
 .filter-buttons {
@@ -105,6 +109,6 @@
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Adjust for responsive layout */
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }

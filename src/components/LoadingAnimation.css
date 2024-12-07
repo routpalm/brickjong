@@ -1,3 +1,10 @@
+/* 
+    src/components/LoadingAnimation.css
+    author: Tong Guan
+    Stylesheet for the LoadingAnimation component
+*/
+
+
 .loading-container {
     display: flex;
     flex-direction: column;

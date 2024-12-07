@@ -1,4 +1,9 @@
-/* components/MiniNavbar.css */
+/* 
+    src/components/MiniNavbar.css
+    author: Tong Guan
+    Stylesheet for the MiniNavbar component
+*/
+
 .mini-navbar {
     display: flex;
     align-items: center;
